@@ -18,12 +18,13 @@ export default GlobalButton;
 
 const styles = StyleSheet.create({
   Container: {
-    backgroundColor: COLORS.purple,
-    borderRadius: 8,
+    backgroundColor:'#AA3FEC',
+    borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    height: HP_WP.hp(6),
-    width: HP_WP.wp(90),
+    height: HP_WP.hp(5.5),
+    width: HP_WP.wp(75),
+    alignSelf:'center'
   },
   title: {
     color: COLORS.white,

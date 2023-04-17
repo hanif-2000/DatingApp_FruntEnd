@@ -32,6 +32,7 @@ const GlobalInput = ({
   code,
   openCode,
   editable,
+  numberInput
 }) => {
   return (
     <>
@@ -39,7 +40,8 @@ const GlobalInput = ({
         style={[
           styles.container,
           inputStyle,
-          {borderColor: errors && touched ? COLORS.orange : COLORS.light},
+          {borderColor: errors && touched ? COLORS.orange : COLORS.light,
+         borderWidth: numberInput ? 0 :0.8 },
         ]}>
         {countryCode && (
           <TouchableOpacity onPress={openCode} style={{marginRight: 5}}>
@@ -77,9 +79,8 @@ export default GlobalInput;
 
 const styles = StyleSheet.create({
   container: {
-    height: hp(6),
+    height: hp(3.5),
     width: wp(90),
-    borderWidth: 0.8,
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
