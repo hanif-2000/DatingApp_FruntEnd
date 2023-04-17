@@ -7,9 +7,9 @@ import {
   } from 'react-native';
   import {HP_WP} from './theme';
   
-  const Container = ({isLight, translucent, children}) => {
+  const Container = ({isLight, translucent, children,Style}) => {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container,Style]}>
         <StatusBar
           animated={true}
           backgroundColor="#F9F9F9"
@@ -17,7 +17,7 @@ import {
           translucent={translucent}
         />
         <KeyboardAvoidingView
-          style={{height: '100%', width: '100%'}}
+          style={{flex:1}}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           {children}
         </KeyboardAvoidingView>

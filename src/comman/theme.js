@@ -33,6 +33,7 @@ import {
   
   export const COLORS = {
     darkWhite: '#FAFAFA',
+    blk:'#303030',
     black: '#000000',
     white: '#ffffff',
     orange: '#E75C25',

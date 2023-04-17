@@ -4,7 +4,7 @@ import AuthStack from './src/navigation/AuthStack'
 
 const App = () => {
   return (
-  <SafeAreaView style={{flex:1}}>
+  <SafeAreaView style={{flex:1,flexGrow:1}}>
      <AuthStack/>
   </SafeAreaView>
   )
