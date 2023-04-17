@@ -13,6 +13,8 @@ const GlobalHeader = ({
   onPressRight,
   rightIconStyle,
   drawer = false,
+  headerTitles,
+  light,
 }) => {
   let Route = useNavigation();
   return (
@@ -23,11 +25,11 @@ const GlobalHeader = ({
             name={drawer ? 'menu' : 'arrow-back'}
             type="ionicons"
             size={20}
-            color="#8E8E8E"
+            color={light ? "#fff" :"#8E8E8E"}
           />
         </TouchableOpacity>
       </View>
-      <Text style={styles.titles}>{title}</Text>
+      <Text style={[styles.titles,headerTitles]}>{title}</Text>
       <View style={{flex: 0.2}}>
         {rightImage && (
           <TouchableOpacity
