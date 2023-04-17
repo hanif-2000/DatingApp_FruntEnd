@@ -1,16 +1,21 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import GlobalHeader from '../comman/GlobalHeader'
+
+import React from 'react';
+import {StyleSheet, Image} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Wellcome = () => {
   return (
-    <View>
-      <GlobalHeader/>
-      <Text>Wellcome</Text>
-    </View>
-  )
-}
+    <LinearGradient
+    start={{x: 0.9, y: 0}} end={{x: 0.9, y: 0.9}}
+      colors={['#AA3FEC', '#000000',]}
+      style={styles.linearGradient}>
+        {/* <Image source={}/> */}
+    </LinearGradient>
+  );
+};
 
-export default Wellcome
+export default Wellcome;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  linearGradient: {flex: 1},
+});
