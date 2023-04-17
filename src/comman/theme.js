@@ -37,7 +37,7 @@ import {
     black: '#000000',
     white: '#ffffff',
     orange: '#E75C25',
-    purple: '#652B88',
+    purple: '#AA3FEC',
     light: '#D8D8DC',
     lightGray: '#AEAEB2',
     gray: '#C4C4C4',
