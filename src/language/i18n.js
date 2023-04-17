@@ -2,13 +2,8 @@ import i18n from 'i18next';
 import i18next from 'i18next';
 import {initReactI18next} from 'react-i18next';
 
-import en from './en.json';
-import hi from './hi.json';
-import mt from './mt.json';
-import bg from './bg.json';
-import pb from './pb.json';
-import tl from './tl.json';
-import gj from './gj.json';
+import en from './en';
+
 
 i18next.init(
   {
@@ -22,15 +17,10 @@ i18n.use(initReactI18next).init({
   lng: 'hi',
   resources: {
     en: en,
-    hi: hi,
-    mt: mt,
-    bg: bg,
-    pb: pb,
-    tl: tl,
-    gj: gj,
+
   },
-  supportedLngs: ['en', 'hi', 'mt', 'bg', 'pb', 'tl', 'gj'],
-  fallbackLng: ['hi', 'en', 'gj', 'tl', 'pb', 'bg', 'mt'],
+  // supportedLngs: ['en', 'hi', 'mt', 'bg', 'pb', 'tl', 'gj'],
+  // fallbackLng: ['hi', 'en', 'gj', 'tl', 'pb', 'bg', 'mt'],
   keySeparator: false,
   interpolation: {
     escapeValue: false,
