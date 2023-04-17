@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {StyleSheet, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
