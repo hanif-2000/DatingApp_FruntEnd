@@ -6,6 +6,8 @@ import { Icon } from 'react-native-elements';
 import {COLORS, HP_WP} from '../comman/theme';
 import HomeScreen from '../screen/HomeScreen';
 import ChatScreen from '../screen/ChatScreen';
+import Profile from '../screen/Profile';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -35,6 +37,17 @@ const MainStack = () => {
           ),
         })}
       />
+        <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={() => ({
+          tabBarIcon: ({focused}) => (
+         <Icon name="home" size={30} type='foundation' color={focused ? COLORS.purple : COLORS.COLORS} />
+          ),
+        })}
+      />
+
+
     </Tab.Navigator>
   );
 };

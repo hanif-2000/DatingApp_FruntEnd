@@ -58,5 +58,7 @@ export const COLORS = {
     MatchImage1:require('../assets/images/matchImage1.png'),
     Profile:require('../assets/images/profile.png'),
     Siliva:require('../assets/images/siliva.png'),
-    VideoCall:require('../assets/images/videoCallImage.png')
+    VideoCall:require('../assets/images/videoCallImage.png'),
+    profileBgImage :require('../assets/images/profileBgImag.png')
+
   }

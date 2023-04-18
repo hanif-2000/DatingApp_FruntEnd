@@ -11,7 +11,7 @@ const GlobalButton = ({title, onPress, Style, textStyle, icon = false}) => {
       activeOpacity={0.8}
       style={[styles.Container, Style]}>
       {icon && (
-        <Icon name="facebook" type="fontisto" size={15} color={COLORS.purple} />
+        <Icon name="facebook" type="fontisto" size={15} color={COLORS.blue} />
       )}
       <Text style={[styles.title, textStyle]}>{title}</Text>
     </TouchableOpacity>
