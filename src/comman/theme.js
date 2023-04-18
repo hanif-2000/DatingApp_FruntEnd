@@ -37,7 +37,7 @@ import {
     black: '#000000',
     white: '#ffffff',
     orange: '#E75C25',
-    purple: '#652B88',
+    purple: '#AA3FEC',
     light: '#D8D8DC',
     lightGray: '#AEAEB2',
     gray: '#C4C4C4',
@@ -53,13 +53,13 @@ import {
   };
 
   export const IMAGE ={
-    Logo:require=('../assest/images/logo.png'),
-    Lucy:require=('../assest/images/lucy.png'),
-    Lucy1:require=('../assest/images/lucy1.png'),
-    Lucy2:require=('../assest/images/lucy2.png'),
-    MatchImage:require=('../assest/images/matchImage.png'),
-    MatchImage1:require=('../assest/images/matchImage1.png'),
-    Profile:require=('../assest/images/profile.png'),
-    Siliva:require=('../assest/images/siliva.png'),
-    VideoCall:require=('../assest/images/videoCallImage.png')
+    Logo: require('../assest/images/logo.png'),
+    Lucy: require('../assest/images/lucy.png'),
+    Lucy1:require('../assest/images/lucy1.png'),
+    Lucy2:require('../assest/images/lucy2.png'),
+    MatchImage:require('../assest/images/matchImage.png'),
+    MatchImage1:require('../assest/images/matchImage1.png'),
+    Profile:require('../assest/images/profile.png'),
+    Siliva:require('../assest/images/siliva.png'),
+    VideoCall:require('../assest/images/videoCallImage.png')
   }

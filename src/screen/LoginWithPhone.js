@@ -1,42 +1,32 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
-import {CountryPicker} from 'react-native-country-codes-picker';
+
 import GlobalHeader from '../comman/GlobalHeader';
 import Container from '../comman/Container';
-import {COLORS, Font, HP_WP, SIZE} from '../comman/theme';
+import {COLORS, HP_WP, SIZE} from '../comman/theme';
+import GlobalButton from '../comman/GlobalButton';
 
-const LoginWithPhone = () => {
-  const [show, setShow] = useState(false);
-  const [countryCode, setCountryCode] = useState('');
-
+const LoginWithPhone = ({navigation}) => {
   return (
     <Container Style={styles.container}>
       <GlobalHeader />
       <View style={styles.innarMainContainer}>
         <Text style={styles.verifyNumber}>Verify phone number</Text>
-        <View style={styles.countryPickerContainer}>
-          <TouchableOpacity
-            onPress={() => setShow(true)}
-            style={{
-              width: HP_WP.wp(25),
-              borderWidth:1,
-            }}>
-            <Text
-              style={{
-                color: COLORS.black,
-                fontSize: 20,
-              }}>
-              {countryCode}
-            </Text>
-          </TouchableOpacity>
-          <CountryPicker
-            show={show}
-            pickerButtonOnPress={item => {
-              setCountryCode(item.dial_code);
-              setShow(false);
-            }}
-          />
-        </View>
+
+        <Text style={styles.bottomText}>
+          By clicking Log In, you agree with our Terms. Learn how process your
+          data in our Privacy Policy and Cookies Policy. By clicking Log In, you
+          agree with our Terms. Learn how
+          <Text style={styles.touchableText}>
+            {' '}
+            process your data in our Privacy Policy and Cookies
+          </Text>
+        </Text>
+        <GlobalButton
+          Style={styles.buttonStyle}
+          title={'CONTINUE'}
+          onPress={() => navigation.navigate('Otp')}
+        />
       </View>
     </Container>
   );
@@ -56,9 +46,16 @@ const styles = StyleSheet.create({
     color: COLORS.blk,
     marginTop: HP_WP.hp(3),
   },
-  countryPickerContainer: {
-    flexDirection: 'row',
-    marginTop:HP_WP.hp(6),
-    alignItems:'center',
+  bottomText: {
+    color: '#8C8C8C',
+    fontSize: SIZE.M,
+    marginTop: HP_WP.hp(3),
+  },
+  touchableText: {
+    textDecorationLine: 'underline',
+    fontWeight: '500',
+  },
+  buttonStyle: {
+    marginTop: HP_WP.hp(3),
   },
 });

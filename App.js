@@ -2,6 +2,7 @@ import { PermissionsAndroid, Platform, SafeAreaView, } from 'react-native'
 import React from 'react'
 import AuthStack from './src/navigation/AuthStack'
 import { fcmService } from 'notification/fcmservice';
+import MainStack from './src/navigation/MainStack';
 
 const App = () => {
 
@@ -29,13 +30,13 @@ const App = () => {
     setFcmToken(token)
   }
 
-
   return (
-    <SafeAreaView style={{ flex: 1, flexGrow: 1 }}>
-      <AuthStack />
+    <SafeAreaView style={{flex: 1, flexGrow: 1}}>
+      <NavigationContainer>
+        <AuthStack />
+      </NavigationContainer>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default App
-
+export default App;
