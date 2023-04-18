@@ -53,13 +53,13 @@ import {
   };
 
   export const IMAGE ={
-    Logo: require('../assest/images/logo.png'),
-    Lucy: require('../assest/images/lucy.png'),
-    Lucy1:require('../assest/images/lucy1.png'),
-    Lucy2:require('../assest/images/lucy2.png'),
-    MatchImage:require('../assest/images/matchImage.png'),
-    MatchImage1:require('../assest/images/matchImage1.png'),
-    Profile:require('../assest/images/profile.png'),
-    Siliva:require('../assest/images/siliva.png'),
-    VideoCall:require('../assest/images/videoCallImage.png')
+    Logo: require('../assets/images/logo.png'),
+    Lucy: require('../assets/images/lucy.png'),
+    Lucy1:require('../assets/images/lucy1.png'),
+    Lucy2:require('../assets/images/lucy2.png'),
+    MatchImage:require('../assets/images/matchImage.png'),
+    MatchImage1:require('../assets/images/matchImage1.png'),
+    Profile:require('../assets/images/profile.png'),
+    Siliva:require('../assets/images/siliva.png'),
+    VideoCall:require('../assets/images/videoCallImage.png')
   }
