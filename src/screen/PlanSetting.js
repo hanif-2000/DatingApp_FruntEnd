@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 30,
     height:HP_WP.hp(4)
+    
   },
   Upgrade: {
     width: HP_WP.wp(37),
