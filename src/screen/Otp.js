@@ -34,7 +34,7 @@ const Otp = ({navigation}) => {
         <GlobalButton
           Style={styles.buttonStyle}
           title={'CONTINUE'}
-          onPress={() => navigation.navigate('Profile')}
+          onPress={() => navigation.navigate('MainStack' ,{screen:'Profile'})}
         />
       </View>
     </Container>
