@@ -38,7 +38,6 @@ import {
     white: '#ffffff',
     orange: '#E75C25',
     purple: '#AA3FEC',
-    blue:"#0F77F0",
     light: '#D8D8DC',
     lightGray: '#AEAEB2',
     gray: '#C4C4C4',

@@ -16,6 +16,7 @@ const AuthStack = () => {
         <Stack.Screen name="LoginWithPhone" component={LoginWithPhone} />
         <Stack.Screen name="Otp" component={Otp} />
         <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Wellcome" component={Wellcome} />
         <Stack.Screen name="LoginWithFacebook" component={LoginWithFacebook} />
       </Stack.Navigator>
   );
