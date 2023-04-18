@@ -41,7 +41,6 @@ export const COLORS = {
   darkGray: '#2D2D2D',
   lightGray: '#8E8E8E',
   mediumGray: '#828282',
-
   orange: '#E75C25',
   purple: '#AA3FEC',
   light: '#D8D8DC',
@@ -49,16 +48,16 @@ export const COLORS = {
   lightBlack: '#2C2C2E',
   lowestBlue: '#F5F5FA',
 };
-  export const IMAGE ={
-    Logo: require('../assets/images/logo.png'),
-    Lucy: require('../assets/images/lucy.png'),
-    Lucy1:require('../assets/images/lucy1.png'),
-    Lucy2:require('../assets/images/lucy2.png'),
-    MatchImage:require('../assets/images/matchImage.png'),
-    MatchImage1:require('../assets/images/matchImage1.png'),
-    Profile:require('../assets/images/profile.png'),
-    Siliva:require('../assets/images/siliva.png'),
-    VideoCall:require('../assets/images/videoCallImage.png'),
-    profileBgImage :require('../assets/images/profileBgImag.png')
-
-  }
+export const IMAGE = {
+  Logo: require('../assets/images/logo.png'),
+  Lucy: require('../assets/images/lucy.png'),
+  Lucy1: require('../assets/images/lucy1.png'),
+  Lucy2: require('../assets/images/lucy2.png'),
+  MatchImage: require('../assets/images/matchImage.png'),
+  MatchImage1: require('../assets/images/matchImage1.png'),
+  Profile: require('../assets/images/profile.png'),
+  Siliva: require('../assets/images/siliva.png'),
+  VideoCall: require('../assets/images/videoCallImage.png'),
+  profileBgImage: require('../assets/images/profileBgImag.png'),
+  logo2:require('../assets/images/logo2.png')
+};
