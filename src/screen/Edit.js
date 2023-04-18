@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: HP_WP.wp(4),
   },
   accountSettings: {
-    marginTop: HP_WP.hp(2),
+    marginTop: HP_WP.hp(4),
     color: COLORS.black,
     fontSize: SIZE.L,
   },

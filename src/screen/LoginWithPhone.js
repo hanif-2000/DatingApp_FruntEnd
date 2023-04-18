@@ -20,6 +20,7 @@ const LoginWithPhone = ({navigation}) => {
         <Text style={styles.verifyNumber}>Verify phone number</Text>
         <GlobalInput
           placeholder="Phone Number"
+          keyboardType={'number-pad'}
           numberInput
           countryCode
           code={[isCounty,' ', countryCode]}

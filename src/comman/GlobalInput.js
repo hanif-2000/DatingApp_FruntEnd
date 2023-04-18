@@ -53,13 +53,9 @@ const GlobalInput = ({
             onPress={openCode}
             style={[
               {
-                marginRight: 10,
                 height: HP_WP.hp(5),
                 justifyContent: 'center',
-                paddingHorizontal: 15,
-                borderBottomWidth: 1,
-                borderBottomColor: COLORS.gray,
-                marginLeft: HP_WP.wp(1),
+               
               },
               countryPikerStyle,
             ]}>
@@ -110,10 +106,11 @@ export default GlobalInput;
 const styles = StyleSheet.create({
   container: {
     height: HP_WP.hp(5),
-    width: HP_WP.wp(90),
+    width: HP_WP.wp(92),
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal:10
   },
   input: {
     flex: 1,
