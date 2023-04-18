@@ -13,6 +13,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import {COLORS, Font, SIZE} from './theme';
+import { Icon } from 'react-native-elements';
 
 const GlobalInput = ({
   onChange,
@@ -32,7 +33,13 @@ const GlobalInput = ({
   code,
   openCode,
   editable,
-  numberInput
+  numberInput,
+  textInputStyle,
+  inputName,
+  label,
+  anyIcon,
+  iconName,
+  iconType
 }) => {
   return (
     <>
@@ -40,16 +47,24 @@ const GlobalInput = ({
         style={[
           styles.container,
           inputStyle,
-          {borderColor: errors && touched ? COLORS.orange : COLORS.light,
-         borderWidth: numberInput ? 0 :0.8 },
+          {
+            borderColor: errors && touched ? COLORS.orange : COLORS.gray,
+            borderWidth: numberInput ? 0 : 0.8,
+          },
         ]}>
         {countryCode && (
           <TouchableOpacity onPress={openCode} style={{marginRight: 5}}>
             <Text style={styles.codeTxt}>{code}</Text>
           </TouchableOpacity>
         )}
+        {inputName && <Text style={styles.inputNameText}>{label}</Text>}
+
         <TextInput
-          style={[styles.input]}
+          style={[
+            styles.input,
+            {textAlign: inputName ? 'right' : 'left'},
+            textInputStyle,
+          ]}
           onChangeText={onChange}
           value={value}
           keyboardType={keyboardType}
@@ -69,6 +84,14 @@ const GlobalInput = ({
             />
           </TouchableOpacity>
         )}
+         {anyIcon && (
+          <TouchableOpacity onPress={onPress}>
+            <Icon  name={iconName}
+            type={iconType}
+            size={20}
+            color={'#8E8E8E'}/>
+          </TouchableOpacity>
+        )}
       </View>
       {errors && touched && <Text style={styles.errorText}>{errors}</Text>}
     </>
@@ -79,8 +102,8 @@ export default GlobalInput;
 
 const styles = StyleSheet.create({
   container: {
-    height: hp(3.5),
-    width: wp(90),
+    height: hp(5),
+    width: wp(92),
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
@@ -88,19 +111,23 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    color: COLORS.black,
+    color: COLORS.lightGray,
     fontSize: SIZE.M,
-    fontFamily: Font.mediam,
   },
   iconStyle: {
     height: hp(2.5),
     width: wp(5),
-    tintColor: COLORS.gray,
   },
   errorText: {
     fontSize: SIZE.S,
-    color: COLORS.orange,
-    fontFamily: Font.regular,
   },
-  codeTxt: {fontSize: 15, color: '#000', fontWeight: '500'},
+  codeTxt: {
+    fontSize: 15,
+    color: '#000',
+    fontWeight: '500',
+  },
+  inputNameText: {
+    color: COLORS.darkGray,
+    fontSize:SIZE.N
+  },
 });
