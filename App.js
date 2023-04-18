@@ -1,8 +1,10 @@
 import { PermissionsAndroid, Platform, SafeAreaView, } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { NavigationContainer } from '@react-navigation/native';
+
 import AuthStack from './src/navigation/AuthStack'
-import { fcmService } from 'notification/fcmservice';
 import MainStack from './src/navigation/MainStack';
+import { fcmService } from './src/notification/fcmservice';
 
 const App = () => {
 
