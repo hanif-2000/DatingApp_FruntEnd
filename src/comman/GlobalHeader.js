@@ -19,17 +19,17 @@ const GlobalHeader = ({
   let Route = useNavigation();
   return (
     <View style={styles.mainContainer}>
-      <View style={{flex: 0.2,alignItems:'flex-start'}}>
+      <View style={{flex: 0.2, alignItems: 'flex-start'}}>
         <TouchableOpacity onPress={() => Route.goBack()}>
           <Icon
             name={drawer ? 'menu' : 'arrow-back'}
             type="ionicons"
             size={20}
-            color={light ? "#fff" :"#8E8E8E"}
+            color={light ? '#fff' : '#8E8E8E'}
           />
         </TouchableOpacity>
       </View>
-      <Text style={[styles.titles,headerTitles]}>{title}</Text>
+      <Text style={[styles.titles, headerTitles]}>{title}</Text>
       <View style={{flex: 0.2}}>
         {rightImage && (
           <TouchableOpacity
@@ -52,9 +52,8 @@ const styles = StyleSheet.create({
     paddingBottom: HP_WP.hp(0.5),
   },
   titles: {
-    color: COLORS.lightBlack,
-    fontSize: SIZE.L,
-    fontFamily: Font.semiBold,
+    color: COLORS.black,
+    fontSize: SIZE.XL,
     textAlign: 'center',
     flex: 1,
   },

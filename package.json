@@ -27,6 +27,7 @@
     "react-native": "0.71.6",
     "react-native-elements": "^3.4.3",
     "react-native-linear-gradient": "^2.6.2",
+    "react-native-modal-datetime-picker": "^15.0.0",
     "react-native-push-notification": "^8.1.1",
     "react-native-responsive-fontsize": "^0.5.1",
     "react-native-responsive-screen": "^1.4.2",
