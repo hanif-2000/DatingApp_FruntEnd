@@ -152,5 +152,6 @@ const styles = StyleSheet.create({
   edit: {
     color: COLORS.blue,
     textDecorationLine: 'underline',
+    marginRight:5
   },
 });
