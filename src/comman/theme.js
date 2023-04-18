@@ -34,7 +34,7 @@ export const SIZE = {
 export const COLORS = {
   darkWhite: '#FAFAFA',
   blk: '#303030',
-  black: '#000000',
+  black: '#000',
   white: '#ffffff',
   gray: '#C6C6C6',
   blue: '#247DCF',

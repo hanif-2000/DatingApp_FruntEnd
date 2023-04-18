@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
@@ -25,7 +25,7 @@ const Edit = ({navigation}) => {
     hideDatePicker();
   };
   return (
-    <Container Style={styles.mainContainer}>
+    <Container >
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
@@ -33,7 +33,7 @@ const Edit = ({navigation}) => {
         onCancel={hideDatePicker}
       />
       <GlobalHeader title={'Edit'} />
-      <ScrollView>
+      <View style={styles.mainContainer}>
         <Text style={styles.accountSettings}>Account Settings</Text>
         <GlobalInput placeholder={'Jenny'} inputStyle={{marginTop: 10}} />
         <GlobalInput
@@ -55,7 +55,7 @@ const Edit = ({navigation}) => {
           inputStyle={{marginTop: 10}}
         />
         <GlobalButton onPress={()=>navigation.navigate('PlanSetting')} Style={styles.button} title={'Save'} />
-      </ScrollView>
+      </View>
     </Container>
   );
 };

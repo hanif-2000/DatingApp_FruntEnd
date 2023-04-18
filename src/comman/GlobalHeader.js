@@ -24,8 +24,8 @@ const GlobalHeader = ({
           <Icon
             name={drawer ? 'menu' : 'arrow-back'}
             type="ionicons"
-            size={20}
-            color={light ? '#fff' : '#8E8E8E'}
+            size={25}
+            color={light ? '#fff' : '#000'}
           />
         </TouchableOpacity>
       </View>
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: HP_WP.hp(1),
     paddingBottom: HP_WP.hp(0.5),
+    paddingLeft: HP_WP.hp(0.8),
   },
   titles: {
     color: COLORS.black,
