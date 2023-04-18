@@ -19,15 +19,7 @@ const Wellcome = ({navigation}) => {
         end={{x: 0.9, y: 0.9}}
         colors={['#AA3FEC', '#000000']}
         style={styles.linearGradient}>
-        <Image
-          source={IMAGE.Logo}
-          style={{
-            height: HP_WP.hp(15),
-            width: HP_WP.wp(30),
-            alignSelf: 'center',
-            marginTop: HP_WP.hp(20),
-          }}
-        />
+        <Image source={IMAGE.Logo} style={styles.Logo} />
       </LinearGradient>
     </Container>
   );
@@ -37,4 +29,10 @@ export default Wellcome;
 
 const styles = StyleSheet.create({
   linearGradient: {flex: 1},
+  Logo: {
+    height: HP_WP.hp(15),
+    width: HP_WP.wp(30),
+    alignSelf: 'center',
+    marginTop: HP_WP.hp(20),
+  },
 });
