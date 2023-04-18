@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "12510229230",
+    "project_id": "jadeen",
+    "storage_bucket": "jadeen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12510229230:android:1ea5c545bef9b9812c39ff",
+        "android_client_info": {
+          "package_name": "com.datingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12510229230-g9le8vjp8dgkn79h6515jatedufq1glq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx1cOCrk9-2em0pvc-FQHqHFDEyYUiB64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12510229230-g9le8vjp8dgkn79h6515jatedufq1glq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
