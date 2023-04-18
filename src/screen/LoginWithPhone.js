@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 import GlobalHeader from '../comman/GlobalHeader';
 import Container from '../comman/Container';
-import {COLORS, HP_WP, SIZE} from '../comman/theme';
+import {COLORS, Font, HP_WP, SIZE} from '../comman/theme';
 import GlobalButton from '../comman/GlobalButton';
 
 const LoginWithPhone = ({navigation}) => {
@@ -36,7 +36,7 @@ export default LoginWithPhone;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: HP_WP.wp(5),
+    paddingHorizontal: HP_WP.wp(5)
   },
   innarMainContainer: {
     marginHorizontal: HP_WP.wp(7),
@@ -45,15 +45,17 @@ const styles = StyleSheet.create({
     fontSize: SIZE.XT,
     color: COLORS.blk,
     marginTop: HP_WP.hp(3),
+    fontFamily:Font.semiBold
   },
   bottomText: {
     color: '#8C8C8C',
     fontSize: SIZE.M,
     marginTop: HP_WP.hp(3),
+    fontFamily:Font.medium
   },
   touchableText: {
     textDecorationLine: 'underline',
-    fontWeight: '500',
+    color: '#8C8C8C'
   },
   buttonStyle: {
     marginTop: HP_WP.hp(3),
