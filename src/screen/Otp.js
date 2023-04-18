@@ -3,7 +3,7 @@ import React, {useRef, useState} from 'react';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 import Container from '../comman/Container';
-import {COLORS, HP_WP, SIZE} from '../comman/theme';
+import {COLORS, Font, HP_WP, SIZE} from '../comman/theme';
 import GlobalHeader from '../comman/GlobalHeader';
 import GlobalButton from '../comman/GlobalButton';
 
@@ -22,8 +22,6 @@ const Otp = ({navigation}) => {
           style={styles.OtpInputStyle}
           pinCount={4}
           keyboardType={'phone-pad'}
-          // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
-          // onCodeChanged = {code => { this.setState({code})}}
           autoFocusOnLoad
           codeInputFieldStyle={styles.underlineStyleBase}
           onCodeFilled={code => {
@@ -34,7 +32,7 @@ const Otp = ({navigation}) => {
         <GlobalButton
           Style={styles.buttonStyle}
           title={'CONTINUE'}
-          onPress={() => navigation.navigate('MainStack' ,{screen:'Profile'})}
+          onPress={() => navigation.navigate('MainStack' ,{screen:'Home'})}
         />
       </View>
     </Container>
@@ -54,6 +52,7 @@ const styles = StyleSheet.create({
     fontSize: SIZE.XT,
     color: COLORS.blk,
     marginTop: HP_WP.hp(3),
+    fontFamily:Font.semiBold
   },
   OtpInputStyle: {
     height: HP_WP.hp(6),
