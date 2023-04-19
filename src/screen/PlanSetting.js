@@ -41,9 +41,6 @@ const PlanSetting = () => {
           </View>
         </View>
         <View style={styles.topCardContainer}>
-            
-            
-
           <Text style={styles.bottomCardTopText}>Get Mingle Gold</Text>
           <LinearGradient
             start={{x: 1, y: 0.8}}
