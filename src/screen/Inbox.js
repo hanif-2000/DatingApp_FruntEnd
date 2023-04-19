@@ -8,20 +8,20 @@ import {
 } from 'react-native';
 import React from 'react';
 
-import { HP_WP ,IMAGE} from '../comman/theme';
+import { HP_WP, IMAGE } from '../comman/theme';
 import Container from '../comman/Container';
 import GlobalHeader from '../comman/GlobalHeader';
 
-const ChatScreen = ({navigation}) => {
+const ChatScreen = ({ navigation }) => {
   const DATA = [1, 2, 3, 4];
   return (
-    <Container Style={{paddingHorizontal:HP_WP.wp(5)}} >
-      <GlobalHeader title={'Chat'}/>
+    <Container Style={{ paddingHorizontal: HP_WP.wp(5) }} >
+      <GlobalHeader title={'Chat'} />
       <FlatList
         data={DATA}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate('ChatingDetailes')}
+            onPress={() => navigation.navigate('ChattingScreen')}
             style={styles.flatListContainer}>
             <Image
               source={IMAGE.Profile}
@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
     marginTop: HP_WP.hp(2.4),
-    
+
   },
 });

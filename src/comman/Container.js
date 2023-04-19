@@ -6,10 +6,11 @@ import {
   View,
   SafeAreaView,
 } from 'react-native';
-import { HP_WP } from './theme';
+import { COLORS, HP_WP } from './theme';
 
 const Container = ({ isLight, translucent, children, Style, hidden }) => {
   return (
+    <SafeAreaView style={[{flex:1,backgroundColor:COLORS.white}]}>
       <View style={[styles.container, Style]}>
         <StatusBar
           animated={true}
@@ -24,6 +25,7 @@ const Container = ({ isLight, translucent, children, Style, hidden }) => {
           {children}
         </KeyboardAvoidingView>
       </View>
+      </SafeAreaView>
   );
 };
 export default Container;

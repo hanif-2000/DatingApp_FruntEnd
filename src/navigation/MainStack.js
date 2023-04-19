@@ -1,14 +1,14 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Icon} from 'react-native-elements';
+import { StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Icon } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-import {COLORS, HP_WP} from '../comman/theme';
+import { COLORS, HP_WP } from '../comman/theme';
 import HomeScreen from '../screen/HomeScreen';
-import ChatScreen from '../screen/ChatScreen';
+import ChatScreen from '../screen/Inbox';
 import Profile from '../screen/Profile';
 import LikeScreen from '../screen/LikeScreen';
 import Match from '../screen/Match';
@@ -27,7 +27,7 @@ const MainStack = () => {
         name="HomeScreen"
         component={HomeScreen}
         options={() => ({
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <Icon
               name="home"
               size={30}
@@ -39,10 +39,10 @@ const MainStack = () => {
       />
       <Tab.Screen
         name="LikeScreen"
-        // component={LikeScreen}
-        component={Match}
+        component={LikeScreen}
+        // component={Match}
         options={() => ({
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <AntDesign
               name="hearto"
               size={30}
@@ -55,7 +55,7 @@ const MainStack = () => {
         name="ChatScreen"
         component={ChatScreen}
         options={() => ({
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <Ionicons
               name="chatbox-ellipses-outline"
               size={30}
@@ -68,7 +68,7 @@ const MainStack = () => {
         name="Profile"
         component={Profile}
         options={() => ({
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <FontAwesome
               name="user"
               size={30}

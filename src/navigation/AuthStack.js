@@ -8,6 +8,8 @@ import Otp from '../screen/Otp';
 import Edit from '../screen/Edit';
 import PlanSetting from '../screen/PlanSetting';
 import MainStack from './MainStack';
+import ChattingScreen from '../screen/ChattingScreen';
+import FitMatch from '../screen/FitMatch';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +24,10 @@ const AuthStack = () => {
       <Stack.Screen name="Edit" component={Edit} />
       <Stack.Screen name="PlanSetting" component={PlanSetting} />
       <Stack.Screen name="MainStack" component={MainStack} />
+      <Stack.Screen name="ChattingScreen" component={ChattingScreen} />
+      <Stack.Screen name="FitMatch" component={FitMatch} />
+      
+
     </Stack.Navigator>
   );
 };
