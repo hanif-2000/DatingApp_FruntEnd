@@ -1,6 +1,6 @@
 
-import React, {useRef} from 'react';
-import {Alert, StyleSheet, View} from 'react-native';
+import React, { useRef } from 'react';
+import { Alert, StyleSheet, View } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 
 import Container from '../comman/Container';
@@ -10,11 +10,11 @@ import Card from '../component/Card';
 import IconButton from '../component/IconButton';
 import { COLORS, HP_WP } from '../comman/theme';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const useSwiper = useRef(null).current;
 
-  const handleOnSwipedLeft = () =>useSwiper.swipedLef(Alert.alert('fghjk'));
-  const handleOnSwipedTop = () => useSwiper.swipeTop('right');
+  const handleOnSwipedLeft = () => useSwiper.swipedLef('left');
+  const handleOnSwipedTop = () => useSwiper.swipeTop('top');
   const handleOnSwipedRight = () => useSwiper.swipeRight('right');
 
   return (
@@ -23,13 +23,13 @@ const HomeScreen = () => {
         withoutIcon={true}
         logo={true}
         rightImage={true}
-        mainContainer={{paddingHorizontal:HP_WP.wp(5)}}
+        mainContainer={{ paddingHorizontal: HP_WP.wp(5) }}
         rightIcon={require('../assets/images/filter.png')}
       />
-      <View style={{flex: 0.88}}>
+      <View style={{ flex: 0.88, backgroundColor: '#fff' }}>
         <Swiper
           ref={useSwiper}
-          backgroundColor='#F9F9F9'
+          backgroundColor='#fff'
           animateCardOpacity
           cards={photoCards}
           renderCard={card => <Card card={card} />}
@@ -44,21 +44,21 @@ const HomeScreen = () => {
       <View style={styles.buttonsContainer}>
         <IconButton
           name="close"
-          onPress={handleOnSwipedLeft}
+          onPress={() => handleOnSwipedLeft()}
           color="white"
           backgroundColor="#E5566D"
           type='AntDesign'
         />
         <IconButton
           name="dollar"
-          onPress={handleOnSwipedTop}
+          onPress={() => navigation.navigate('PlanSetting')}
           color="white"
           backgroundColor="#FFD912"
           type='fontisto'
         />
         <IconButton
           name="heart"
-          onPress={handleOnSwipedRight}
+          onPress={() => handleOnSwipedRight()}
           color="white"
           backgroundColor={COLORS.purple}
           type='entypo'
@@ -71,5 +71,9 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  buttonsContainer: {flexDirection: 'row', justifyContent: 'space-around',},
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    backgroundColor:'#fff' 
+  },
 });

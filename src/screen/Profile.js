@@ -102,24 +102,28 @@ const Profile = ({ navigation }) => {
             inputName
             label="Name"
             inputStyle={{ marginTop: 10 }}
+            editable={false}
           />
           <GlobalInput
             placeholder={'+91 9876543210'}
             inputName
             label="Phone Number"
             inputStyle={{ marginTop: 10 }}
+            editable={false}
           />
           <GlobalInput
             placeholder={'02-05-1997'}
             inputName
             label="Date of birth"
             inputStyle={{ marginTop: 10 }}
+            editable={false}
           />
           <GlobalInput
             placeholder={'abcqwertyu@gmail.com'}
             inputName
             label="Email"
             inputStyle={{ marginTop: 10 }}
+            editable={false}
           />
           <Text style={[styles.accountSettings, { marginTop: HP_WP.hp(2) }]}>
             Plan Settings

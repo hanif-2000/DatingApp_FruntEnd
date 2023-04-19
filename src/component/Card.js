@@ -10,7 +10,7 @@ import {COLORS, Font, HP_WP, SIZE} from '../comman/theme';
 
 const Card = ({card}) => (
   <View style={styles.card}>
-    <Image style={styles.image} source={card.photo} resizeMode="contain" />
+    <Image style={styles.image} source={card.photo} resizeMode='cover' />
     <View style={styles.photoDescriptionContainer}>
       <Text style={styles.text}>{`${card.name}, ${card.age}`}</Text>
     </View>
@@ -20,14 +20,15 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
-    height: HP_WP.hp(70),
+    height: HP_WP.hp(65),
     borderRadius: 10,
-    top: HP_WP.hp(-3),
+    top: HP_WP.hp(-6),
+    backgroundColor:'#fff' 
   },
   image: {
     borderRadius: 10,
     width: HP_WP.wp(90),
-    flex: 1,
+    height: HP_WP.hp(65),
   },
   photoDescriptionContainer: {
     position: 'absolute',

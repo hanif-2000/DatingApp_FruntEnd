@@ -69,7 +69,6 @@ const GlobalInput = ({
             styles.input,
             {textAlign: inputName ? 'right' : 'left'},
             textInputStyle,
-            textInputStyle,
           ]}
           onChangeText={onChange}
           value={value}
@@ -116,6 +115,8 @@ const styles = StyleSheet.create({
     flex: 1,
     color: COLORS.lightGray,
     fontSize: SIZE.N,
+    height:HP_WP.hp(5)
+
   },
   iconStyle: {
     height: HP_WP.hp(2.5),
