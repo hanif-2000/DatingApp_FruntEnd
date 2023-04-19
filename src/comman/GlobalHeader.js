@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Icon} from 'react-native-elements';
 
-import {COLORS, Font, HP_WP, SIZE} from './theme';
+import {COLORS, Font, HP_WP, IMAGE, SIZE} from './theme';
 import {useNavigation} from '@react-navigation/native';
 
 const GlobalHeader = ({
@@ -15,27 +15,34 @@ const GlobalHeader = ({
   drawer = false,
   headerTitles,
   light,
+  withoutIcon,
+  disabled,
+  logo,
 }) => {
   let Route = useNavigation();
   return (
     <View style={styles.mainContainer}>
       <View style={{flex: 0.2, alignItems: 'flex-start'}}>
-        <TouchableOpacity onPress={() => Route.goBack()}>
+        <TouchableOpacity disabled={disabled} onPress={() => Route.goBack()}>
           <Icon
-            name={drawer ? 'menu' : 'arrow-back'}
+            name={drawer ? 'menu' : withoutIcon ? '' : 'arrow-back'}
             type="ionicons"
-            size={25}
-            color={light ? '#fff' : '#000'}
+            size={20}
+            color={light ? '#fff' : COLORS.black}
           />
         </TouchableOpacity>
       </View>
-      <Text style={[styles.titles, headerTitles]}>{title}</Text>
+      {logo ? (
+        <Image source={IMAGE.logo2} style={styles.logo} />
+      ) : (
+        <Text style={[styles.titles, headerTitles]}>{title}</Text>
+      )}
       <View style={{flex: 0.2}}>
         {rightImage && (
           <TouchableOpacity
             onPress={onPressRight}
             style={{alignSelf: 'flex-end'}}>
-            <Image source={rightIcon} style={rightIconStyle} />
+            <Image source={rightIcon} style={[styles.rightIconStyle,rightIconStyle]} />
           </TouchableOpacity>
         )}
       </View>
@@ -48,7 +55,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: HP_WP.hp(1),
+    paddingTop: HP_WP.hp(2),
     paddingBottom: HP_WP.hp(0.5),
     paddingLeft: HP_WP.hp(0.8),
   },
@@ -57,5 +64,17 @@ const styles = StyleSheet.create({
     fontSize: SIZE.XL,
     textAlign: 'center',
     flex: 1,
+    fontFamily:Font.semiBold
   },
+  logo: {
+    height: HP_WP.hp(3),
+    width: HP_WP.wp(30),
+    resizeMode: 'contain',
+    flex: 1,
+    alignSelf: 'center',
+  },
+  rightIconStyle:{
+    height: HP_WP.hp(3),
+    width: HP_WP.wp(6), 
+  }
 });

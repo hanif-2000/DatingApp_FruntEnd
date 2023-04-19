@@ -35,6 +35,7 @@ const ChatScreen = () => {
             </View>
           );
         }}
+
       />
     </Container>
   );
@@ -69,3 +70,4 @@ const styles = StyleSheet.create({
     marginLeft: 78,
   },
 });
+

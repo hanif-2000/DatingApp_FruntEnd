@@ -1,13 +1,16 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { Icon } from 'react-native-elements';
+import {Icon} from 'react-native-elements';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import {COLORS, HP_WP} from '../comman/theme';
 import HomeScreen from '../screen/HomeScreen';
 import ChatScreen from '../screen/ChatScreen';
 import Profile from '../screen/Profile';
-
+import LikeScreen from '../screen/LikeScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,34 +23,58 @@ const MainStack = () => {
         tabBarShowLabel: false,
       }}>
       <Tab.Screen
-        name="Home"
+        name="HomeScreen"
         component={HomeScreen}
         options={() => ({
           tabBarIcon: ({focused}) => (
-         <Icon name="home" size={30} type='foundation' color={focused ? COLORS.purple : COLORS.COLORS} />
+            <Icon
+              name="home"
+              size={30}
+              type="foundation"
+              color={focused ? COLORS.purple : COLORS.COLORS}
+            />
           ),
         })}
       />
-       <Tab.Screen
+      <Tab.Screen
+        name="LikeScreen"
+        component={LikeScreen}
+        options={() => ({
+          tabBarIcon: ({focused}) => (
+            <AntDesign
+              name="hearto"
+              size={30}
+              color={focused ? COLORS.purple : COLORS.COLORS}
+            />
+          ),
+        })}
+      />
+      <Tab.Screen
         name="ChatScreen"
         component={ChatScreen}
         options={() => ({
           tabBarIcon: ({focused}) => (
-         <Icon name="home" size={30} type='foundation' color={focused ? COLORS.purple : COLORS.COLORS} />
+            <Ionicons
+              name="chatbox-ellipses-outline"
+              size={30}
+              color={focused ? COLORS.purple : COLORS.COLORS}
+            />
           ),
         })}
       />
-        <Tab.Screen
+      <Tab.Screen
         name="Profile"
         component={Profile}
         options={() => ({
           tabBarIcon: ({focused}) => (
-         <Icon name="home" size={30} type='foundation' color={focused ? COLORS.purple : COLORS.COLORS} />
+            <FontAwesome
+              name="user"
+              size={30}
+              color={focused ? COLORS.purple : COLORS.COLORS}
+            />
           ),
         })}
       />
-
-
     </Tab.Navigator>
   );
 };
@@ -56,7 +83,7 @@ export default MainStack;
 const styles = StyleSheet.create({
   main: {
     backgroundColor: COLORS.white,
-    height: 70,
+    height: 65,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     elevation: 3,
