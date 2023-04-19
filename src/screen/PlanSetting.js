@@ -31,7 +31,9 @@ const PlanSetting = () => {
   return (
     <Container Style={styles.mainContainer}>
       <GlobalHeader title={'Manage Subscription'} />
-      <ScrollView contentContainerStyle={{paddingHorizontal: 10,paddingBottom:20}}>
+      <ScrollView 
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={{paddingHorizontal: 10,paddingBottom:20}}>
         <View style={[styles.topCardContainer, {padding: 20}]}>
           <View style={styles.directionContainer}>
             <Text style={styles.currentPlan}>Current Plan</Text>

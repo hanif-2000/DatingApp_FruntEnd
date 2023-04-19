@@ -13,7 +13,12 @@ const Wellcome = ({navigation}) => {
   }, []);
 
   return (
-    <Container translucent={true} isLight={true} hidden={true}>
+    <LinearGradient
+    start={{x: 0.9, y: 0}}
+    end={{x: 0.9, y: 0.9}}
+    colors={['#AA3FEC', '#000000']}
+    style={styles.linearGradient}>
+    <Container translucent={true} isLight={true} hidden={false}>
       <LinearGradient
         start={{x: 0.9, y: 0}}
         end={{x: 0.9, y: 0.9}}
@@ -31,6 +36,7 @@ const Wellcome = ({navigation}) => {
         />
       </LinearGradient>
     </Container>
+    </LinearGradient>
   );
 };
 
