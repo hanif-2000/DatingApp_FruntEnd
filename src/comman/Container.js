@@ -12,7 +12,6 @@ const Container = ({ isLight, translucent, children, Style, hidden }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={[styles.container, Style]}>
-        
         <StatusBar
           animated={true}
           backgroundColor={"#000"}
