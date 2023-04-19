@@ -28,7 +28,7 @@ const GlobalHeader = ({
             name={drawer ? 'menu' : withoutIcon ? '' : 'arrow-back'}
             type="ionicons"
             size={20}
-            color={light ? '#fff' : '#8E8E8E'}
+            color={light ? '#fff' : COLORS.black}
           />
         </TouchableOpacity>
       </View>
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     fontSize: SIZE.XL,
     textAlign: 'center',
     flex: 1,
+    fontFamily:Font.semiBold
   },
   logo: {
     height: HP_WP.hp(3),

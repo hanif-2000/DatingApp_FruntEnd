@@ -13,17 +13,17 @@ const Stack = createNativeStackNavigator();
 
 const AuthStack = () => {
   return (
-      <Stack.Navigator initialRouteName='Wellcome' screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Wellcome" component={Wellcome} />
-        <Stack.Screen name="LoginWithPhone" component={LoginWithPhone} />
-        <Stack.Screen name="Otp" component={Otp} />
-        <Stack.Screen name="LoginWithFacebook" component={LoginWithFacebook} />
-        <Stack.Screen name="Edit" component={Edit} />
-        <Stack.Screen name="PlanSetting" component={PlanSetting} />
-
-
-        <Stack.Screen name="MainStack" component={MainStack} />
-      </Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName="PlanSetting"
+      screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Wellcome" component={Wellcome} />
+      <Stack.Screen name="LoginWithPhone" component={LoginWithPhone} />
+      <Stack.Screen name="Otp" component={Otp} />
+      <Stack.Screen name="LoginWithFacebook" component={LoginWithFacebook} />
+      <Stack.Screen name="Edit" component={Edit} />
+      <Stack.Screen name="PlanSetting" component={PlanSetting} />
+      <Stack.Screen name="MainStack" component={MainStack} />
+    </Stack.Navigator>
   );
 };
 

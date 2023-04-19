@@ -46,7 +46,7 @@ const Edit = ({navigation}) => {
           onPress={showDatePicker}
           anyIcon
           iconName="calendar"
-          iconType="Entypo"
+          iconType="entypo"
           placeholder={'02-05-1997'}
           inputStyle={{marginTop: 10}}
         />
