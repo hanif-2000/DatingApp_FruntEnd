@@ -1,3 +1,4 @@
+
 import React, {useRef} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Swiper from 'react-native-deck-swiper';

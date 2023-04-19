@@ -19,7 +19,7 @@ const LoginWithFacebook = () => {
         end={{x: 0.9, y: 0.9}}
         colors={['#AA3FEC', '#000000']}
         style={styles.linearGradient}>
-        <Image source={IMAGE.Logo} style={styles.logo} />
+        <Image source={IMAGE.Logo} style={styles.logo} resizeMode='contain' />
         <Text style={styles.txt}>
           By clicking Log In, you agree with our{' '}
           <Text style={{textDecorationLine: 'underline', color: COLORS.white}}>

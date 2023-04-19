@@ -21,6 +21,7 @@ const Wellcome = ({navigation}) => {
         style={styles.linearGradient}>
         <Image
           source={IMAGE.Logo}
+          resizeMode='contain'
           style={{
             height: HP_WP.hp(15),
             width: HP_WP.wp(30),

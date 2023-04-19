@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: HP_WP.hp(2),
     paddingBottom: HP_WP.hp(0.5),
+    paddingLeft: HP_WP.hp(0.8),
   },
   titles: {
     color: COLORS.black,

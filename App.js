@@ -4,12 +4,43 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import AuthStack from './src/navigation/AuthStack'
 import MainStack from './src/navigation/MainStack';
-import { fcmService } from './src/notification/fcmservice';
+// import { fcmService } from './src/notification/fcmservice';
+import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 
 const App = () => {
 
+  const toastConfig = {
+    success: (props) => (
+      <BaseToast
+        {...props}
+        style={{ borderLeftColor: 'green' }}
+        contentContainerStyle={{ paddingHorizontal: 15 }}
+        text1Style={{
+          fontSize: 15,
+          fontWeight: '400',
+        }}
+      />
+    ),
+    error: (props) => (
+      <ErrorToast
+        {...props}
+        text1Style={{
+          fontSize: 17,
+        }}
+        text2Style={{
+          fontSize: 15,
+        }}
+      />
+    ),
+    tomatoToast: ({ text1, props }) => (
+      <View style={{ height: 60, width: '100%', backgroundColor: 'red' }}>
+        <Text>{text1}</Text>
+      </View>
+    ),
+  };
+
   useEffect(() => {
-    handler()
+    // handler()
   }, []);
 
   const handler = async () => {
@@ -33,11 +64,12 @@ const App = () => {
   }
 
   return (
-    <SafeAreaView style={{flex: 1, flexGrow: 1}}>
+    // <SafeAreaView style={{flex: 1, flexGrow: 1}}>
       <NavigationContainer>
         <AuthStack />
+        <Toast config={toastConfig} />
       </NavigationContainer>
-    </SafeAreaView>
+    // </SafeAreaView>
   );
 };
 
