@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -17,7 +16,6 @@ const GlobalInput = ({
   keyboardType,
   placeholder,
   icon,
-  showIcon,
   inputStyle,
   secureTextEntry,
   onPress,
@@ -32,10 +30,11 @@ const GlobalInput = ({
   textInputStyle,
   inputName,
   label,
-  anyIcon,
   iconName,
   iconType,
   countryPikerStyle,
+  text,
+  tuchText,
 }) => {
   return (
     <>
@@ -55,7 +54,6 @@ const GlobalInput = ({
               {
                 height: HP_WP.hp(5),
                 justifyContent: 'center',
-               
               },
               countryPikerStyle,
             ]}>
@@ -63,7 +61,6 @@ const GlobalInput = ({
           </TouchableOpacity>
         )}
         {inputName && <Text style={[styles.inputNameText]}>{label}</Text>}
-
         <TextInput
           style={[
             styles.input,
@@ -83,16 +80,16 @@ const GlobalInput = ({
         />
         {icon && (
           <TouchableOpacity onPress={onPress}>
-            <Image
-              source={showIcon}
-              resizeMode={'contain'}
-              style={styles.iconStyle}
-            />
-          </TouchableOpacity>
-        )}
-        {anyIcon && (
-          <TouchableOpacity onPress={onPress}>
-            <Icon name={iconName} type={iconType} size={20} color={'#8E8E8E'} />
+            {text ? (
+              <Text style={styles.tuchText}>{tuchText}</Text>
+            ) : (
+              <Icon
+                name={iconName}
+                type={iconType}
+                size={20}
+                color={'#8E8E8E'}
+              />
+            )}
           </TouchableOpacity>
         )}
       </View>
@@ -110,7 +107,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal:10
+    paddingHorizontal: 10,
   },
   input: {
     flex: 1,
@@ -131,5 +128,10 @@ const styles = StyleSheet.create({
   inputNameText: {
     color: COLORS.darkGray,
     fontSize: SIZE.N,
+  },
+  tuchText: {
+    fontSize: SIZE.N,
+    color: COLORS.blue,
+    fontFamily: Font.medium,
   },
 });

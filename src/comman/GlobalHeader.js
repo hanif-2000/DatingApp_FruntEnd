@@ -23,7 +23,7 @@ const GlobalHeader = ({
   return (
     <View style={[styles.mainContainer,mainContainer]}>
       <View style={{flex: 0.2, alignItems: 'flex-start'}}>
-        <TouchableOpacity disabled={disabled} onPress={() => Route.goBack()}>
+        <TouchableOpacity  disabled={disabled} onPress={() => Route.goBack()}>
           <Icon
             name={drawer ? 'menu' : withoutIcon ? '' : 'arrow-back'}
             type="ionicons"
