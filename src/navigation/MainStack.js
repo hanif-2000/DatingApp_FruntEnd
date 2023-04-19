@@ -11,6 +11,7 @@ import HomeScreen from '../screen/HomeScreen';
 import ChatScreen from '../screen/ChatScreen';
 import Profile from '../screen/Profile';
 import LikeScreen from '../screen/LikeScreen';
+import Match from '../screen/Match';
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +39,8 @@ const MainStack = () => {
       />
       <Tab.Screen
         name="LikeScreen"
-        component={LikeScreen}
+        // component={LikeScreen}
+        component={Match}
         options={() => ({
           tabBarIcon: ({focused}) => (
             <AntDesign

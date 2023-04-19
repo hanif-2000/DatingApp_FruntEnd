@@ -19,7 +19,7 @@ const Container = ({ isLight, translucent, children, Style, hidden }) => {
           hidden={hidden ? true : false}
         />
         <KeyboardAvoidingView
-          style={{ flex: 1 }}
+          style={{ flex: 1, }}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           {children}
         </KeyboardAvoidingView>
