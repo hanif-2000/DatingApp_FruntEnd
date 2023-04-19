@@ -11,7 +11,7 @@ import GlobalInput from '../comman/GlobalInput';
 const LoginWithPhone = ({navigation}) => {
   const [openCountryPicker, setOpenCountryPicker] = useState(false);
   const [countryCode, setCountryCode] = useState('IN +91');
-  const [isCounty,setCountry] =useState()
+  const [isCounty, setCountry] = useState();
 
   return (
     <Container Style={styles.container}>
@@ -23,10 +23,11 @@ const LoginWithPhone = ({navigation}) => {
           keyboardType={'number-pad'}
           numberInput
           countryCode
-          code={[isCounty,' ', countryCode]}
+          code={[isCounty, ' ', countryCode]}
           inputStyle={{width: HP_WP.wp(76)}}
           textInputStyle={styles.inputStyle}
           openCode={() => setOpenCountryPicker(true)}
+          countryPikerStyle={styles.countryPikerStyle}
         />
         <Text style={styles.bottomText}>
           By clicking Log In, you agree with our Terms. Learn how process your
@@ -44,18 +45,18 @@ const LoginWithPhone = ({navigation}) => {
         />
       </View>
       <CountryPicker
-          show={openCountryPicker}
-          pickerButtonOnPress={item => {
-            setCountryCode(item.dial_code);
-            setOpenCountryPicker(false);
-            setCountry(item.code)
-          }}
-          onBackdropPress={() => {
-            setOpenCountryPicker(false);
-          }}
-          placeholderTextColor="#000"
-          style={styles.countryPicker}
-        />
+        show={openCountryPicker}
+        pickerButtonOnPress={item => {
+          setCountryCode(item.dial_code);
+          setOpenCountryPicker(false);
+          setCountry(item.code);
+        }}
+        onBackdropPress={() => {
+          setOpenCountryPicker(false);
+        }}
+        placeholderTextColor="#000"
+        style={styles.countryPicker}
+      />
     </Container>
   );
 };
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     color: COLORS.blk,
     marginTop: HP_WP.hp(3),
     fontFamily: Font.semiBold,
-    marginBottom:HP_WP.hp(7)
+    marginBottom: HP_WP.hp(7),
   },
   bottomText: {
     color: '#8C8C8C',
@@ -114,5 +115,12 @@ const styles = StyleSheet.create({
     searchMessageText: {
       color: '#000',
     },
+  },
+  countryPikerStyle: {
+    borderBottomWidth: 1.5,
+    borderBottomColor: COLORS.gray,
+    marginRight: 10,
+    paddingHorizontal: 10,
+    top: 0.5,
   },
 });

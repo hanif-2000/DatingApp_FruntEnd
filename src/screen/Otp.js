@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useRef, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useState} from 'react';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 
 import Container from '../comman/Container';
@@ -8,7 +8,6 @@ import GlobalHeader from '../comman/GlobalHeader';
 import GlobalButton from '../comman/GlobalButton';
 
 const Otp = ({navigation}) => {
-  const OTPRef = useRef(null);
   const [clearOTP, setClearOTP] = useState(false);
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
@@ -28,7 +27,9 @@ const Otp = ({navigation}) => {
             console.log(`Code is ${code}, you are good to go!`);
           }}
         />
+        <TouchableOpacity style={{alignSelf:'center'}}>
         <Text style={styles.bottomText}>RESEND</Text>
+        </TouchableOpacity>
         <GlobalButton
           Style={styles.buttonStyle}
           title={'CONTINUE'}
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     color: '#8C8C8C',
     fontSize: SIZE.M,
     marginTop: HP_WP.hp(3),
-    textAlign: 'center',
+    fontFamily:Font.medium
   },
   buttonStyle: {
     marginTop: HP_WP.hp(3),
