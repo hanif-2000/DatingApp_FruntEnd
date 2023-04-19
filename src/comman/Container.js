@@ -10,7 +10,7 @@ import { COLORS, HP_WP } from './theme';
 
 const Container = ({ isLight, translucent, children, Style, hidden }) => {
   return (
-    <SafeAreaView style={[{flex:1,backgroundColor:COLORS.white}]}>
+    <SafeAreaView style={[{ flex: 1 }]}>
       <View style={[styles.container, Style]}>
         <StatusBar
           animated={true}
@@ -25,7 +25,7 @@ const Container = ({ isLight, translucent, children, Style, hidden }) => {
           {children}
         </KeyboardAvoidingView>
       </View>
-      </SafeAreaView>
+    </SafeAreaView>
   );
 };
 export default Container;
