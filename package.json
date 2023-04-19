@@ -31,6 +31,7 @@
     "react-native-image-picker": "^5.3.1",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-loading-spinner-overlay": "^3.0.1",
+    "react-native-modal": "^13.0.1",
     "react-native-modal-datetime-picker": "^15.0.0",
     "react-native-responsive-fontsize": "^0.5.1",
     "react-native-responsive-screen": "^1.4.2",
