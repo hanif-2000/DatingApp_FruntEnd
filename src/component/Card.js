@@ -1,64 +1,54 @@
-import React from 'react'
-import { View, Text, Image, ImageSourcePropType,StyleSheet, Dimensions } from 'react-native'
-import { shape, string, number } from 'prop-types'
-import { COLORS } from '../comman/theme'
+import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
+import {shape, string, number} from 'prop-types';
+import {COLORS, Font, HP_WP, SIZE} from '../comman/theme';
 
-const { height } = Dimensions.get('window')
+const {height} = Dimensions.get('window');
 
-const Card = ({ card }) => (
-  <View
-    activeOpacity={1}
-    style={styles.card}
-  >
-    <Image
-      style={styles.image}
-      source={card.photo}
-      resizeMode="cover"
-    />
+const Card = ({card}) => (
+  <View style={styles.card}>
+    <Image style={styles.image} source={card.photo} resizeMode="contain" />
     <View style={styles.photoDescriptionContainer}>
-      <Text style={styles.text}>
-        {`${card.name}, ${card.age}`}
-      </Text>
+      <Text style={styles.text}>{`${card.name}, ${card.age}`}</Text>
     </View>
   </View>
-)
+);
 
-Card.propTypes = { 
+Card.propTypes = {
   card: shape({
     photo: ImageSourcePropType,
     name: string,
     age: number,
   }).isRequired,
-}
+};
 export default Card;
 
 const styles = StyleSheet.create({
-    card: {
-        height: height - 300,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 10,
-      },
-      image: {
-        borderRadius: 5,
-        flex: 1,
-        width: '100%',
-      },
-      photoDescriptionContainer: {
-        justifyContent: 'flex-end',
-        alignItems: 'flex-start',
-        flexDirection: 'column',
-        height: '100%',
-        position: 'absolute',
-        left: 10,
-        bottom: 10,
-      },
-      text: {
-        textAlign: 'center',
-        fontSize: 20,
-        color: COLORS.white,
-        fontFamily: 'Avenir',
-        textShadowColor: COLORS.black,
-        textShadowRadius: 10,
-      },
-})
+  card: {
+    height: HP_WP.hp(70),
+    borderRadius: 10,
+    top: HP_WP.hp(-3),
+  },
+  image: {
+    borderRadius: 10,
+    width: HP_WP.wp(90),
+    flex: 1,
+  },
+  photoDescriptionContainer: {
+    position: 'absolute',
+    left: 40,
+    bottom: 40,
+  },
+  text: {
+    fontSize: SIZE.XL,
+    color: COLORS.white,
+    fontFamily: Font.semiBold,
+  },
+});
