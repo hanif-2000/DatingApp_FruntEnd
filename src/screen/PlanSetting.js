@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Container from '../comman/Container';
@@ -14,12 +14,24 @@ import {COLORS, HP_WP, SIZE} from '../comman/theme';
 import GlobalHeader from '../comman/GlobalHeader';
 import {Font} from '../comman/theme';
 import {Icon} from 'react-native-elements';
+import GlobalButton from '../comman/GlobalButton';
 
 const PlanSetting = () => {
+  const [currentPlan, setCurrentPlan] = useState('6');
+  data = [
+    {id: 1, time: '12', rate: '7'},
+    {id: 2, time: '6', rate: '10'},
+    {id: 3, time: '1', rate: '9'},
+  ];
+
+  const onChange = item => {
+    setCurrentPlan(item.time);
+  };
+
   return (
     <Container Style={styles.mainContainer}>
       <GlobalHeader title={'Manage Subscription'} />
-      <ScrollView>
+      <ScrollView contentContainerStyle={{paddingHorizontal: 10,paddingBottom:20}}>
         <View style={[styles.topCardContainer, {padding: 20}]}>
           <View style={styles.directionContainer}>
             <Text style={styles.currentPlan}>Current Plan</Text>
@@ -60,13 +72,58 @@ const PlanSetting = () => {
               )}
             />
           </View>
-          <LinearGradient
-            colors={['#EEAF51', '#B67718']}
-            style={styles.bottomButtonContainer}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>CONTINUE</Text>
-            </TouchableOpacity>
-          </LinearGradient>
+          <FlatList
+            numColumns={3}
+            data={data}
+            renderItem={({item}) => {
+              return (
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => onChange(item)}
+                  style={[
+                    styles.card,
+                    {
+                      borderColor:
+                        currentPlan == item.time ? '#FFA31A' : '#C0C0C0',
+                      backgroundColor:
+                        currentPlan == item.time ? '#fff' : '#F7F7F7',
+                    },
+                  ]}>
+                  <Text
+                    style={[
+                      styles.monthText,
+                      {
+                        fontSize: SIZE.XXXl,
+                        color: currentPlan == item.time ? '#B67718' : '#000',
+                      },
+                    ]}>
+                    {item.time}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.monthText,
+                      {color: currentPlan == item.time ? '#B67718' : '#000'},
+                    ]}>
+                    {'months'}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.monthText,
+                      {
+                        marginTop: 10,
+                        color: currentPlan == item.time ? '#B67718' : '#000',
+                      },
+                    ]}>
+                    ${item.rate}/mo{' '}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }}
+          />
+          <GlobalButton
+            title={'CONTINUE'}
+            Style={{backgroundColor: '#B67718', marginTop: 20}}
+          />
         </View>
       </ScrollView>
     </Container>
@@ -84,6 +141,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.8,
     borderColor: COLORS.gray,
     marginTop: HP_WP.hp(3),
+    paddingVertical: 20,
   },
   directionContainer: {
     flexDirection: 'row',
@@ -105,7 +163,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   Unsubscribe: {
-    width: HP_WP.wp(37),
+    width: HP_WP.wp(34),
     borderWidth: 0.8,
     borderColor: COLORS.mediumGray,
     justifyContent: 'center',
@@ -114,7 +172,7 @@ const styles = StyleSheet.create({
     height: HP_WP.hp(4.5),
   },
   Upgrade: {
-    width: HP_WP.wp(37),
+    width: HP_WP.wp(34),
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 30,
@@ -127,7 +185,6 @@ const styles = StyleSheet.create({
     fontFamily: Font.medium,
   },
   bottomCardTopText: {
-    marginTop: 20,
     textAlign: 'center',
   },
   heartContainer: {
@@ -165,26 +222,23 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: '#C0C0C0',
   },
-  bottomButtonContainer: {
-    borderRadius: 30,
-    height: HP_WP.hp(5.5),
-    width: HP_WP.wp(75),
-    alignSelf: 'center',
-    marginVertical: 20,
-  },
-  button: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: COLORS.white,
-    fontSize: SIZE.NL,
-    fontFamily: Font.semiBold,
-  },
   textt: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  card: {
+    borderWidth: 0.8,
+    borderWidth: 0.8,
+    width: '33.33%',
+    alignItems: 'center',
+    paddingVertical: 30,
+    marginTop: 20,
+  },
+  monthText: {
+    fontSize: SIZE.N,
+    color: COLORS.black,
+    fontFamily: Font.semiBold,
+    lineHeight: 25,
   },
 });

@@ -40,12 +40,6 @@ const Edit = ({ navigation }) => {
       <View style={styles.mainContainer}>
         <Text style={styles.accountSettings}>Account Settings</Text>
         <GlobalInput placeholder={'Jenny'} inputStyle={{ marginTop: 10 }} />
-        {/* <GlobalInput
-          countryCode
-          code={+91}
-          placeholder={'9876543210'}
-          inputStyle={{marginTop: 10}}
-        /> */}
         <GlobalInput
           placeholder="9876543210"
           keyboardType={'number-pad'}
@@ -53,11 +47,10 @@ const Edit = ({ navigation }) => {
           code={[countryCode]}
           openCode={() => setOpenCountryPicker(true)}
           inputStyle={{ marginTop: 10 }}
-
         />
         <GlobalInput
           onPress={showDatePicker}
-          anyIcon
+          icon
           iconName="calendar"
           iconType="entypo"
           placeholder={'02-05-1997'}
