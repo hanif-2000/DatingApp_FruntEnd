@@ -9,7 +9,6 @@ const GlobalHeader = ({
   title,
   rightIcon,
   rightImage,
-  onPressLeft,
   onPressRight,
   rightIconStyle,
   drawer = false,
@@ -18,10 +17,11 @@ const GlobalHeader = ({
   withoutIcon,
   disabled,
   logo,
+  mainContainer
 }) => {
   let Route = useNavigation();
   return (
-    <View style={styles.mainContainer}>
+    <View style={[styles.mainContainer,mainContainer]}>
       <View style={{flex: 0.2, alignItems: 'flex-start'}}>
         <TouchableOpacity disabled={disabled} onPress={() => Route.goBack()}>
           <Icon

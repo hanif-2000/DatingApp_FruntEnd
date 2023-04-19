@@ -1,6 +1,6 @@
 
 import React, {useRef} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 
 import Container from '../comman/Container';
@@ -8,13 +8,14 @@ import GlobalHeader from '../comman/GlobalHeader';
 import photoCards from '../component/photoCards';
 import Card from '../component/Card';
 import IconButton from '../component/IconButton';
+import { COLORS, HP_WP } from '../comman/theme';
 
 const HomeScreen = () => {
   const useSwiper = useRef(null).current;
 
-  const handleOnSwipedLeft = () => useSwiper.swipeLeft();
-  const handleOnSwipedTop = () => useSwiper.swipeTop();
-  const handleOnSwipedRight = () => useSwiper.swipeRight();
+  const handleOnSwipedLeft = () =>useSwiper.swipedLef(Alert.alert('fghjk'));
+  const handleOnSwipedTop = () => useSwiper.swipeTop('right');
+  const handleOnSwipedRight = () => useSwiper.swipeRight('right');
 
   return (
     <Container >
@@ -22,6 +23,7 @@ const HomeScreen = () => {
         withoutIcon={true}
         logo={true}
         rightImage={true}
+        mainContainer={{paddingHorizontal:HP_WP.wp(5)}}
         rightIcon={require('../assets/images/filter.png')}
       />
       <View style={{flex: 0.88}}>
@@ -45,18 +47,21 @@ const HomeScreen = () => {
           onPress={handleOnSwipedLeft}
           color="white"
           backgroundColor="#E5566D"
+          type='AntDesign'
         />
         <IconButton
-          name="star"
+          name="dollar"
           onPress={handleOnSwipedTop}
           color="white"
-          backgroundColor="#3CA3FF"
+          backgroundColor="#FFD912"
+          type='fontisto'
         />
         <IconButton
           name="heart"
           onPress={handleOnSwipedRight}
           color="white"
-          backgroundColor="#4CCC93"
+          backgroundColor={COLORS.purple}
+          type='entypo'
         />
       </View>
     </Container>

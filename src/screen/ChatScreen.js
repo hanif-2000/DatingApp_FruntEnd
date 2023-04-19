@@ -1,41 +1,41 @@
 import {
-  FlatList,
-  Image,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
+  TouchableOpacity,
+  FlatList,
+  Image,
 } from 'react-native';
 import React from 'react';
-import { COLORS, HP_WP, IMAGE, SIZE } from '../comman/theme';
+
+import { HP_WP ,IMAGE} from '../comman/theme';
 import Container from '../comman/Container';
+import GlobalHeader from '../comman/GlobalHeader';
 
-const ChatScreen = () => {
+const ChatScreen = ({navigation}) => {
+  const DATA = [1, 2, 3, 4];
   return (
-    <Container>
+    <Container Style={{paddingHorizontal:HP_WP.wp(5)}} >
+      <GlobalHeader title={'Chat'}/>
       <FlatList
-        data={[1, 2, 3, 4]}
-        renderItem={() => {
-          return (
-            <View style={styles.flist}>
-              <TouchableOpacity
-                style={{ flexDirection: 'row', height: HP_WP.hp(12) }}>
-                <Image
-                  source={IMAGE.Lucy}
-                  style={styles.Image}
-                />
-                <Text style={styles.titel}>Siliva</Text>
-              </TouchableOpacity>
-              <View style={{ flexDirection: 'row' }}>
-                <Text style={styles.Chat}>
-                  I’m not a hoarder but I really...
-                </Text>
-                <Text style={styles.Chat}>11:30</Text>
-              </View>
+        data={DATA}
+        renderItem={({item}) => (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('ChatingDetailes')}
+            style={styles.flatListContainer}>
+            <Image
+              source={IMAGE.Profile}
+              style={styles.profileImage}
+            />
+            <View style={styles.ProfileNameContainer}>
+              <Text style={styles.silivaStyle}>Siliva</Text>
+              <Text style={styles.hoarderStyle}>
+                I’m not a hoarder but I really...
+              </Text>
             </View>
-          );
-        }}
-
+            <Text style={styles.numberStyle}>11:30</Text>
+          </TouchableOpacity>
+        )}
       />
     </Container>
   );
@@ -44,30 +44,36 @@ const ChatScreen = () => {
 export default ChatScreen;
 
 const styles = StyleSheet.create({
-  flist: {
-    flex: 1,
-    width: HP_WP.wp(100),
-    justifyContent: 'center',
-  },
-  Image: {
-    width: HP_WP.wp(14),
-    height: HP_WP.hp(10),
-    resizeMode: 'contain',
-    marginLeft: 10,
-
-  },
-  titel: {
-    color: COLORS.black,
-    marginLeft: HP_WP.wp(4),
-    fontSize: SIZE.XL,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-  },
-  Chat: {
-    color: COLORS.black,
+  flatListContainer: {
+    marginTop: HP_WP.hp(2.5),
+    flexDirection: 'row',
+    paddingTop: HP_WP.hp(2),
     alignItems: 'center',
-    marginTop: -22,
-    marginLeft: 78,
+  },
+  profileImage: {
+    resizeMode: 'contain',
+    height: HP_WP.hp(6),
+    width: HP_WP.wp(11),
+  },
+  silivaStyle: {
+    color: '#000',
+    fontSize: 15,
+    fontWeight: '500',
+  },
+  hoarderStyle: {
+    color: '#000',
+    fontSize: 12,
+    fontWeight: '400',
+  },
+  ProfileNameContainer: {
+    marginLeft: HP_WP.hp(1),
+    flex: 1,
+  },
+  numberStyle: {
+    color: '#000',
+    fontSize: 12,
+    fontWeight: '400',
+    marginTop: HP_WP.hp(2.4),
+    
   },
 });
-

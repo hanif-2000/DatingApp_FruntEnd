@@ -1,27 +1,20 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {func, string} from 'prop-types';
-import Icon from 'react-native-vector-icons/AntDesign';
-import { COLORS } from '../comman/theme';
+import {COLORS} from '../comman/theme';
+import {Icon} from 'react-native-elements';
 
-
-const IconButton = ({onPress, name, backgroundColor, color}) => (
+const IconButton = ({onPress, name, backgroundColor, color, type}) => (
   <TouchableOpacity
     style={[styles.singleButton, {backgroundColor}]}
     onPress={onPress}
     activeOpacity={0.85}>
-    <Icon name={name} size={20} color={color} />
+    <Icon type={type} name={name} size={20} color={color} />
   </TouchableOpacity>
 );
 IconButton.defaultProps = {
   color: COLORS.white,
   backgroundColor: COLORS.heartColor,
-};
-IconButton.propTypes = {
-  onPress: func.isRequired,
-  name: string.isRequired,
-  color: string,
-  backgroundColor: string,
 };
 export default IconButton;
 
@@ -32,6 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     shadowRadius: 6,
-    padding: 15,
+    height: 50,
+    width: 50,
   },
 });

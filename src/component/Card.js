@@ -3,14 +3,10 @@ import {
   View,
   Text,
   Image,
-  ImageSourcePropType,
   StyleSheet,
-  Dimensions,
 } from 'react-native';
-import {shape, string, number} from 'prop-types';
 import {COLORS, Font, HP_WP, SIZE} from '../comman/theme';
 
-const {height} = Dimensions.get('window');
 
 const Card = ({card}) => (
   <View style={styles.card}>
@@ -20,14 +16,6 @@ const Card = ({card}) => (
     </View>
   </View>
 );
-
-Card.propTypes = {
-  card: shape({
-    photo: ImageSourcePropType,
-    name: string,
-    age: number,
-  }).isRequired,
-};
 export default Card;
 
 const styles = StyleSheet.create({
