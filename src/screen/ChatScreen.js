@@ -15,7 +15,7 @@ import GlobalHeader from '../comman/GlobalHeader';
 const ChatScreen = ({navigation}) => {
   const DATA = [1, 2, 3, 4];
   return (
-    <Container>
+    <Container Style={{paddingHorizontal:HP_WP.wp(5)}} >
       <GlobalHeader title={'Chat'}/>
       <FlatList
         data={DATA}
@@ -74,5 +74,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '400',
     marginTop: HP_WP.hp(2.4),
+    
   },
 });
