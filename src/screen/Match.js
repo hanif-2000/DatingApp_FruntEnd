@@ -4,6 +4,7 @@ import Container from '../comman/Container'
 import GlobalHeader from '../comman/GlobalHeader'
 import { COLORS, IMAGE } from '../comman/theme'
 import { Image } from 'react-native-elements'
+import GlobalButton from '../comman/GlobalButton'
 
 const Match = () => {
     const dataList = [
@@ -53,6 +54,7 @@ const Match = () => {
                     </View>
                 )}
                 />
+                <GlobalButton Style={{ backgroundColor: '#EEAF51', marginBottom: 10 }} title={"SEE WHO LIKES YOU"} />
             </View>
 
 

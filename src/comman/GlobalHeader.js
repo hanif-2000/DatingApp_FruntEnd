@@ -1,9 +1,9 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Icon} from 'react-native-elements';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Icon } from 'react-native-elements';
 
-import {COLORS, Font, HP_WP, IMAGE, SIZE} from './theme';
-import {useNavigation} from '@react-navigation/native';
+import { COLORS, Font, HP_WP, IMAGE, SIZE } from './theme';
+import { useNavigation } from '@react-navigation/native';
 
 const GlobalHeader = ({
   title,
@@ -21,13 +21,13 @@ const GlobalHeader = ({
 }) => {
   let Route = useNavigation();
   return (
-    <View style={[styles.mainContainer,mainContainer]}>
-      <View style={{flex: 0.2, alignItems: 'flex-start'}}>
-        <TouchableOpacity  disabled={disabled} onPress={() => Route.goBack()}>
+    <View style={[styles.mainContainer, mainContainer, { paddingTop: Platform.OS === 'android' ? HP_WP.hp(2) : 0, }]}>
+      <View style={{ flex: 0.2, alignItems: 'flex-start' }}>
+        <TouchableOpacity disabled={disabled} onPress={() => Route.goBack()}>
           <Icon
             name={drawer ? 'menu' : withoutIcon ? '' : 'arrow-back'}
             type="ionicons"
-            size={20}
+            size={25}
             color={light ? '#fff' : COLORS.black}
           />
         </TouchableOpacity>
@@ -37,12 +37,12 @@ const GlobalHeader = ({
       ) : (
         <Text style={[styles.titles, headerTitles]}>{title}</Text>
       )}
-      <View style={{flex: 0.2}}>
+      <View style={{ flex: 0.2 }}>
         {rightImage && (
           <TouchableOpacity
             onPress={onPressRight}
-            style={{alignSelf: 'flex-end'}}>
-            <Image source={rightIcon} style={[styles.rightIconStyle,rightIconStyle]} />
+            style={{ alignSelf: 'flex-end' }}>
+            <Image source={rightIcon} style={[styles.rightIconStyle, rightIconStyle]} />
           </TouchableOpacity>
         )}
       </View>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingTop: HP_WP.hp(2),
+    // paddingTop: HP_WP.hp(2),
     paddingBottom: HP_WP.hp(0.5),
     paddingLeft: HP_WP.hp(0.8),
   },
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     fontSize: SIZE.XL,
     textAlign: 'center',
     flex: 1,
-    fontFamily:Font.semiBold
+    fontFamily: Font.semiBold
   },
   logo: {
     height: HP_WP.hp(3),
@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
   },
-  rightIconStyle:{
+  rightIconStyle: {
     height: HP_WP.hp(3),
-    width: HP_WP.wp(6), 
+    width: HP_WP.wp(6),
   }
 });
