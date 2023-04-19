@@ -88,8 +88,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     elevation: 3,
     width: HP_WP.wp(100),
-    position: 'absolute',
-    bottom: 0,
+    // position: 'absolute',
+    // bottom: 0,
     alignSelf: 'center',
   },
 });
