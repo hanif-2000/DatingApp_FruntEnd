@@ -6,14 +6,9 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  ViewStyle,
 } from 'react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import {COLORS, Font, SIZE} from './theme';
-import { Icon } from 'react-native-elements';
+import {COLORS, Font, HP_WP, SIZE} from './theme';
+import {Icon} from 'react-native-elements';
 
 const GlobalInput = ({
   onChange,
@@ -39,7 +34,8 @@ const GlobalInput = ({
   label,
   anyIcon,
   iconName,
-  iconType
+  iconType,
+  countryPikerStyle,
 }) => {
   return (
     <>
@@ -53,16 +49,26 @@ const GlobalInput = ({
           },
         ]}>
         {countryCode && (
-          <TouchableOpacity onPress={openCode} style={{marginRight: 5}}>
+          <TouchableOpacity
+            onPress={openCode}
+            style={[
+              {
+                height: HP_WP.hp(5),
+                justifyContent: 'center',
+               
+              },
+              countryPikerStyle,
+            ]}>
             <Text style={styles.codeTxt}>{code}</Text>
           </TouchableOpacity>
         )}
-        {inputName && <Text style={styles.inputNameText}>{label}</Text>}
+        {inputName && <Text style={[styles.inputNameText]}>{label}</Text>}
 
         <TextInput
           style={[
             styles.input,
             {textAlign: inputName ? 'right' : 'left'},
+            textInputStyle,
             textInputStyle,
           ]}
           onChangeText={onChange}
@@ -84,12 +90,9 @@ const GlobalInput = ({
             />
           </TouchableOpacity>
         )}
-         {anyIcon && (
+        {anyIcon && (
           <TouchableOpacity onPress={onPress}>
-            <Icon  name={iconName}
-            type={iconType}
-            size={20}
-            color={'#8E8E8E'}/>
+            <Icon name={iconName} type={iconType} size={20} color={'#8E8E8E'} />
           </TouchableOpacity>
         )}
       </View>
@@ -102,32 +105,31 @@ export default GlobalInput;
 
 const styles = StyleSheet.create({
   container: {
-    height: hp(5),
-    width: wp(92),
+    height: HP_WP.hp(5),
+    width: HP_WP.wp(92),
     borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: wp(2.5),
+    paddingHorizontal:10
   },
   input: {
     flex: 1,
     color: COLORS.lightGray,
-    fontSize: SIZE.M,
+    fontSize: SIZE.N,
   },
   iconStyle: {
-    height: hp(2.5),
-    width: wp(5),
+    height: HP_WP.hp(2.5),
+    width: HP_WP.wp(5),
   },
   errorText: {
     fontSize: SIZE.S,
   },
   codeTxt: {
-    fontSize: 15,
-    color: '#000',
-    fontWeight: '500',
+    fontSize: SIZE.N,
+    color: COLORS.black,
   },
   inputNameText: {
     color: COLORS.darkGray,
-    fontSize:SIZE.N
+    fontSize: SIZE.N,
   },
 });
