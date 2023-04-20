@@ -59,5 +59,6 @@ export const IMAGE = {
   Siliva: require('../assets/images/siliva.png'),
   VideoCall: require('../assets/images/videoCallImage.png'),
   profileBgImage: require('../assets/images/profileBgImag.png'),
-  logo2:require('../assets/images/logo2.png')
+  logo2:require('../assets/images/logo2.png'),
+  slideImage:require('../assets/images/slideImage.png')
 };

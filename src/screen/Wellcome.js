@@ -4,6 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import {HP_WP, IMAGE} from '../comman/theme';
 import Container from '../comman/Container';
+import GradientContainer from '../comman/GradientContainer';
 
 const Wellcome = ({navigation}) => {
   useEffect(() => {
@@ -13,17 +14,7 @@ const Wellcome = ({navigation}) => {
   }, []);
 
   return (
-    <LinearGradient
-    start={{x: 0.9, y: 0}}
-    end={{x: 0.9, y: 0.9}}
-    colors={['#AA3FEC', '#000000']}
-    style={styles.linearGradient}>
-    <Container translucent={true} isLight={true} hidden={false}>
-      <LinearGradient
-        start={{x: 0.9, y: 0}}
-        end={{x: 0.9, y: 0.9}}
-        colors={['#AA3FEC', '#000000']}
-        style={styles.linearGradient}>
+    <GradientContainer translucent={true} isLight={true} hidden={false}>
         <Image
           source={IMAGE.Logo}
           resizeMode='contain'
@@ -34,9 +25,7 @@ const Wellcome = ({navigation}) => {
             marginTop: HP_WP.hp(20),
           }}
         />
-      </LinearGradient>
-    </Container>
-    </LinearGradient>
+    </GradientContainer>
   );
 };
 
