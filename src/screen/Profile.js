@@ -20,6 +20,7 @@ import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { BlurView } from '@react-native-community/blur';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Dropdown } from 'react-native-element-dropdown';
+import RangeSlider from '@jesster2k10/react-native-range-slider';
 
 const Profile = ({ navigation }) => {
   const [nameOfFile, setNameOfFile] = useState(null);
@@ -31,6 +32,11 @@ const Profile = ({ navigation }) => {
   const [groupChat, setGroupChat] = useState(false)
   const [male, setMale] = useState(false)
   const [female, setFemale] = useState(false)
+
+  const [minSelected, setMinSelected] = useState(0)
+  const [maxSelected, setMaxSelected] = useState(0)
+  const [distance, setDistance] = useState(0)
+
   const [preferredLanguages, setPreferredLanguages] = useState([
     {
       id: 1,
@@ -41,6 +47,15 @@ const Profile = ({ navigation }) => {
       name: 'Hindi',
     },
   ]);
+
+  const onChange = (min, max) => {
+    setMinSelected(min)
+    setMaxSelected(max)
+  }
+
+  const onChangeDistance = (min, max) => {
+    setDistance(max)
+  }
 
   const [planName, setPlanName] = useState('Free');
   const [plan, setPlan] = useState([
@@ -208,6 +223,43 @@ const Profile = ({ navigation }) => {
                 </View>
               </TouchableOpacity>
 
+
+              <View style={{
+                borderColor: 'gray', borderWidth: 1, marginTop: 15
+
+              }}>
+                <TouchableOpacity
+                  onPress={() => setMale(!male)}
+                  style={{
+                    height: HP_WP.hp(5),
+                    width: HP_WP.wp(92),
+                    borderRadius: 4,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    justifyContent: 'space-between'
+                  }}>
+                  <Text>Age Range</Text>
+                  <Text>{minSelected}-{maxSelected}</Text>
+                </TouchableOpacity>
+
+                <RangeSlider
+                  type="range" // ios only
+                  min={18}
+                  max={70}
+                  selectedMinimum={22} // ios only
+                  selectedMaximum={44} // ios only
+                  tintColor="#000"
+                  handleColor="#f368e0"
+                  handlePressedColor="#f368e0"
+                  tintColorBetweenHandles="#ff9ff3"
+                  onChange={(min, max) => onChange(min, max)}
+                />
+              </View>
+
+
+
+
               <TouchableOpacity
                 onPress={() => setGroupChat(!groupChat)}
                 style={{
@@ -295,6 +347,40 @@ const Profile = ({ navigation }) => {
                   }
                 </View>
               </TouchableOpacity>
+
+              <View style={{
+                borderColor: 'gray', borderWidth: 1, marginTop: 15
+
+              }}>
+                <TouchableOpacity
+                  onPress={() => setMale(!male)}
+                  style={{
+                    height: HP_WP.hp(5),
+                    width: HP_WP.wp(92),
+                    borderRadius: 4,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingHorizontal: 10,
+                    justifyContent: 'space-between'
+                  }}>
+                  <Text>Maximum Distance  (only upgrade )</Text>
+                  <Text>{distance}km.</Text>
+                </TouchableOpacity>
+
+                <RangeSlider
+                  type="slider" // ios only
+                  min={0}
+                  max={100}
+                  selectedMinimum={0} // ios only
+                  selectedMaximum={100} // ios only
+                  tintColor="#000"
+                  handleColor="#f368e0"
+                  handlePressedColor="#f368e0"
+                  tintColorBetweenHandles="#ff9ff3"
+                  onChange={(min, max) => onChangeDistance(min, max)}
+                  hideLabels={true}
+                />
+              </View>
 
             </View>
           </ScrollView>
