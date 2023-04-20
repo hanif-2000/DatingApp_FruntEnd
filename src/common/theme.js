@@ -42,6 +42,7 @@ export const COLORS = {
   lightGray: '#8E8E8E',
   mediumGray: '#828282',
   orange: '#E75C25',
+  lightPurple: '#BD94D7',
   purple: '#AA3FEC',
   light: '#D8D8DC',
   lightBlack2: '#333333',
@@ -59,6 +60,6 @@ export const IMAGE = {
   Siliva: require('../assets/images/siliva.png'),
   VideoCall: require('../assets/images/videoCallImage.png'),
   profileBgImage: require('../assets/images/profileBgImag.png'),
-  logo2:require('../assets/images/logo2.png'),
-  // slideImage:require('../assets/images/slideImage.png')
+  logo2: require('../assets/images/logo2.png'),
+  itsMatch: require('../assets/images/ItsMatch.png'),
 };
