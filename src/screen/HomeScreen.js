@@ -5,10 +5,10 @@ import Swiper from 'react-native-deck-swiper';
 
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
-import photoCards from '../component/PhotoCards';
 import Card from '../component/Card';
 import IconButton from '../component/IconButton';
 import { COLORS, HP_WP } from '../common/theme';
+import photoCards from '../component/photoCards';
 
 const HomeScreen = ({ navigation }) => {
   // const useSwiper = useRef(null).current;
