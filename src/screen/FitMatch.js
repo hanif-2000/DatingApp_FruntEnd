@@ -1,10 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-import {HP_WP, IMAGE} from '../comman/theme';
+import {HP_WP, IMAGE} from '../common/theme';
 import {Image} from 'react-native-elements';
-import GlobalButton from '../comman/GlobalButton';
-import GradientContainer from '../comman/GradientContainer';
+import GlobalButton from '../common/GlobalButton';
+import GradientContainer from '../common/GradientContainer';
 
 const FitMatch = ({navigation}) => {
   return (

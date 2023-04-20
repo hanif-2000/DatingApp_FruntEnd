@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useState, useCallback, useEffect, useRef } from 'react'
-import Container from '../comman/Container'
+import Container from '../common/Container'
 import { GiftedChat } from 'react-native-gifted-chat'
-import GlobalHeader from '../comman/GlobalHeader'
+import GlobalHeader from '../common/GlobalHeader'
 
 const ChattingScreen = () => {
     const [messages, setMessages] = useState([]);

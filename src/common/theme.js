@@ -60,5 +60,5 @@ export const IMAGE = {
   VideoCall: require('../assets/images/videoCallImage.png'),
   profileBgImage: require('../assets/images/profileBgImag.png'),
   logo2:require('../assets/images/logo2.png'),
-  slideImage:require('../assets/images/slideImage.png')
+  // slideImage:require('../assets/images/slideImage.png')
 };

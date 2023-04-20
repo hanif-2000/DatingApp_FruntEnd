@@ -3,20 +3,24 @@ import React, { useRef } from 'react';
 import { Alert, StyleSheet, View } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 
-import Container from '../comman/Container';
-import GlobalHeader from '../comman/GlobalHeader';
-import photoCards from '../component/photoCards';
+import Container from '../common/Container';
+import GlobalHeader from '../common/GlobalHeader';
+import photoCards from '../component/PhotoCards';
 import Card from '../component/Card';
 import IconButton from '../component/IconButton';
-import { COLORS, HP_WP } from '../comman/theme';
+import { COLORS, HP_WP } from '../common/theme';
 
-const HomeScreen = ({navigation}) => {
-  const useSwiper = useRef(null).current;
+const HomeScreen = ({ navigation }) => {
+  // const useSwiper = useRef(null).current;
 
-  const handleOnSwipedLeft = () => useSwiper.swipedLef('left');
-  const handleOnSwipedTop = () => useSwiper.swipeTop('top');
-  const handleOnSwipedRight = () => useSwiper.swipeRight('right');
 
+  const onSwipedLeft = (type) => {
+    this.swiper.swipeLeft(type)
+  }
+
+  const onSwipedRight = (type) => {
+    this.swiper.swipeRight(type)
+  }
   return (
     <Container >
       <GlobalHeader
@@ -28,7 +32,10 @@ const HomeScreen = ({navigation}) => {
       />
       <View style={{ flex: 0.88, backgroundColor: '#fff' }}>
         <Swiper
-          ref={useSwiper}
+          ref={swiper => {
+            this.swiper = swiper
+          }}
+          verticalSwipe={false}
           backgroundColor='#fff'
           animateCardOpacity
           cards={photoCards}
@@ -44,7 +51,7 @@ const HomeScreen = ({navigation}) => {
       <View style={styles.buttonsContainer}>
         <IconButton
           name="close"
-          onPress={() => handleOnSwipedLeft()}
+          onPress={() => onSwipedLeft('left')}
           color="white"
           backgroundColor="#E5566D"
           type='AntDesign'
@@ -58,7 +65,7 @@ const HomeScreen = ({navigation}) => {
         />
         <IconButton
           name="heart"
-          onPress={() => handleOnSwipedRight()}
+          onPress={() => onSwipedRight('right')}
           color="white"
           backgroundColor={COLORS.purple}
           type='entypo'
@@ -74,5 +81,6 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    backgroundColor: '#fff'
   },
 });

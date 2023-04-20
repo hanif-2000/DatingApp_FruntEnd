@@ -1,12 +1,9 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, Image} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import {HP_WP, IMAGE} from '../common/theme';
+import GradientContainer from '../common/GradientContainer';
 
-import {HP_WP, IMAGE} from '../comman/theme';
-import Container from '../comman/Container';
-import GradientContainer from '../comman/GradientContainer';
-
-const Wellcome = ({navigation}) => {
+const SplashScreen = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.replace('LoginWithFacebook');
@@ -29,7 +26,7 @@ const Wellcome = ({navigation}) => {
   );
 };
 
-export default Wellcome;
+export default SplashScreen;
 
 const styles = StyleSheet.create({
   linearGradient: {flex: 1},

@@ -5,8 +5,8 @@ import { Icon } from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
-import { COLORS, HP_WP } from '../comman/theme';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { COLORS, HP_WP } from '../common/theme';
 import HomeScreen from '../screen/HomeScreen';
 import ChatScreen from '../screen/Inbox';
 import Profile from '../screen/Profile';
@@ -45,6 +45,32 @@ const MainStack = () => {
           tabBarIcon: ({ focused }) => (
             <AntDesign
               name="hearto"
+              size={30}
+              color={focused ? COLORS.purple : COLORS.COLORS}
+            />
+          ),
+        })}
+      />
+      <Tab.Screen
+        name="Group"
+        component={LikeScreen}
+        options={() => ({
+          tabBarIcon: ({ focused }) => (
+            <MaterialCommunityIcons
+              name="account-group-outline"
+              size={30}
+              color={focused ? COLORS.purple : COLORS.COLORS}
+            />
+          ),
+        })}
+      />
+      <Tab.Screen
+        name="CheckIn"
+        component={Match}
+        options={() => ({
+          tabBarIcon: ({ focused }) => (
+            <MaterialCommunityIcons
+              name="near-me"
               size={30}
               color={focused ? COLORS.purple : COLORS.COLORS}
             />

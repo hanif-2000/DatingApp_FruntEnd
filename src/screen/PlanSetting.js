@@ -9,12 +9,12 @@ import {
 import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
-import Container from '../comman/Container';
-import {COLORS, HP_WP, SIZE} from '../comman/theme';
-import GlobalHeader from '../comman/GlobalHeader';
-import {Font} from '../comman/theme';
+import Container from '../common/Container';
+import {COLORS, HP_WP, SIZE} from '../common/theme';
+import GlobalHeader from '../common/GlobalHeader';
+import {Font} from '../common/theme';
 import {Icon} from 'react-native-elements';
-import GlobalButton from '../comman/GlobalButton';
+import GlobalButton from '../common/GlobalButton';
 
 const PlanSetting = () => {
   const [currentPlan, setCurrentPlan] = useState('6');

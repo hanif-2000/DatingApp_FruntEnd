@@ -1,10 +1,10 @@
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import Container from '../comman/Container';
-import GlobalHeader from '../comman/GlobalHeader';
-import {COLORS, IMAGE} from '../comman/theme';
+import Container from '../common/Container';
+import GlobalHeader from '../common/GlobalHeader';
+import {COLORS, IMAGE} from '../common/theme';
 import {Image} from 'react-native-elements';
-import GlobalButton from '../comman/GlobalButton';
+import GlobalButton from '../common/GlobalButton';
 
 const Match = () => {
   const dataList = [

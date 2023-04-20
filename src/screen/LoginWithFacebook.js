@@ -2,9 +2,9 @@ import React from 'react';
 import {StyleSheet, Image, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../comman/theme';
-import GlobalButton from '../comman/GlobalButton';
-import GradientContainer from '../comman/GradientContainer';
+import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
+import GlobalButton from '../common/GlobalButton';
+import GradientContainer from '../common/GradientContainer';
 
 const LoginWithFacebook = () => {
   let Route = useNavigation();

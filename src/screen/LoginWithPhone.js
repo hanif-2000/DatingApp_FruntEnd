@@ -1,14 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
-import {CountryPicker} from 'react-native-country-codes-picker';
+import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { CountryPicker } from 'react-native-country-codes-picker';
 
-import GlobalHeader from '../comman/GlobalHeader';
-import Container from '../comman/Container';
-import {COLORS, Font, HP_WP, SIZE} from '../comman/theme';
-import GlobalButton from '../comman/GlobalButton';
-import GlobalInput from '../comman/GlobalInput';
+import GlobalHeader from '../common/GlobalHeader';
+import Container from '../common/Container';
+import { COLORS, Font, HP_WP, SIZE } from '../common/theme';
+import GlobalButton from '../common/GlobalButton';
+import GlobalInput from '../common/GlobalInput';
 
-const LoginWithPhone = ({navigation}) => {
+const LoginWithPhone = ({ navigation }) => {
   const [openCountryPicker, setOpenCountryPicker] = useState(false);
   const [countryCode, setCountryCode] = useState('IN +91');
   const [isCounty, setCountry] = useState();
@@ -24,7 +24,7 @@ const LoginWithPhone = ({navigation}) => {
           numberInput
           countryCode
           code={[isCounty, ' ', countryCode]}
-          inputStyle={{width: HP_WP.wp(76)}}
+          inputStyle={{ width: HP_WP.wp(76) }}
           textInputStyle={styles.inputStyle}
           openCode={() => setOpenCountryPicker(true)}
           countryPikerStyle={styles.countryPikerStyle}
@@ -41,7 +41,7 @@ const LoginWithPhone = ({navigation}) => {
         <GlobalButton
           Style={styles.buttonStyle}
           title={'CONTINUE'}
-          onPress={() => navigation.navigate('Otp')}
+          onPress={() => navigation.navigate('OtpVerification')}
         />
       </View>
       <CountryPicker

@@ -6,7 +6,7 @@ import {
   View,
   SafeAreaView,
 } from 'react-native';
-import { COLORS, HP_WP } from './theme';
+import {  HP_WP } from './theme';
 
 const Container = ({ isLight, translucent, children, Style, hidden }) => {
   return (
