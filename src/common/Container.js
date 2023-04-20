@@ -6,21 +6,21 @@ import {
   View,
   SafeAreaView,
 } from 'react-native';
-import {  HP_WP } from './theme';
+import {HP_WP} from './theme';
 
-const Container = ({ isLight, translucent, children, Style, hidden }) => {
+const Container = ({isLight, translucent, children, Style, hidden}) => {
   return (
-    <SafeAreaView style={[{ flex: 1 }]}>
+    <SafeAreaView style={[{flex: 1, backgroundColor: '#fff'}]}>
       <View style={[styles.container, Style]}>
         <StatusBar
           animated={true}
-          backgroundColor={"#fff"}
+          backgroundColor={'#fff'}
           barStyle={isLight ? 'light-content' : 'dark-content'}
           translucent={translucent}
           hidden={hidden ? true : false}
         />
         <KeyboardAvoidingView
-          style={{ flex: 1, }}
+          style={{flex: 1}}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           {children}
         </KeyboardAvoidingView>

@@ -12,16 +12,16 @@ const FitMatch = ({navigation}) => {
         <View style={styles.mainContainer}>
           <Image source={IMAGE.itsMatch} style={styles.matchText} />
           <Text style={styles.likesText}>Lucy likes you too</Text>
-          <View>
+          <View style={{height:110,alignSelf:'center'}}>
             <Image
               source={IMAGE.MatchImage1}
-              style={styles.logo}
+              style={[styles.matchImage,{right:-15}]}
               resizeMode="contain"
             />
             <Image
               source={IMAGE.MatchImage}
-              style={[styles.logo, styles.matchImage]}
-              resizeMode="cover"
+              style={[ styles.matchImage,{left:-15}]}
+              resizeMode="contain"
             />
           </View>
           <GlobalButton
@@ -61,17 +61,15 @@ const styles = StyleSheet.create({
     fontFamily: Font.regular,
     marginVertical: 20,
   },
-  logo: {
-    height: HP_WP.hp(14),
-    width: HP_WP.wp(30),
-    borderRadius: 100,
-    marginRight: HP_WP.wp(10),
-  },
+
   matchImage: {
     borderColor: COLORS.purple,
-    borderWidth: 3,
+    // borderWidth: 3,
     position: 'absolute',
-    right: -85,
+    height: 110,
+    width: 110,
+    borderRadius: 100,
+    // marginRight: HP_WP.wp(10),
   },
   topButton: {
     backgroundColor: '#BB34D2',
