@@ -1,66 +1,50 @@
 import React from 'react';
-import { StyleSheet, Image } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
+import {StyleSheet, Image, Text} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../comman/theme';
-import Container from '../comman/Container';
-import { Text } from 'react-native-elements';
+import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../comman/theme';
 import GlobalButton from '../comman/GlobalButton';
+import GradientContainer from '../comman/GradientContainer';
 
 const LoginWithFacebook = () => {
-
-  let Route = useNavigation()
+  let Route = useNavigation();
 
   return (
-    <LinearGradient
-      start={{ x: 0.9, y: 0 }}
-      end={{ x: 0.9, y: 0.9 }}
-      colors={['#AA3FEC', '#000000']}
-      style={styles.linearGradient}>
-      <Container translucent={false} hidden={false} isLight={true}>
-        <LinearGradient
-          start={{ x: 0.9, y: 0 }}
-          end={{ x: 0.9, y: 0.9 }}
-          colors={['#AA3FEC', '#000000']}
-          style={styles.linearGradient}>
-          <Image source={IMAGE.Logo} style={styles.logo} resizeMode='contain' />
-          <Text style={styles.txt}>
-            By clicking Log In, you agree with our{' '}
-            <Text style={{ textDecorationLine: 'underline', color: COLORS.white }}>
-              Terms.
-            </Text>
-            {'\n'}Learn how we process your data in our{' '}
-            <Text style={{ textDecorationLine: 'underline', color: COLORS.white }}>
-              Privacy Policy
-            </Text>{' '}
-            and{' '}
-            <Text
-              style={{
-                textDecorationLine: 'underline',
-                color: COLORS.white,
-              }}>
-              Cookies Policy.
-            </Text>
-          </Text>
-          <GlobalButton
-            icon
-            onPress={() => Route.navigate('LoginWithPhone')}
-            title={'LOGIN WITH FACEBOOK'}
-            textStyle={{ color: COLORS.black }}
-            Style={{ backgroundColor: '#fff' }}
-          />
-        </LinearGradient>
-      </Container>
-    </LinearGradient>
-
+    <GradientContainer translucent={false} hidden={false}>
+      <Image source={IMAGE.Logo} style={styles.logo} resizeMode="contain" />
+      <Text style={styles.txt}>
+        By clicking Log In, you agree with our{' '}
+        <Text style={{textDecorationLine: 'underline', fontSize: SIZE.N}}>
+          Terms.
+        </Text>
+        {'\n'}Learn how we process your data in our{' '}
+        <Text style={{textDecorationLine: 'underline', fontSize: SIZE.N}}>
+          Privacy{'\n'}Policy
+        </Text>{' '}
+        and{' '}
+        <Text
+          style={{
+            textDecorationLine: 'underline',
+            fontSize: SIZE.N,
+          }}>
+          Cookies Policy.
+        </Text>
+      </Text>
+      <GlobalButton
+        icon
+        onPress={() => Route.navigate('LoginWithPhone')}
+        title={'LOGIN WITH FACEBOOK'}
+        textStyle={{color: COLORS.black}}
+        Style={{backgroundColor: '#fff'}}
+      />
+    </GradientContainer>
   );
 };
 
 export default LoginWithFacebook;
 
 const styles = StyleSheet.create({
-  linearGradient: { flex: 1, paddingHorizontal: HP_WP.wp(10) },
+  linearGradient: {flex: 1, paddingHorizontal: HP_WP.wp(10)},
   logo: {
     height: HP_WP.hp(15),
     width: HP_WP.wp(30),
@@ -68,9 +52,9 @@ const styles = StyleSheet.create({
     marginTop: HP_WP.hp(20),
   },
   txt: {
-    fontSize: SIZE.N,
+    fontSize: SIZE.M,
     color: COLORS.white,
-    fontFamily: Font.medium,
+    fontFamily: Font.semiBold,
     textAlign: 'center',
     marginVertical: HP_WP.hp(12),
   },
