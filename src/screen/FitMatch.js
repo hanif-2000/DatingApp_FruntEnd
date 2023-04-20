@@ -1,12 +1,10 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, Image, View} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 
-import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../comman/theme';
-import Container from '../comman/Container';
+import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
 import {Text} from 'react-native-elements';
-import GlobalButton from '../comman/GlobalButton';
 import GradientContainer from '../common/GradientContainer';
+import GlobalButton from '../common/GlobalButton';
 
 const FitMatch = ({navigation}) => {
   return (
