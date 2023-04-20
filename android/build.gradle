@@ -13,6 +13,11 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
+
     }
     dependencies {
         classpath 'com.google.gms:google-services:4.3.15'
