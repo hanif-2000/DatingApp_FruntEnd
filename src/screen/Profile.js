@@ -21,6 +21,7 @@ import { BlurView } from '@react-native-community/blur';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Dropdown } from 'react-native-element-dropdown';
 import RangeSlider from '@jesster2k10/react-native-range-slider';
+import GlobalButton from '../comman/GlobalButton';
 
 const Profile = ({ navigation }) => {
   const [nameOfFile, setNameOfFile] = useState(null);
@@ -380,6 +381,17 @@ const Profile = ({ navigation }) => {
                   onChange={(min, max) => onChangeDistance(min, max)}
                   hideLabels={true}
                 />
+              </View>
+              <View>
+                <GlobalButton
+                  Style={{ width: HP_WP.wp(90), backgroundColor: '#fff', borderWidth: 1, borderRadius: 5, marginVertical: 15 }}
+                  textStyle={{ color: '#000' }}
+                  title={'Logout'} />
+
+                <GlobalButton
+                  Style={{ width: HP_WP.wp(90), backgroundColor: '#fff', borderWidth: 1, borderRadius: 5, marginVertical: 10 }}
+                  textStyle={{ color: 'red' }}
+                  title={'Delete Account'} />
               </View>
 
             </View>
