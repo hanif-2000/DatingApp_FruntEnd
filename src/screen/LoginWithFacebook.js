@@ -3,10 +3,10 @@ import { StyleSheet, Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
-import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../comman/theme';
-import Container from '../comman/Container';
+import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
+import Container from '../common/Container';
 import { Text } from 'react-native-elements';
-import GlobalButton from '../comman/GlobalButton';
+import GlobalButton from '../common/GlobalButton';
 
 const LoginWithFacebook = () => {
 

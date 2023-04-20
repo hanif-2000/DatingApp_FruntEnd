@@ -11,17 +11,17 @@ import {
   View,
 } from 'react-native';
 import React, { useState, useCallback } from 'react';
-import Container from '../comman/Container';
-import GlobalHeader from '../comman/GlobalHeader';
-import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../comman/theme';
+import Container from '../common/Container';
+import GlobalHeader from '../common/GlobalHeader';
+import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import { Icon } from 'react-native-elements';
-import GlobalInput from '../comman/GlobalInput';
+import GlobalInput from '../common/GlobalInput';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { BlurView } from '@react-native-community/blur';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { Dropdown } from 'react-native-element-dropdown';
 import RangeSlider from '@jesster2k10/react-native-range-slider';
-import GlobalButton from '../comman/GlobalButton';
+import GlobalButton from '../common/GlobalButton';
 
 const Profile = ({ navigation }) => {
   const [nameOfFile, setNameOfFile] = useState(null);

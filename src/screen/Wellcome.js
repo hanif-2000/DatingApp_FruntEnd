@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import {StyleSheet, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import {HP_WP, IMAGE} from '../comman/theme';
-import Container from '../comman/Container';
+import {HP_WP, IMAGE} from '../common/theme';
+import Container from '../common/Container';
 
 const Wellcome = ({navigation}) => {
   useEffect(() => {

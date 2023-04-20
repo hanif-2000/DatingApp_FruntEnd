@@ -5,7 +5,7 @@ import {
   Image,
   StyleSheet,
 } from 'react-native';
-import {COLORS, Font, HP_WP, SIZE} from '../comman/theme';
+import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
 
 
 const Card = ({card}) => (

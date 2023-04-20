@@ -2,10 +2,10 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 
-import Container from '../comman/Container';
-import {COLORS, Font, HP_WP, SIZE} from '../comman/theme';
-import GlobalHeader from '../comman/GlobalHeader';
-import GlobalButton from '../comman/GlobalButton';
+import Container from '../common/Container';
+import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
+import GlobalHeader from '../common/GlobalHeader';
+import GlobalButton from '../common/GlobalButton';
 
 const Otp = ({navigation}) => {
   const [clearOTP, setClearOTP] = useState(false);

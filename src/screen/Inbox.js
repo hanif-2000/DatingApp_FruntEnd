@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import React from 'react';
 
-import { HP_WP, IMAGE } from '../comman/theme';
-import Container from '../comman/Container';
-import GlobalHeader from '../comman/GlobalHeader';
+import { HP_WP, IMAGE } from '../common/theme';
+import Container from '../common/Container';
+import GlobalHeader from '../common/GlobalHeader';
 
 const ChatScreen = ({ navigation }) => {
   const DATA = [1, 2, 3, 4];

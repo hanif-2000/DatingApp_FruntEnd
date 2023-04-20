@@ -11,10 +11,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import Modal from 'react-native-modal';
 import {Icon} from 'react-native-elements';
 
-import Container from '../comman/Container';
-import GlobalHeader from '../comman/GlobalHeader';
-import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../comman/theme';
-import GlobalButton from '../comman/GlobalButton';
+import Container from '../common/Container';
+import GlobalHeader from '../common/GlobalHeader';
+import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
+import GlobalButton from '../common/GlobalButton';
 
 const LikeScreen = ({navigation}) => {
   const [isVisible, setVisible] = useState(false);

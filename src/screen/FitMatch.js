@@ -1,9 +1,9 @@
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import LinearGradient from 'react-native-linear-gradient';
-import { HP_WP, IMAGE } from '../comman/theme';
+import { HP_WP, IMAGE } from '../common/theme';
 import { Image } from 'react-native-elements';
-import GlobalButton from '../comman/GlobalButton';
+import GlobalButton from '../common/GlobalButton';
 
 const FitMatch = ({ navigation }) => {
     return (
