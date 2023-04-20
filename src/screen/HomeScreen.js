@@ -13,8 +13,7 @@ import PhotoCards from '../component/PhotoCards';
 
 const HomeScreen = ({ navigation }) => {
   const bottomSheet = useRef(null);
-
-
+  
   const onSwipedLeft = (type) => {
     this.swiper.swipeLeft(type)
   }
@@ -32,8 +31,7 @@ const HomeScreen = ({ navigation }) => {
         rightIcon={require('../assets/images/filter.png')}
         onPressRight={() => bottomSheet.current?.show()}
       />
-      <View style={{ flex: 0.88, backgroundColor: '#000' }}>
-
+      <View style={{ flex: 1,backgroundColor: '#fff' }}>
         <Swiper
           ref={swiper => {
             this.swiper = swiper
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: '#fff'
+    marginBottom:10
   },
   contentContainer: {
     flex: 1,
