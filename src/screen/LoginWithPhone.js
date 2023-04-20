@@ -41,7 +41,7 @@ const LoginWithPhone = ({navigation}) => {
         <GlobalButton
           Style={styles.buttonStyle}
           title={'CONTINUE'}
-          onPress={() => navigation.navigate('Otp')}
+          onPress={() => navigation.navigate('OtpScreen')}
         />
       </View>
       <CountryPicker

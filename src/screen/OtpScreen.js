@@ -7,7 +7,7 @@ import {COLORS, Font, HP_WP, SIZE} from '../comman/theme';
 import GlobalHeader from '../comman/GlobalHeader';
 import GlobalButton from '../comman/GlobalButton';
 
-const Otp = ({navigation}) => {
+const OtpScreen = ({navigation}) => {
   const [clearOTP, setClearOTP] = useState(false);
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
@@ -40,7 +40,7 @@ const Otp = ({navigation}) => {
   );
 };
 
-export default Otp;
+export default OtpScreen;
 
 const styles = StyleSheet.create({
   container: {
