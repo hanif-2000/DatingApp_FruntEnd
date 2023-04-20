@@ -8,7 +8,7 @@ import { COLORS, HP_WP, SIZE } from '../common/theme';
 import GlobalInput from '../common/GlobalInput';
 import GlobalButton from '../common/GlobalButton';
 
-const Edit = ({ navigation }) => {
+const ProfileEdit = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [date, setDate] = useState('');
 
@@ -79,7 +79,7 @@ const Edit = ({ navigation }) => {
   );
 };
 
-export default Edit;
+export default ProfileEdit;
 
 const styles = StyleSheet.create({
   mainContainer: {

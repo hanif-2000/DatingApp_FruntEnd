@@ -14,7 +14,7 @@ const Container = ({ isLight, translucent, children, Style, hidden }) => {
       <View style={[styles.container, Style]}>
         <StatusBar
           animated={true}
-          backgroundColor={"#000"}
+          backgroundColor={"#fff"}
           barStyle={isLight ? 'light-content' : 'dark-content'}
           translucent={translucent}
           hidden={hidden ? true : false}

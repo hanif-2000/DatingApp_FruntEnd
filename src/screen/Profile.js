@@ -127,7 +127,7 @@ const Profile = ({ navigation }) => {
                 <Text style={styles.accountSettings}>Account Settings</Text>
                 <Text
                   style={styles.edit}
-                  onPress={() => navigation.navigate('Edit')}>
+                  onPress={() => navigation.navigate('ProfileEdit')}>
                   Edit
                 </Text>
               </View>
@@ -229,8 +229,7 @@ const Profile = ({ navigation }) => {
                 borderColor: 'gray', borderWidth: 1, marginTop: 15
 
               }}>
-                <TouchableOpacity
-                  onPress={() => setMale(!male)}
+                <View
                   style={{
                     height: HP_WP.hp(5),
                     width: HP_WP.wp(92),
@@ -242,7 +241,7 @@ const Profile = ({ navigation }) => {
                   }}>
                   <Text>Age Range</Text>
                   <Text>{minSelected}-{maxSelected}</Text>
-                </TouchableOpacity>
+                </View>
 
                 <RangeSlider
                   type="range" // ios only
@@ -353,8 +352,7 @@ const Profile = ({ navigation }) => {
                 borderColor: 'gray', borderWidth: 1, marginTop: 15
 
               }}>
-                <TouchableOpacity
-                  onPress={() => setMale(!male)}
+                <View
                   style={{
                     height: HP_WP.hp(5),
                     width: HP_WP.wp(92),
@@ -366,7 +364,7 @@ const Profile = ({ navigation }) => {
                   }}>
                   <Text>Maximum Distance  (only upgrade )</Text>
                   <Text>{distance}km.</Text>
-                </TouchableOpacity>
+                </View>
 
                 <RangeSlider
                   type="slider" // ios only
@@ -384,12 +382,12 @@ const Profile = ({ navigation }) => {
               </View>
               <View>
                 <GlobalButton
-                  Style={{ width: HP_WP.wp(90), backgroundColor: '#fff', borderWidth: 1, borderRadius: 5, marginVertical: 15 }}
+                  Style={{ borderColor: 'gray', width: HP_WP.wp(90), backgroundColor: '#fff', borderWidth: 1, borderRadius: 5, marginVertical: 15 }}
                   textStyle={{ color: '#000' }}
                   title={'Logout'} />
 
                 <GlobalButton
-                  Style={{ width: HP_WP.wp(90), backgroundColor: '#fff', borderWidth: 1, borderRadius: 5, marginVertical: 10 }}
+                  Style={{ borderColor: 'gray', width: HP_WP.wp(90), backgroundColor: '#fff', borderWidth: 1, borderRadius: 5, marginVertical: 10 }}
                   textStyle={{ color: 'red' }}
                   title={'Delete Account'} />
               </View>

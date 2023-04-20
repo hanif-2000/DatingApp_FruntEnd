@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -9,17 +9,18 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Modal from 'react-native-modal';
-import {Icon} from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
-import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
+import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
+import useAppData, { useStore } from '../service/AppData';
 
-const LikeScreen = ({navigation}) => {
+const LikeScreen = ({ navigation }) => {
   const [isVisible, setVisible] = useState(false);
   const [currentPlan, setCurrentPlan] = useState('6');
-
+  const [{ upgraded }] = useAppData()
   const Modalclose = () => setVisible(false);
   const Modalopen = () => setVisible(true);
 
@@ -55,20 +56,21 @@ const LikeScreen = ({navigation}) => {
   };
 
   data = [
-    {id: 1, time: '12', rate: '7'},
-    {id: 2, time: '6', rate: '10'},
-    {id: 3, time: '1', rate: '9'},
+    { id: 1, time: '12', rate: '7' },
+    { id: 2, time: '6', rate: '10' },
+    { id: 3, time: '1', rate: '9' },
   ];
   const onChange = item => {
     setCurrentPlan(item.time);
   };
+
   const ModalUI = () => {
     return (
       <View style={styles.topCardContainer}>
         <Text style={styles.bottomCardTopText}>Get Mingle Gold</Text>
         <LinearGradient
-          start={{x: 1, y: 0.8}}
-          end={{x: 0.1, y: 0.5}}
+          start={{ x: 1, y: 0.8 }}
+          end={{ x: 0.1, y: 0.5 }}
           colors={['#B44CF4', '#7A29AC']}
           style={styles.heartContainer}>
           <Icon name={'heart'} type="entypo" size={25} color={COLORS.white} />
@@ -79,7 +81,7 @@ const LikeScreen = ({navigation}) => {
           <FlatList
             horizontal={true}
             data={[1, 2, 3, 4, 5]}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <TouchableOpacity style={styles.dotContainer} />
             )}
           />
@@ -87,7 +89,7 @@ const LikeScreen = ({navigation}) => {
         <FlatList
           numColumns={3}
           data={data}
-          renderItem={({item}) => {
+          renderItem={({ item }) => {
             return (
               <TouchableOpacity
                 activeOpacity={0.8}
@@ -114,7 +116,7 @@ const LikeScreen = ({navigation}) => {
                 <Text
                   style={[
                     styles.monthText,
-                    {color: currentPlan == item.time ? '#B67718' : '#000'},
+                    { color: currentPlan == item.time ? '#B67718' : '#000' },
                   ]}>
                   {'months'}
                 </Text>
@@ -135,7 +137,7 @@ const LikeScreen = ({navigation}) => {
         <GlobalButton
           onPress={Modalclose}
           title={'CONTINUE'}
-          Style={{backgroundColor: '#B67718', marginTop: 20}}
+          Style={{ backgroundColor: '#B67718', marginTop: 20 }}
         />
       </View>
     );
@@ -144,18 +146,20 @@ const LikeScreen = ({navigation}) => {
   return (
     <Container>
       <GlobalHeader title={'Like'} />
-      <View style={{flex: 1}}>
-        <Text style={{fontSize: 18, fontWeight: '500', paddingLeft: 10}}>
+      <View style={{ flex: 1 }}>
+        <Text style={{ fontSize: 18, fontWeight: '500', paddingLeft: 10 }}>
           7 Likes
         </Text>
+        {/* {!upgraded && <>
+          {Modalopen()}</>} */}
         <FlatList
-          contentContainerStyle={{marginHorizontal: HP_WP.wp(1)}}
+          contentContainerStyle={{ marginHorizontal: HP_WP.wp(1) }}
           data={dataList}
           numColumns={2}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => trytochat(item.blurRadius)}
-              style={{marginHorizontal: HP_WP.wp(1), marginVertical: 5}}>
+              style={{ marginHorizontal: HP_WP.wp(1), marginVertical: 5 }}>
               <Image
                 blurRadius={item.blurRadius}
                 source={item.img}
@@ -196,12 +200,12 @@ const LikeScreen = ({navigation}) => {
           )}
         />
         <GlobalButton
-          Style={{backgroundColor: '#EEAF51', marginBottom: 10}}
+          Style={{ backgroundColor: '#EEAF51', marginBottom: 10 }}
           title={'SEE WHO LIKES YOU'}
         />
       </View>
       <Modal
-        style={{margin: 0}}
+        style={{ margin: 0 }}
         visible={isVisible}
         backgroundColor="rgba(0,0,0,0.7)"
         backdropOpacity={1}

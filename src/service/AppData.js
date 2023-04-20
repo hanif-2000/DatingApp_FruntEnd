@@ -1,12 +1,12 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 
 export const useStore = create(set => ({
-  phone: '',
+  upgraded: false,
   userId: '',
 
-  setPhone: (phone) =>
+  setUpgraded: (upgraded) =>
     set(() => ({
-      phone: phone,
+      upgraded: upgraded,
     })),
   setUserId: (userId) =>
     set(() => ({
@@ -17,8 +17,8 @@ export const useStore = create(set => ({
 export default () => {
   return [
     {
-      phone: useStore((state) => state.phone),
-      userId: useStore((state) => state.userId), 
+      upgraded: useStore((state) => state.upgraded),
+      userId: useStore((state) => state.userId),
     },
   ];
 };
