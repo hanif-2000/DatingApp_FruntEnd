@@ -1,10 +1,9 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
-import {COLORS, IMAGE} from '../common/theme';
-import {Image} from 'react-native-elements';
-import GlobalButton from '../common/GlobalButton';
+import { COLORS, IMAGE } from '../common/theme';
+import { Image } from 'react-native-elements';
 
 const Match = () => {
   const dataList = [
@@ -32,22 +31,22 @@ const Match = () => {
   return (
     <Container>
       <GlobalHeader title={'Match'} />
-      <View style={{flex: 1}}>
-        <Text style={{fontSize: 18, fontWeight: '500', paddingLeft: 10}}>
+      <View style={{ flex: 1 }}>
+        <Text style={{ fontSize: 18, fontWeight: '500', paddingLeft: 10, marginVertical: 15 }}>
           7 Match
         </Text>
         <FlatList
           data={dataList}
           numColumns={2}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <View>
               <Image
                 blurRadius={item.blurRadius}
                 source={item.img}
                 style={[
                   {
-                    width: 190,
-                    height: 190,
+                    width: 210,
+                    height: 210,
                     resizeMode: 'cover',
                     marginVertical: 5,
                     borderRadius: 5,
@@ -80,10 +79,6 @@ const Match = () => {
               </View>
             </View>
           )}
-        />
-        <GlobalButton
-          Style={{backgroundColor: '#EEAF51', marginBottom: 10}}
-          title={'SEE WHO LIKES YOU'}
         />
       </View>
     </Container>

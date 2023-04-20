@@ -1,17 +1,18 @@
 
 import React, { useRef } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, View } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
+import { BottomSheet } from 'react-native-sheet';
 
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
 import Card from '../component/Card';
 import IconButton from '../component/IconButton';
 import { COLORS, HP_WP } from '../common/theme';
-import photoCards from '../component/photoCards';
+import PhotoCards from '../component/PhotoCards';
 
 const HomeScreen = ({ navigation }) => {
-  // const useSwiper = useRef(null).current;
+  const bottomSheet = useRef(null);
 
 
   const onSwipedLeft = (type) => {
@@ -29,8 +30,10 @@ const HomeScreen = ({ navigation }) => {
         rightImage={true}
         mainContainer={{ paddingHorizontal: HP_WP.wp(5) }}
         rightIcon={require('../assets/images/filter.png')}
+        onPressRight={() => bottomSheet.current?.show()}
       />
-      <View style={{ flex: 0.88, backgroundColor: '#fff' }}>
+      <View style={{ flex: 0.88, backgroundColor: '#000' }}>
+
         <Swiper
           ref={swiper => {
             this.swiper = swiper
@@ -38,7 +41,7 @@ const HomeScreen = ({ navigation }) => {
           verticalSwipe={false}
           backgroundColor='#fff'
           animateCardOpacity
-          cards={photoCards}
+          cards={PhotoCards}
           renderCard={card => <Card card={card} />}
           cardIndex={0}
           stackSize={2}
@@ -71,6 +74,17 @@ const HomeScreen = ({ navigation }) => {
           type='entypo'
         />
       </View>
+
+      <View >
+        <BottomSheet
+          draggable={false}
+          sheetStyle={{ position: 'absolute', top: 0, paddingTop: 50 }}
+          height={400}
+          ref={bottomSheet}>
+          <Text>sheetStyle</Text>
+        </BottomSheet>
+      </View>
+
     </Container>
   );
 };
@@ -82,5 +96,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: '#fff'
+  },
+  contentContainer: {
+    flex: 1,
+    alignItems: 'center',
   },
 });
