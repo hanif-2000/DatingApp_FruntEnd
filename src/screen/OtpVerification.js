@@ -7,11 +7,8 @@ import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
 import GlobalHeader from '../common/GlobalHeader';
 import GlobalButton from '../common/GlobalButton';
 
-<<<<<<<< HEAD:src/screen/OtpVerification.js
 const OtpVerification = ({navigation}) => {
-========
-const OtpScreen = ({navigation}) => {
->>>>>>>> ec23e67e9873c6dcca46c9909f86b11c986ab642:src/screen/OtpScreen.js
+
   const [clearOTP, setClearOTP] = useState(false);
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
@@ -44,11 +41,7 @@ const OtpScreen = ({navigation}) => {
   );
 };
 
-<<<<<<<< HEAD:src/screen/OtpVerification.js
 export default OtpVerification;
-========
-export default OtpScreen;
->>>>>>>> ec23e67e9873c6dcca46c9909f86b11c986ab642:src/screen/OtpScreen.js
 
 const styles = StyleSheet.create({
   container: {
