@@ -1,9 +1,9 @@
 import React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
 import { COLORS, Font, HP_WP, IMAGE, SIZE } from './theme';
-import { useNavigation } from '@react-navigation/native';
 
 const GlobalHeader = ({
   title,
