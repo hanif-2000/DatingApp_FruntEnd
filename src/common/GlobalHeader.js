@@ -36,7 +36,7 @@ const GlobalHeader = ({
         mainContainer,
         {paddingTop: Platform.OS === 'android' ? HP_WP.hp(2) : HP_WP.hp(0.5)},
       ]}>
-      <View style={{flex: 0.2, alignItems: 'flex-start'}}>
+      <View style={{flex: 0.2,alignItems:'flex-start'}}>
         <TouchableOpacity
           disabled={disabled}
           onPress={drawerPress ? onPress : () => Route.goBack()}>
@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingBottom: HP_WP.hp(0.5),
+    justifyContent:'space-between'
   },
   titles: {
     color: COLORS.black,

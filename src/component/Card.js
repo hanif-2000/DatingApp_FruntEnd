@@ -6,7 +6,7 @@ const Card = ({card}) => (
   <View style={styles.card}>
     <Image style={styles.image} source={card.photo} resizeMode='cover' />
     <View style={styles.photoDescriptionContainer}>
-      <Text style={styles.text}>{`${card.name} , ${card.age}`}</Text>
+      <Text style={styles.text}>{`${card.userName} , ${card.age}`}</Text>
       <Text style={styles.text2}>{`${card.miles}`}</Text>
     </View>
   </View>

@@ -25,6 +25,7 @@ import GlobalHeader from '../common/GlobalHeader';
 import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
 import GlobalInput from '../common/GlobalInput';
 import GlobalButton from '../common/GlobalButton';
+import Container from '../common/Container';
 
 const Profile = ({navigation}) => {
   const [nameOfFile, setNameOfFile] = useState(null);
@@ -52,14 +53,14 @@ const Profile = ({navigation}) => {
     },
   ]);
 
-  const onChange = (min, max) => {
-    setMinSelected(min);
-    setMaxSelected(max);
-  };
+  // const onChange = (min, max) => {
+  //   setMinSelected(min);
+  //   setMaxSelected(max);
+  // };
 
-  const onChangeDistance = (min, max) => {
-    setDistance(max);
-  };
+  // const onChangeDistance = (min, max) => {
+  //   setDistance(max);
+  // };
 
   const [planName, setPlanName] = useState('Free');
   const [plan, setPlan] = useState([
@@ -95,20 +96,18 @@ const Profile = ({navigation}) => {
   };
   return (
     <LinearGradient
-    start={{x: 0, y: 0}}
-    end={{x: 2, y: 0}}
-    locations={[0,0.4,]}
+      start={{x: 0, y: 0}}
+      end={{x: 2, y: 0}}
+      locations={[0, 0.4]}
       colors={['#000000', '#BD94D7']}
       style={styles.linearGradient}>
-      <SafeAreaView style={{flex:1}}>
-        <StatusBar barStyle={'light-content'} />
-        <View style={{flex:1,backgroundColor:"#fff"}}>
+      <Container>
         <ImageBackground
           source={IMAGE.profileBgImage}
           resizeMode="stretch"
           style={styles.bgImg}>
           <GlobalHeader
-            mainContainer={{paddingHorizotal: HP_WP.wp(5)}}
+            mainContainer={{paddingHorizontal: HP_WP.wp(5)}}
             light
             title={'Profile'}
             headerTitles={styles.headerText}
@@ -125,9 +124,7 @@ const Profile = ({navigation}) => {
             </View>
           </View>
         </ImageBackground>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{flexGrow: 1, paddingBottom: 20}}>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.mainContainer}>
             <View style={styles.accountSettingsContainer}>
               <Text style={styles.accountSettings}>Account Settings</Text>
@@ -243,7 +240,7 @@ const Profile = ({navigation}) => {
                 borderColor: COLORS.light,
                 borderWidth: 0.8,
                 marginTop: 15,
-                borderRadius:4
+                borderRadius: 4,
               }}>
               <View
                 style={{
@@ -278,7 +275,7 @@ const Profile = ({navigation}) => {
             <TouchableOpacity
               onPress={() => setGroupChat(!groupChat)}
               style={{
-                borderColor:COLORS.light,
+                borderColor: COLORS.light,
                 height: HP_WP.hp(5),
                 width: HP_WP.wp(92),
                 borderRadius: 4,
@@ -310,8 +307,7 @@ const Profile = ({navigation}) => {
                   borderColor: COLORS.light,
                   borderWidth: 0.8,
                   marginTop: 15,
-                  borderRadius:4
-
+                  borderRadius: 4,
                 }}>
                 <TouchableOpacity
                   onPress={() => setMale(!male)}
@@ -404,7 +400,7 @@ const Profile = ({navigation}) => {
                 borderColor: COLORS.light,
                 borderWidth: 0.8,
                 marginTop: 15,
-                borderRadius:4
+                borderRadius: 4,
               }}>
               <View
                 style={{
@@ -499,8 +495,7 @@ const Profile = ({navigation}) => {
           size="large"
           overlayColor="rgba(0,0,0,0.5)"
         />
-        </View>
-      </SafeAreaView>
+      </Container>
     </LinearGradient>
   );
 };
@@ -508,7 +503,7 @@ const Profile = ({navigation}) => {
 export default Profile;
 
 const styles = StyleSheet.create({
-  linearGradient: {flex: 1,flexGrow:1},
+  linearGradient: {flex: 1, flexGrow: 1},
   mainContainer: {
     paddingHorizontal: HP_WP.wp(4),
   },

@@ -9,9 +9,8 @@ import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
 import Card from '../component/Card';
 import IconButton from '../component/IconButton';
-import {COLORS, HP_WP, IMAGE, SIZE} from '../common/theme';
+import {COLORS, HP_WP, IMAGE, SIZE,Font} from '../common/theme';
 import photoCards from '../component/photoCards';
-import {Font} from '../common/theme';
 
 const HomeScreen = ({navigation}) => {
   const [gender, setGender] = useState('male');
