@@ -3,7 +3,7 @@ import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import {BottomSheet} from 'react-native-sheet';
 import {Dropdown} from 'react-native-element-dropdown';
-import RangeSlider from 'react-native-range-slider';
+// import RangeSlider from '@jesster2k10/react-native-range-slider';
 
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
@@ -55,8 +55,9 @@ const HomeScreen = ({navigation}) => {
         rightIcon={require('../assets/images/filter.png')}
         onPressRight={() => bottomSheet.current?.show()}
       />
-      <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <View style={{backgroundColor: 'black',height:HP_WP.hp(73)}}>
         <Swiper
+        style={{height:HP_WP.hp(65)}}
           ref={swiper => {
             this.swiper = swiper;
           }}
@@ -125,7 +126,7 @@ const HomeScreen = ({navigation}) => {
             maxHeight={300}
             labelField="label"
             valueField="value"
-            placeholder={!isFocus ? 'Select item' : '...'}
+            placeholder={!isFocus ? 'Select Distance' : 'Select Distance'}
             // searchPlaceholder="Search..."
             value={value}
             onFocus={() => setIsFocus(true)}
@@ -141,7 +142,7 @@ const HomeScreen = ({navigation}) => {
             <TouchableOpacity
               onPress={() => setGender('male')}
               style={[gender == 'male' ? styles.activeButton : styles.button]}>
-              <Text style={styles.buttonText}>Male</Text>
+              <Text style={[styles.buttonText, {color: gender == 'male' ? COLORS.white :COLORS.light}]}>Male</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => setGender('female')}
@@ -152,17 +153,17 @@ const HomeScreen = ({navigation}) => {
                   borderRightWidth: gender == 'shemale' ? 0 : 1,
                 },
               ]}>
-              <Text style={styles.buttonText}>Female</Text>
+              <Text style={[styles.buttonText,{color: gender == 'female' ? COLORS.white :COLORS.light}]}>Female</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => setGender('shemale')}
               style={gender == 'shemale' ? styles.activeButton : styles.button}>
-              <Text style={styles.buttonText}>Shemale</Text>
+              <Text style={[styles.buttonText,{color: gender == 'shemale' ? COLORS.white :COLORS.light}]}>Shemale</Text>
             </TouchableOpacity>
           </View>
           <Text style={styles.distanceText}>Age</Text>
         </View>
-        <RangeSlider
+        {/* <RangeSlider
         style={{marginTop:10}}
           type="range" // ios only
           min={18}
@@ -174,7 +175,7 @@ const HomeScreen = ({navigation}) => {
           handlePressedColor="#f368e0"
           tintColorBetweenHandles="#ff9ff3"
           onChange={(min, max) => onChange(min, max)}
-        />
+        /> */}
       </BottomSheet>
     </Container>
   );
@@ -185,7 +186,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent:'space-around',
     marginBottom: 10,
   },
   contentContainer: {
@@ -230,7 +231,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: COLORS.gray,
     fontSize: SIZE.N,
-    fontFamily: Font.light,
   },
   activeButton: {
     backgroundColor: COLORS.purple,
