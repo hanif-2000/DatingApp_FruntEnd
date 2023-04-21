@@ -14,21 +14,28 @@
       },
       "oauth_client": [
         {
-          "client_id": "12510229230-g9le8vjp8dgkn79h6515jatedufq1glq.apps.googleusercontent.com",
+          "client_id": "12510229230-a0ut8m458n38c48cp77qtgq2fd6ld1ak.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBx1cOCrk9-2em0pvc-FQHqHFDEyYUiB64"
+          "current_key": "AIzaSyD2R5bG47R4wGpolbkU6iJRURpeW9kYBCs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "12510229230-g9le8vjp8dgkn79h6515jatedufq1glq.apps.googleusercontent.com",
+              "client_id": "12510229230-a0ut8m458n38c48cp77qtgq2fd6ld1ak.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "12510229230-9q9teduveid0itm7hdufjc80h8nvmgh1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jadeen"
+              }
             }
           ]
         }
