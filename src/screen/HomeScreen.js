@@ -55,14 +55,14 @@ const HomeScreen = ({navigation}) => {
         rightIcon={require('../assets/images/filter.png')}
         onPressRight={() => bottomSheet.current?.show()}
       />
-      <View style={{backgroundColor: 'black',height:HP_WP.hp(73)}}>
+      <View style={{height: HP_WP.hp(73)}}>
         <Swiper
-        style={{height:HP_WP.hp(65)}}
+          style={{height: HP_WP.hp(65)}}
           ref={swiper => {
             this.swiper = swiper;
           }}
           verticalSwipe={false}
-          backgroundColor="#fff"
+          backgroundColor={COLORS.white}
           animateCardOpacity
           cards={photoCards}
           renderCard={card => <Card card={card} />}
@@ -78,21 +78,21 @@ const HomeScreen = ({navigation}) => {
         <IconButton
           name="close"
           onPress={() => onSwipedLeft('left')}
-          color="white"
-          backgroundColor="#E5566D"
+          color={COLORS.white}
+          backgroundColor={COLORS.red}
           type="AntDesign"
         />
         <IconButton
           name="dollar"
           onPress={() => navigation.navigate('PlanSetting')}
-          color="white"
-          backgroundColor="#FFD912"
+          color={COLORS.white}
+          backgroundColor={COLORS.yellow}
           type="fontisto"
         />
         <IconButton
           name="heart"
           onPress={() => onSwipedRight('right')}
-          color="white"
+          color={COLORS.white}
           backgroundColor={COLORS.purple}
           type="entypo"
         />
@@ -109,7 +109,7 @@ const HomeScreen = ({navigation}) => {
           rightImage={true}
           rightIcon={IMAGE.check}
           drawerPress
-          onPressRight ={() => bottomSheet.current?.hide()}
+          onPressRight={() => bottomSheet.current?.hide()}
           onPress={() => bottomSheet.current?.hide()}
         />
         <View style={styles.sheetContainer}>
@@ -142,7 +142,13 @@ const HomeScreen = ({navigation}) => {
             <TouchableOpacity
               onPress={() => setGender('male')}
               style={[gender == 'male' ? styles.activeButton : styles.button]}>
-              <Text style={[styles.buttonText, {color: gender == 'male' ? COLORS.white :COLORS.light}]}>Male</Text>
+              <Text
+                style={[
+                  styles.buttonText,
+                  {color: gender == 'male' ? COLORS.white : COLORS.light},
+                ]}>
+                Male
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => setGender('female')}
@@ -153,12 +159,24 @@ const HomeScreen = ({navigation}) => {
                   borderRightWidth: gender == 'shemale' ? 0 : 1,
                 },
               ]}>
-              <Text style={[styles.buttonText,{color: gender == 'female' ? COLORS.white :COLORS.light}]}>Female</Text>
+              <Text
+                style={[
+                  styles.buttonText,
+                  {color: gender == 'female' ? COLORS.white : COLORS.light},
+                ]}>
+                Female
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => setGender('shemale')}
               style={gender == 'shemale' ? styles.activeButton : styles.button}>
-              <Text style={[styles.buttonText,{color: gender == 'shemale' ? COLORS.white :COLORS.light}]}>Shemale</Text>
+              <Text
+                style={[
+                  styles.buttonText,
+                  {color: gender == 'shemale' ? COLORS.white : COLORS.light},
+                ]}>
+                Shemale
+              </Text>
             </TouchableOpacity>
           </View>
           <Text style={styles.distanceText}>Age</Text>
@@ -186,7 +204,7 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
-    justifyContent:'space-around',
+    justifyContent: 'space-around',
     marginBottom: 10,
   },
   contentContainer: {
@@ -199,11 +217,11 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     height: 325,
     paddingHorizontal: HP_WP.wp(5),
-    borderBottomLeftRadius:20,
-    borderBottomRightRadius:20
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
   sheetContainer: {
     marginHorizontal: 25,
@@ -231,6 +249,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: COLORS.gray,
     fontSize: SIZE.N,
+    fontFamily:Font.regular
   },
   activeButton: {
     backgroundColor: COLORS.purple,
@@ -242,7 +261,7 @@ const styles = StyleSheet.create({
   activeButtonText: {
     color: COLORS.white,
     fontSize: SIZE.N,
-    fontFamily: Font.light,
+    fontFamily: Font.regular,
   },
   dropdown: {
     height: 34,

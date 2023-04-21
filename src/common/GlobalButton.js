@@ -11,7 +11,7 @@ const GlobalButton = ({title, onPress, Style, textStyle, icon = false}) => {
       activeOpacity={0.8}
       style={[styles.Container, Style]}>
       {icon && (
-        <Icon name="facebook" type='fontisto'  size={15} color={COLORS.blue} />
+        <Icon name="facebook" type="fontisto" size={15} color={COLORS.blue} />
       )}
       <Text style={[styles.title, textStyle]}>{title}</Text>
     </TouchableOpacity>
@@ -22,7 +22,7 @@ export default GlobalButton;
 
 const styles = StyleSheet.create({
   Container: {
-    backgroundColor: '#AA3FEC',
+    backgroundColor: COLORS.purple,
     borderRadius: 30,
     height: HP_WP.hp(5.5),
     width: HP_WP.wp(75),

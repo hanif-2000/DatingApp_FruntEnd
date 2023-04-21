@@ -14,17 +14,17 @@ const GradientContainer = ({children}) => {
     <LinearGradient
       start={{x: 0.9, y: 0}}
       end={{x: 0.9, y: 0.9}}
-      colors={['#BD94D7', '#000000']}
+      colors={[COLORS.lightPurple, COLORS.black]}
       style={styles.linearGradient}>
-      <SafeAreaView style={[{flex: 1, backgroundColor: 'transparent'}]}>
+      <SafeAreaView style={styles.safeAreaViewStyle}>
         <View style={styles.container}>
           <StatusBar
             animated={true}
-            backgroundColor={'#BD94D7'}
-            barStyle={ 'light-content'}
+            backgroundColor={COLORS.lightPurple}
+            barStyle={'light-content'}
           />
           <KeyboardAvoidingView
-            style={{flex: 1}}
+            style={styles.linearGradient}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             {children}
           </KeyboardAvoidingView>
@@ -41,7 +41,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     width: HP_WP.wp(100),
     alignSelf: 'center',
-    // paddingHorizontal:HP_WP.wp(5)
   },
-  linearGradient: {flex: 1},
+  linearGradient: {
+    flex: 1,
+  },
+  safeAreaViewStyle: {
+    flex: 1,
+    backgroundColor: 'transparent',
+  },
 });

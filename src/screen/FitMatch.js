@@ -8,33 +8,33 @@ import GlobalButton from '../common/GlobalButton';
 
 const FitMatch = ({navigation}) => {
   return (
-    <GradientContainer >
-        <View style={styles.mainContainer}>
-          <Image source={IMAGE.itsMatch} style={styles.matchText} />
-          <Text style={styles.likesText}>Lucy likes you too</Text>
-          <View style={{height:110,alignSelf:'center'}}>
-            <Image
-              source={IMAGE.MatchImage1}
-              style={[styles.matchImage,{right:-15}]}
-              resizeMode="contain"
-            />
-            <Image
-              source={IMAGE.MatchImage}
-              style={[ styles.matchImage,{left:-15}]}
-              resizeMode="contain"
-            />
-          </View>
-          <GlobalButton
-            onPress={() => navigation.navigate('ChattingScreen')}
-            Style={styles.topButton}
-            title={'SEND A MESSAGE '}
+    <GradientContainer>
+      <View style={styles.mainContainer}>
+        <Image source={IMAGE.itsMatch} style={styles.matchText} />
+        <Text style={styles.likesText}>Lucy likes you too</Text>
+        <View style={styles.imageContainer}>
+          <Image
+            source={IMAGE.MatchImage1}
+            style={[styles.matchImage, {right: -15}]}
+            resizeMode="contain"
           />
-          <GlobalButton
-            onPress={() => navigation.goBack()}
-            Style={styles.bottomButton}
-            title={'KEEP SWIPING'}
+          <Image
+            source={IMAGE.MatchImage}
+            style={[styles.matchImage, {left: -15}]}
+            resizeMode="contain"
           />
         </View>
+        <GlobalButton
+          onPress={() => navigation.navigate('ChattingScreen')}
+          Style={styles.topButton}
+          title={'SEND A MESSAGE '}
+        />
+        <GlobalButton
+          onPress={() => navigation.goBack()}
+          Style={styles.bottomButton}
+          title={'KEEP SWIPING'}
+        />
+      </View>
     </GradientContainer>
   );
 };
@@ -61,27 +61,25 @@ const styles = StyleSheet.create({
     fontFamily: Font.regular,
     marginVertical: 20,
   },
-
+  imageContainer: {
+    height: 110,
+    alignSelf: 'center',
+  },
   matchImage: {
     borderColor: COLORS.purple,
-    // borderWidth: 3,
     position: 'absolute',
     height: 110,
     width: 110,
     borderRadius: 100,
-    // marginRight: HP_WP.wp(10),
   },
   topButton: {
-    backgroundColor: '#BB34D2',
-    marginBottom: 10,
-    marginTop: 5,
+    backgroundColor: COLORS.purple,
+    marginBottom: 15,
     marginTop: HP_WP.hp(10),
   },
   bottomButton: {
-    backgroundColor: '#000',
-    marginBottom: 10,
-    marginTop: 5,
-    borderColor: '#BB34D2',
+    backgroundColor: COLORS.black,
+    borderColor: COLORS.purple,
     borderWidth: 2,
   },
 });

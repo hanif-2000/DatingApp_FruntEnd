@@ -15,8 +15,7 @@ const Stack = createNativeStackNavigator();
 
 const AuthStack = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{headerShown: false}}>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="LoginWithPhone" component={LoginWithPhone} />
       <Stack.Screen name="OtpVerification" component={OtpVerification} />
@@ -26,8 +25,6 @@ const AuthStack = () => {
       <Stack.Screen name="MainStack" component={MainStack} />
       <Stack.Screen name="ChattingScreen" component={ChattingScreen} />
       <Stack.Screen name="FitMatch" component={FitMatch} />
-      
-
     </Stack.Navigator>
   );
 };
