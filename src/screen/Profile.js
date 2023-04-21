@@ -16,7 +16,7 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {BlurView} from '@react-native-community/blur';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {Dropdown} from 'react-native-element-dropdown';
-import RangeSlider from 'react-native-range-slider'
+// import RangeSlider from '@jesster2k10/react-native-range-slider';
 import LinearGradient from 'react-native-linear-gradient';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Icon} from 'react-native-elements';
@@ -261,7 +261,7 @@ const Profile = ({navigation}) => {
                 </Text>
               </View>
 
-              <RangeSlider
+              {/* <RangeSlider
                 type="range" // ios only
                 min={18}
                 max={70}
@@ -272,7 +272,7 @@ const Profile = ({navigation}) => {
                 handlePressedColor="#f368e0"
                 tintColorBetweenHandles="#ff9ff3"
                 onChange={(min, max) => onChange(min, max)}
-              />
+              /> */}
             </View>
 
             <TouchableOpacity
@@ -420,7 +420,7 @@ const Profile = ({navigation}) => {
                 <Text>{distance}km.</Text>
               </View>
 
-              <RangeSlider
+              {/* <RangeSlider
                 type="slider" // ios only
                 min={0}
                 max={100}
@@ -432,7 +432,7 @@ const Profile = ({navigation}) => {
                 tintColorBetweenHandles="#ff9ff3"
                 onChange={(min, max) => onChangeDistance(min, max)}
                 hideLabels={true}
-              />
+              /> */}
             </View>
             <View>
               <GlobalButton
