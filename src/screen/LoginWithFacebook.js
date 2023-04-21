@@ -1,11 +1,13 @@
 import React from 'react';
 import {StyleSheet, Image, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
+import {LoginManager} from 'react-native-fbsdk-next';
 
 import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 import GradientContainer from '../common/GradientContainer';
+
+// https://jadeen.firebaseapp.com/__/auth/handler
 
 const LoginWithFacebook = () => {
   let Route = useNavigation();
