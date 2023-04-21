@@ -6,15 +6,15 @@ import {
   View,
   SafeAreaView,
 } from 'react-native';
-import {HP_WP} from './theme';
+import {COLORS, HP_WP} from './theme';
 
 const Container = ({isLight, translucent, children, Style, hidden}) => {
   return (
-    <SafeAreaView style={[{flex: 1, backgroundColor: '#fff'}]}>
+    <SafeAreaView style={styles.mainContainer}>
       <View style={[styles.container, Style]}>
         <StatusBar
           animated={true}
-          backgroundColor={'#fff'}
+          backgroundColor={COLORS.white}
           barStyle={isLight ? 'light-content' : 'dark-content'}
           translucent={translucent}
           hidden={hidden ? true : false}
@@ -31,9 +31,13 @@ const Container = ({isLight, translucent, children, Style, hidden}) => {
 export default Container;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+  },
   container: {
     flexGrow: 1,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     width: HP_WP.wp(100),
     alignSelf: 'center',
   },

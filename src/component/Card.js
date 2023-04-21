@@ -4,9 +4,9 @@ import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
 
 const Card = ({card}) => (
   <View style={styles.card}>
-    <Image style={styles.image} source={card.photo} resizeMode='cover' />
+    <Image style={styles.image} source={card.photo} resizeMode="cover" />
     <View style={styles.photoDescriptionContainer}>
-      <Text style={styles.text}>{`${card.name} , ${card.age}`}</Text>
+      <Text style={styles.text}>{`${card.userName} , ${card.age}`}</Text>
       <Text style={styles.text2}>{`${card.miles}`}</Text>
     </View>
   </View>
@@ -15,17 +15,17 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
-    top: HP_WP.hp(-8),
+    top: HP_WP.hp(-6),
   },
   image: {
     borderRadius: 30,
     width: '100%',
-    height:HP_WP.hp(70)
+    height: HP_WP.hp(65),
   },
   photoDescriptionContainer: {
     position: 'absolute',
     left: 40,
-    bottom: 30,
+    bottom: 20,
   },
   text: {
     fontSize: SIZE.XL,
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
     fontSize: SIZE.N,
     color: COLORS.white,
     fontFamily: Font.medium,
-    marginTop:5
+    marginTop: 5,
   },
 });

@@ -1,55 +1,65 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
-import { COLORS, IMAGE } from '../common/theme';
-import { Image } from 'react-native-elements';
+import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
+import {Image} from 'react-native-elements';
 
 const Match = () => {
   const dataList = [
     {
       img: IMAGE.VideoCall,
-      blurRadius: 0,
     },
     {
       img: IMAGE.VideoCall,
-      blurRadius: 4,
     },
     {
       img: IMAGE.VideoCall,
-      blurRadius: 4,
     },
     {
       img: IMAGE.VideoCall,
-      blurRadius: 4,
     },
     {
       img: IMAGE.VideoCall,
-      blurRadius: 0,
     },
   ];
   return (
     <Container>
-      <GlobalHeader title={'Match'} />
-      <View style={{ flex: 1 }}>
-        <Text style={{ fontSize: 18, fontWeight: '500', paddingLeft: 10, marginVertical: 15 }}>
+      <GlobalHeader
+        title={'Match'}
+        mainContainer={{paddingHorizontal: HP_WP.wp(5)}}
+      />
+      <View style={{flex: 1}}>
+        <Text
+          style={{
+            fontSize: SIZE.L,
+            fontWeight: '500',
+            paddingLeft: HP_WP.wp(5),
+            color: COLORS.black,
+            fontFamily: Font.semiBold,
+          }}>
           7 Match
         </Text>
         <FlatList
+          style={{marginHorizontal: HP_WP.wp(2.5)}}
+          showsVerticalScrollIndicator={false}
           data={dataList}
           numColumns={2}
-          renderItem={({ item }) => (
-            <View>
+          renderItem={({item}) => (
+            <TouchableOpacity
+              // onPress={() => trytochat(item.blurRadius)}
+              style={{
+                marginHorizontal: HP_WP.wp(2.5),
+                marginVertical: 5,
+              }}>
               <Image
-                blurRadius={item.blurRadius}
                 source={item.img}
                 style={[
                   {
-                    width: 210,
-                    height: 210,
+                    width: HP_WP.wp(42.5),
+                    height: HP_WP.hp(26),
                     resizeMode: 'cover',
-                    marginVertical: 5,
-                    borderRadius: 5,
+                    borderRadius: 12,
                   },
                 ]}
               />
@@ -77,7 +87,7 @@ const Match = () => {
                   }}
                 />
               </View>
-            </View>
+            </TouchableOpacity>
           )}
         />
       </View>

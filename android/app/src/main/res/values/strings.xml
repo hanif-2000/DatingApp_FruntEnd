@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DatingApp</string>
+    <string name="facebook_app_id">1622110844937853</string>
+    <string name="facebook_client_token">9551268f763aa97eff819303c4e2e40b</string>
 </resources>

@@ -6,7 +6,7 @@ export function navigate(name, params) {
   navigationRef?.current?.navigate(name, params);
 }
 
-export const notificationOpen = (notification) => {
+export const notificationOpen = notification => {
   console.warn(notification, '/////------------------->');
   //   let notifyData = Platform.OS=='ios'?notify?.data:notify?.data?.response_data;
   //   if(notifyData){

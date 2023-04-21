@@ -7,26 +7,22 @@ import {
   Image,
 } from 'react-native';
 import React from 'react';
-
-import { HP_WP, IMAGE } from '../common/theme';
+import {COLORS, Font, HP_WP, IMAGE} from '../common/theme';
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
 
-const ChatScreen = ({ navigation }) => {
+const ChatScreen = ({navigation}) => {
   const DATA = [1, 2, 3, 4];
   return (
-    <Container Style={{ paddingHorizontal: HP_WP.wp(5) }} >
+    <Container Style={styles.mainContainer}>
       <GlobalHeader title={'Chat'} />
       <FlatList
         data={DATA}
-        renderItem={({ item }) => (
+        renderItem={({item}) => (
           <TouchableOpacity
             onPress={() => navigation.navigate('ChattingScreen')}
             style={styles.flatListContainer}>
-            <Image
-              source={IMAGE.Profile}
-              style={styles.profileImage}
-            />
+            <Image source={IMAGE.Profile} style={styles.profileImage} />
             <View style={styles.ProfileNameContainer}>
               <Text style={styles.silivaStyle}>Siliva</Text>
               <Text style={styles.hoarderStyle}>
@@ -44,6 +40,9 @@ const ChatScreen = ({ navigation }) => {
 export default ChatScreen;
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    paddingHorizontal: HP_WP.wp(5),
+  },
   flatListContainer: {
     marginTop: HP_WP.hp(2.5),
     flexDirection: 'row',
@@ -56,24 +55,23 @@ const styles = StyleSheet.create({
     width: HP_WP.wp(11),
   },
   silivaStyle: {
-    color: '#000',
+    color: COLORS.black,
     fontSize: 15,
-    fontWeight: '500',
+    fontFamily: Font.medium,
   },
   hoarderStyle: {
-    color: '#000',
+    color: COLORS.black,
     fontSize: 12,
-    fontWeight: '400',
+    fontFamily: Font.regular,
   },
   ProfileNameContainer: {
     marginLeft: HP_WP.hp(1),
     flex: 1,
   },
   numberStyle: {
-    color: '#000',
+    color: COLORS.black,
     fontSize: 12,
-    fontWeight: '400',
+    fontFamily: Font.regular,
     marginTop: HP_WP.hp(2.4),
-
   },
 });
