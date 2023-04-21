@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Icon} from 'react-native-elements';
+
+import { StyleSheet } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Foundation from 'react-native-vector-icons/Foundation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -27,8 +28,8 @@ const MainStack = () => {
         name="HomeScreen"
         component={HomeScreen}
         options={() => ({
-          tabBarIcon: ({focused}) => (
-            <Icon
+          tabBarIcon: ({ focused }) => (
+            <Foundation
               name="home"
               size={30}
               type="foundation"

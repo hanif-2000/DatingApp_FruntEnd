@@ -75,6 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingBottom: HP_WP.hp(0.5),
+    justifyContent:'space-between'
   },
   iconContainer: {
     flex: 0.2,

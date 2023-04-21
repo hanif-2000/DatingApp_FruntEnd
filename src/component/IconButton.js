@@ -11,10 +11,7 @@ const IconButton = ({onPress, name, backgroundColor, color, type}) => (
     <Icon type={type} name={name} size={20} color={color} />
   </TouchableOpacity>
 );
-IconButton.defaultProps = {
-  color: COLORS.white,
-  backgroundColor: COLORS.heartColor,
-};
+
 export default IconButton;
 
 const styles = StyleSheet.create({
