@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Image, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {AccessToken, LoginManager} from 'react-native-fbsdk-next';
 
 import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
@@ -8,6 +9,24 @@ import GradientContainer from '../common/GradientContainer';
 
 const LoginWithFacebook = () => {
   let Route = useNavigation();
+
+  const onHandle = () => {
+    LoginManager.logInWithPermissions(['public_profile']).then(
+      function (result) {
+        if (result.isCancelled) {
+          console.warn('Login cancelled');
+        } else {
+          console.log(
+            'Login success with permissions: ' +
+              result.grantedPermissions.toString(),
+          );
+        }
+      },
+      function (error) {
+        console.log('Login fail with error: ' + error);
+      },
+    );
+  };
 
   return (
     <GradientContainer translucent={false} hidden={false}>
@@ -21,7 +40,8 @@ const LoginWithFacebook = () => {
       </Text>
       <GlobalButton
         icon
-        onPress={() => Route.navigate('LoginWithPhone')}
+        onPress={onHandle}
+        // onPress={() => Route.navigate('LoginWithPhone')}
         title={'LOGIN WITH FACEBOOK'}
         textStyle={{color: COLORS.black}}
         Style={{backgroundColor: COLORS.white}}

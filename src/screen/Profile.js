@@ -5,7 +5,6 @@ import {
   Modal,
   Pressable,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -16,9 +15,8 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {BlurView} from '@react-native-community/blur';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {Dropdown} from 'react-native-element-dropdown';
-// import RangeSlider from '@jesster2k10/react-native-range-slider';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import LinearGradient from 'react-native-linear-gradient';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {Icon} from 'react-native-elements';
 
 import GlobalHeader from '../common/GlobalHeader';
@@ -38,9 +36,9 @@ const Profile = ({navigation}) => {
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
 
-  const [minSelected, setMinSelected] = useState(0);
-  const [maxSelected, setMaxSelected] = useState(0);
-  const [distance, setDistance] = useState(0);
+  const [minimumSlideValue, setMinimumSlideValue] = useState([100]);
+  const [maximumSlideValue, setMaximumSliderValue] = useState([18]);
+  const [changeValue, setChangeValue] = useState(0);
 
   const [preferredLanguages, setPreferredLanguages] = useState([
     {
@@ -254,22 +252,41 @@ const Profile = ({navigation}) => {
                 }}>
                 <Text>Age Range</Text>
                 <Text>
-                  {minSelected}-{maxSelected}
+                  {maximumSlideValue[0]}-{minimumSlideValue[1]}
                 </Text>
               </View>
 
-              {/* <RangeSlider
-                type="range" // ios only
+              <MultiSlider
+                sliderLength={300}
+                containerStyle={{
+                  marginLeft: 2,
+                  alignSelf: 'center',
+                }}
+                trackStyle={{
+                  height: 3,
+                  backgroundColor: '#CACACA',
+                  borderRadius: 5,
+                }}
+                valuePrefix="age"
+                values={[maximumSlideValue, minimumSlideValue]}
+                onValuesChange={value => {
+                  setChangeValue(value, console.log(value));
+                  setMaximumSliderValue(value);
+                  setMinimumSlideValue(value);
+                }}
+                selectedStyle={{
+                  backgroundColor: COLORS.purple,
+                }}
+                markerStyle={{
+                  backgroundColor: COLORS.purple,
+                  top: 0.8,
+                }}
+                step={1}
+                isMarkersSeparated={true}
                 min={18}
                 max={70}
-                selectedMinimum={22} // ios only
-                selectedMaximum={44} // ios only
-                tintColor="#000"
-                handleColor="#f368e0"
-                handlePressedColor="#f368e0"
-                tintColorBetweenHandles="#ff9ff3"
-                onChange={(min, max) => onChange(min, max)}
-              /> */}
+                allowOverlap
+              />
             </View>
 
             <TouchableOpacity
@@ -413,7 +430,7 @@ const Profile = ({navigation}) => {
                   justifyContent: 'space-between',
                 }}>
                 <Text>Maximum Distance (only upgrade )</Text>
-                <Text>{distance}km.</Text>
+                {/* <Text>{distance}km.</Text> */}
               </View>
 
               {/* <RangeSlider
