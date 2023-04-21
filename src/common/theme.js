@@ -33,6 +33,7 @@ export const SIZE = {
 
 export const COLORS = {
   darkWhite: '#FAFAFA',
+  lightPurple: '#BD94D7',
   blk: '#303030',
   black: '#000',
   white: '#ffffff',
@@ -42,6 +43,8 @@ export const COLORS = {
   lightGray: '#8E8E8E',
   mediumGray: '#828282',
   orange: '#E75C25',
+  red: '#FF2D2D',
+  yellow: '#FFD912',
   lightPurple: '#BD94D7',
   purple: '#AA3FEC',
   light: '#D8D8DC',
@@ -62,5 +65,5 @@ export const IMAGE = {
   profileBgImage: require('../assets/images/profileBgImag.png'),
   logo2: require('../assets/images/logo2.png'),
   itsMatch: require('../assets/images/ItsMatch.png'),
-  check:require('../assets/images/check.png')
+  check: require('../assets/images/check.png'),
 };

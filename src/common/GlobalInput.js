@@ -50,13 +50,7 @@ const GlobalInput = ({
         {countryCode && (
           <TouchableOpacity
             onPress={openCode}
-            style={[
-              {
-                height: HP_WP.hp(5),
-                justifyContent: 'center',
-              },
-              countryPikerStyle,
-            ]}>
+            style={[styles.countryPicker, countryPikerStyle]}>
             <Text style={styles.codeTxt}>{code}</Text>
           </TouchableOpacity>
         )}
@@ -86,7 +80,7 @@ const GlobalInput = ({
                 name={iconName}
                 type={iconType}
                 size={20}
-                color={'#8E8E8E'}
+                color={COLORS.lightGray}
               />
             )}
           </TouchableOpacity>
@@ -108,12 +102,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
   },
+  countryPicker: {
+    height: HP_WP.hp(5),
+    justifyContent: 'center',
+  },
   input: {
     flex: 1,
     color: COLORS.lightGray,
     fontSize: SIZE.N,
-    height:HP_WP.hp(5)
-
+    height: HP_WP.hp(5),
+    fontFamily: Font.medium,
   },
   iconStyle: {
     height: HP_WP.hp(2.5),
@@ -121,14 +119,18 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: SIZE.S,
+    fontFamily: Font.regular,
+    color: COLORS.orange,
   },
   codeTxt: {
     fontSize: SIZE.N,
     color: COLORS.black,
+    fontFamily: Font.medium,
   },
   inputNameText: {
     color: COLORS.darkGray,
     fontSize: SIZE.N,
+    fontFamily: Font.medium,
   },
   tuchText: {
     fontSize: SIZE.N,

@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Image, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
+import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 import GradientContainer from '../common/GradientContainer';
 
@@ -14,28 +14,17 @@ const LoginWithFacebook = () => {
       <Image source={IMAGE.Logo} style={styles.logo} resizeMode="contain" />
       <Text style={styles.txt}>
         By clicking Log In, you agree with our{' '}
-        <Text style={{textDecorationLine: 'underline', fontSize: SIZE.N}}>
-          Terms.
-        </Text>
+        <Text style={styles.underLineText}>Terms.</Text>
         {'\n'}Learn how we process your data in our{' '}
-        <Text style={{textDecorationLine: 'underline', fontSize: SIZE.N}}>
-          Privacy{'\n'}Policy
-        </Text>{' '}
-        and{' '}
-        <Text
-          style={{
-            textDecorationLine: 'underline',
-            fontSize: SIZE.N,
-          }}>
-          Cookies Policy.
-        </Text>
+        <Text style={styles.underLineText}>Privacy{'\n'}Policy</Text> and{' '}
+        <Text style={styles.underLineText}>Cookies Policy.</Text>
       </Text>
       <GlobalButton
         icon
         onPress={() => Route.navigate('LoginWithPhone')}
         title={'LOGIN WITH FACEBOOK'}
         textStyle={{color: COLORS.black}}
-        Style={{backgroundColor: '#fff'}}
+        Style={{backgroundColor: COLORS.white}}
       />
     </GradientContainer>
   );
@@ -44,7 +33,10 @@ const LoginWithFacebook = () => {
 export default LoginWithFacebook;
 
 const styles = StyleSheet.create({
-  linearGradient: {flex: 1, paddingHorizontal: HP_WP.wp(10)},
+  linearGradient: {
+    flex: 1,
+    paddingHorizontal: HP_WP.wp(10),
+  },
   logo: {
     height: HP_WP.hp(15),
     width: HP_WP.wp(30),
@@ -57,5 +49,9 @@ const styles = StyleSheet.create({
     fontFamily: Font.semiBold,
     textAlign: 'center',
     marginVertical: HP_WP.hp(12),
+  },
+  underLineText: {
+    textDecorationLine: 'underline',
+    fontSize: SIZE.N,
   },
 });

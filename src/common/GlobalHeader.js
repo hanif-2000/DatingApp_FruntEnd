@@ -36,7 +36,7 @@ const GlobalHeader = ({
         mainContainer,
         {paddingTop: Platform.OS === 'android' ? HP_WP.hp(2) : HP_WP.hp(0.5)},
       ]}>
-      <View style={{flex: 0.2,alignItems:'flex-start'}}>
+      <View style={styles.iconContainer}>
         <TouchableOpacity
           disabled={disabled}
           onPress={drawerPress ? onPress : () => Route.goBack()}>
@@ -44,7 +44,7 @@ const GlobalHeader = ({
             name={drawer ? 'menu' : withoutIcon ? '' : 'arrow-back'}
             type={'ionicons'}
             size={25}
-            color={light ? '#fff' : COLORS.black}
+            color={light ? COLORS.white : COLORS.black}
           />
         </TouchableOpacity>
       </View>
@@ -76,6 +76,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingBottom: HP_WP.hp(0.5),
     justifyContent:'space-between'
+  },
+  iconContainer: {
+    flex: 0.2,
+    alignItems: 'flex-start',
   },
   titles: {
     color: COLORS.black,
