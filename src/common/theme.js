@@ -62,4 +62,5 @@ export const IMAGE = {
   profileBgImage: require('../assets/images/profileBgImag.png'),
   logo2: require('../assets/images/logo2.png'),
   itsMatch: require('../assets/images/ItsMatch.png'),
+  check:require('../assets/images/check.png')
 };
