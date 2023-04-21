@@ -16,6 +16,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1808E0E63ABB418DAAF55F74 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18A3FE6E9A9741A08992E00A /* Poppins-Medium.ttf */; };
 		25158DE7E96B45BD9FAA00D5 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = A214F9DA1B874F5EA4848C6D /* OFL.txt */; };
+		4519C8CE29F2F7C800FAEE93 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4519C8CD29F2F7C800FAEE93 /* GoogleService-Info.plist */; };
 		4583DC9429EEB76400DCE8BC /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4583DC8429EEB76200DCE8BC /* Foundation.ttf */; };
 		4583DC9529EEB76400DCE8BC /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4583DC8529EEB76300DCE8BC /* AntDesign.ttf */; };
 		4583DC9629EEB76400DCE8BC /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4583DC8629EEB76300DCE8BC /* Feather.ttf */; };
@@ -67,6 +68,7 @@
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-DatingApp-DatingAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DatingApp-DatingAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-DatingApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatingApp.debug.xcconfig"; path = "Target Support Files/Pods-DatingApp/Pods-DatingApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4515AF4A29EE47EB0050E12A /* DatingApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = DatingApp.entitlements; path = DatingApp/DatingApp.entitlements; sourceTree = "<group>"; };
+		4519C8CD29F2F7C800FAEE93 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4583DC8429EEB76200DCE8BC /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Foundation.ttf; path = ../src/assets/victor_icon/Foundation.ttf; sourceTree = "<group>"; };
 		4583DC8529EEB76300DCE8BC /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AntDesign.ttf; path = ../src/assets/victor_icon/AntDesign.ttf; sourceTree = "<group>"; };
 		4583DC8629EEB76300DCE8BC /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = ../src/assets/victor_icon/Feather.ttf; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				4519C8CD29F2F7C800FAEE93 /* GoogleService-Info.plist */,
 				4583DC8529EEB76300DCE8BC /* AntDesign.ttf */,
 				4583DC8729EEB76300DCE8BC /* Entypo.ttf */,
 				4583DC9029EEB76300DCE8BC /* EvilIcons.ttf */,
@@ -335,6 +338,7 @@
 				4583DC9529EEB76400DCE8BC /* AntDesign.ttf in Resources */,
 				4583DC9629EEB76400DCE8BC /* Feather.ttf in Resources */,
 				4583DC9729EEB76400DCE8BC /* Entypo.ttf in Resources */,
+				4519C8CE29F2F7C800FAEE93 /* GoogleService-Info.plist in Resources */,
 				4583DC9829EEB76400DCE8BC /* Octicons.ttf in Resources */,
 				4583DC9929EEB76400DCE8BC /* Ionicons.ttf in Resources */,
 				4583DC9A29EEB76400DCE8BC /* Zocial.ttf in Resources */,
@@ -630,7 +634,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.datingApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadeen;
 				PRODUCT_NAME = DatingApp;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -658,7 +662,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.datingApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadeen;
 				PRODUCT_NAME = DatingApp;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
