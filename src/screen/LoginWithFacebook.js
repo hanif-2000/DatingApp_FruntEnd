@@ -1,7 +1,9 @@
 import React from 'react';
 import {StyleSheet, Image, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {LoginManager} from 'react-native-fbsdk-next';
+import auth from '@react-native-firebase/auth';
+import {LoginManager, AuthenticationToken} from 'react-native-fbsdk-next';
+import { sha256 } from 'react-native-sha256';
 
 import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
@@ -12,22 +14,28 @@ import GradientContainer from '../common/GradientContainer';
 const LoginWithFacebook = () => {
   let Route = useNavigation();
 
-  const onHandle = () => {
-    LoginManager.logInWithPermissions(['public_profile']).then(
-      function (result) {
-        if (result.isCancelled) {
-          console.warn('Login cancelled');
-        } else {
-          console.log(
-            'Login success with permissions: ' +
-              result.grantedPermissions.toString(),
-          );
-        }
-      },
-      function (error) {
-        console.log('Login fail with error: ' + error);
-      },
+  const onHandle = async () => {
+    const nonce = '123456';
+    const nonceSha256 = await sha256(nonce);
+    const result = await LoginManager.logInWithPermissions(
+      ['public_profile', 'email'],
+      'limited',
+      nonceSha256,
     );
+
+    if (result.isCancelled) {
+      throw 'User cancelled the login process';
+    }
+    const data = await AuthenticationToken.getAuthenticationTokenIOS();
+
+    if (!data) {
+      throw 'Something went wrong obtaining authentication token';
+    }
+    const facebookCredential = auth.FacebookAuthProvider.credential(
+      data.authenticationToken,
+      nonce,
+    );
+    return auth().signInWithCredential(facebookCredential);
   };
 
   return (
@@ -42,8 +50,10 @@ const LoginWithFacebook = () => {
       </Text>
       <GlobalButton
         icon
-        // onPress={onHandle}
-        onPress={() => Route.navigate('LoginWithPhone')}
+        onPress={()=>onHandle().then(res=>{
+          console.warn('res==>',res)
+        }).catch(error=>console.warn('error==',error))}
+        // onPress={() => Route.navigate('LoginWithPhone')}
         title={'LOGIN WITH FACEBOOK'}
         textStyle={{color: COLORS.black}}
         Style={{backgroundColor: COLORS.white}}
