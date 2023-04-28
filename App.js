@@ -203,7 +203,7 @@ const App = () => {
 
     fcmService.register();
     let token = fcmService.getFcmToken();
-    setFcmToken(token);
+    fcmService.setFcmToken(token);
   };
 
   return (

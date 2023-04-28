@@ -579,10 +579,10 @@ PODS:
     - React-Core
   - RNDateTimePicker (7.0.1):
     - React-Core
-  - RNFBApp (17.4.2):
+  - RNFBApp (17.4.3):
     - Firebase/CoreOnly (= 10.3.0)
     - React-Core
-  - RNFBMessaging (17.4.2):
+  - RNFBMessaging (17.4.3):
     - Firebase/Messaging (= 10.3.0)
     - FirebaseCoreExtension (= 10.3.0)
     - React-Core
@@ -601,6 +601,7 @@ DEPENDENCIES:
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
+  - FBSDKLoginKit
   - Firebase
   - Firebase/Messaging
   - FirebaseCore
@@ -885,13 +886,13 @@ SPEC CHECKSUMS:
   RNCClipboard: 41d8d918092ae8e676f18adada19104fa3e68495
   RNCPushNotificationIOS: 64218f3c776c03d7408284a819b2abfda1834bc8
   RNDateTimePicker: e073697ac3e8a378968d68ab0581fef542b8af8a
-  RNFBApp: a781dd51dc252e014a29d2430e2f294d609e3502
-  RNFBMessaging: c1a2c9d400ca0e40de52cc498a31e71c32c318d1
+  RNFBApp: e2aeec4ae62795c18cf576a528bfd3a94d8c9a5e
+  RNFBMessaging: 41453ecc856189dfdf8505d50299c29c66432806
   RNScreens: 218801c16a2782546d30bd2026bb625c0302d70f
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: ba09b6b11e6139e3df8229238aa794205ca6a02a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: ce9eb15c94be171ad14cc61891b1da221798d5a5
+PODFILE CHECKSUM: eacb68216d8f23e16025c7c0a98f0015d7694060
 
 COCOAPODS: 1.12.0
