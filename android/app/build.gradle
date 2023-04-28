@@ -153,7 +153,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation project(':react-native-fbsdk-next')
-
+    implementation 'com.facebook.android:facebook-android-sdk:15.0.2'
 
 //
 

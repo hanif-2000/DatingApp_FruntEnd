@@ -3,11 +3,14 @@ import { StyleSheet, Image, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { LoginManager, ShareDialog } from 'react-native-fbsdk-next';
 
+
 import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 import GradientContainer from '../common/GradientContainer';
 import { LoginButton, AccessToken } from 'react-native-fbsdk-next';
 import { useStore } from '../service/AppData';
+
+// https://jadeen.firebaseapp.com/__/auth/handler
 
 const LoginWithFacebook = () => {
   const { setToken, setUserData } = useStore()
