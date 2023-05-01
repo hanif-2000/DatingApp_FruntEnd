@@ -243,7 +243,6 @@ const Profile = ({navigation}) => {
                 onChange={(min, max) => onChange(min, max)}
               /> */}
           </View>
-
           <TouchableOpacity
             onPress={() => setGroupChat(!groupChat)}
             style={styles.marriageContainer}>
