@@ -279,7 +279,6 @@ const Profile = ({navigation}) => {
                   )}
                 </View>
               </TouchableOpacity>
-
               <TouchableOpacity
                 onPress={() => setFemale(!female)}
                 style={styles.ageRangeContainer}>
