@@ -6,22 +6,22 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Container from '../common/Container';
-import { COLORS, HP_WP, SIZE } from '../common/theme';
+import {COLORS, HP_WP, SIZE} from '../common/theme';
 import GlobalHeader from '../common/GlobalHeader';
-import { Font } from '../common/theme';
-import { Icon } from 'react-native-elements';
+import {Font} from '../common/theme';
+import {Icon} from 'react-native-elements';
 import GlobalButton from '../common/GlobalButton';
 
 const PlanSetting = () => {
   const [currentPlan, setCurrentPlan] = useState('6');
   data = [
-    { id: 1, time: '12', rate: '7' },
-    { id: 2, time: '6', rate: '10' },
-    { id: 3, time: '1', rate: '9' },
+    {id: 1, time: '12', rate: '7'},
+    {id: 2, time: '6', rate: '10'},
+    {id: 3, time: '1', rate: '9'},
   ];
 
   const onChange = item => {
@@ -33,13 +33,13 @@ const PlanSetting = () => {
       <GlobalHeader title={'Manage Subscription'} />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 10, paddingBottom: 20 }}>
-        <View style={[styles.topCardContainer, { padding: 20 }]}>
+        contentContainerStyle={styles.scrollViewStyle}>
+        <View style={[styles.topCardContainer, {padding: 20}]}>
           <View style={styles.directionContainer}>
             <Text style={styles.currentPlan}>Current Plan</Text>
             <Text style={styles.free}>Free</Text>
           </View>
-          <View style={[styles.directionContainer, { marginTop: 10 }]}>
+          <View style={[styles.directionContainer, {marginTop: 10}]}>
             <Text style={styles.currentPlan}>Time Period</Text>
             <Text style={styles.free}>12/04/2020 - 12/04/2021</Text>
           </View>
@@ -48,7 +48,7 @@ const PlanSetting = () => {
               <Text style={styles.unsubscribeText}>Unsubscribe</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.Upgrade}>
-              <Text style={[styles.unsubscribeText, { color: COLORS.white }]}>
+              <Text style={[styles.unsubscribeText, {color: COLORS.white}]}>
                 Upgrade
               </Text>
             </TouchableOpacity>
@@ -57,9 +57,9 @@ const PlanSetting = () => {
         <View style={styles.topCardContainer}>
           <Text style={styles.bottomCardTopText}>Get Mingle Gold</Text>
           <LinearGradient
-            start={{ x: 1, y: 0.8 }}
-            end={{ x: 0.1, y: 0.5 }}
-            colors={['#B44CF4', '#7A29AC']}
+            start={{x: 1, y: 0.8}}
+            end={{x: 0.1, y: 0.5}}
+            colors={[COLORS.purple, COLORS.darkPurple]}
             style={styles.heartContainer}>
             <Icon name={'heart'} type="entypo" size={25} color={COLORS.white} />
           </LinearGradient>
@@ -69,13 +69,13 @@ const PlanSetting = () => {
             <FlatList
               horizontal={true}
               data={[1, 2, 3, 4, 5]}
-              renderItem={({ item }) => (
+              renderItem={({item}) => (
                 <TouchableOpacity style={styles.dotContainer} />
               )}
             />
           </View>
-          <View style={{ flexDirection: 'row' }}>
-            {data.map((item) => (
+          <View style={{flexDirection: 'row'}}>
+            {data.map(item => (
               <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => onChange(item)}
@@ -83,9 +83,9 @@ const PlanSetting = () => {
                   styles.card,
                   {
                     borderColor:
-                      currentPlan == item.time ? '#FFA31A' : '#C0C0C0',
+                      currentPlan == item.time ? COLORS.darkYellow : '#C0C0C0',
                     backgroundColor:
-                      currentPlan == item.time ? '#fff' : '#F7F7F7',
+                      currentPlan == item.time ? COLORS.white : '#F7F7F7',
                   },
                 ]}>
                 <Text
@@ -93,7 +93,7 @@ const PlanSetting = () => {
                     styles.monthText,
                     {
                       fontSize: SIZE.XXXl,
-                      color: currentPlan == item.time ? '#B67718' : '#000',
+                      color: currentPlan == item.time ? COLORS.darkYellow : COLORS.black,
                     },
                   ]}>
                   {item.time}
@@ -101,7 +101,7 @@ const PlanSetting = () => {
                 <Text
                   style={[
                     styles.monthText,
-                    { color: currentPlan == item.time ? '#B67718' : '#000' },
+                    {color: currentPlan == item.time ? COLORS.darkYellow : COLORS.black},
                   ]}>
                   {'months'}
                 </Text>
@@ -110,7 +110,7 @@ const PlanSetting = () => {
                     styles.monthText,
                     {
                       marginTop: 10,
-                      color: currentPlan == item.time ? '#B67718' : '#000',
+                      color: currentPlan == item.time ? COLORS.darkYellow : COLORS.black,
                     },
                   ]}>
                   ${item.rate}/mo{' '}
@@ -118,10 +118,7 @@ const PlanSetting = () => {
               </TouchableOpacity>
             ))}
           </View>
-          <GlobalButton
-            title={'CONTINUE'}
-            Style={{ backgroundColor: '#B67718', marginTop: 20 }}
-          />
+          <GlobalButton title={'CONTINUE'} Style={styles.buttonStyle} />
         </View>
       </ScrollView>
     </Container>
@@ -133,6 +130,10 @@ export default PlanSetting;
 const styles = StyleSheet.create({
   mainContainer: {
     paddingHorizontal: HP_WP.wp(4),
+  },
+  scrollViewStyle: {
+    paddingHorizontal: 10,
+    paddingBottom: 20,
   },
   topCardContainer: {
     borderRadius: 8,
@@ -184,6 +185,9 @@ const styles = StyleSheet.create({
   },
   bottomCardTopText: {
     textAlign: 'center',
+    color: COLORS.darkYellow,
+    fontSize: SIZE.XXL,
+    fontFamily: Font.semiBold,
   },
   heartContainer: {
     width: 50,
@@ -220,11 +224,6 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderColor: '#C0C0C0',
   },
-  textt: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   card: {
     borderWidth: 0.8,
     borderWidth: 0.8,
@@ -237,6 +236,9 @@ const styles = StyleSheet.create({
     fontSize: SIZE.N,
     color: COLORS.black,
     fontFamily: Font.semiBold,
-    lineHeight: 25,
+  },
+  buttonStyle: {
+    backgroundColor: COLORS.darkYellow,
+    marginTop: 20,
   },
 });

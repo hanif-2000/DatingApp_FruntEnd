@@ -54,7 +54,7 @@ const LoginWithPhone = ({ navigation }) => {
         onBackdropPress={() => {
           setOpenCountryPicker(false);
         }}
-        placeholderTextColor="#000"
+        placeholderTextColor={COLORS.black}
         style={styles.countryPicker}
       />
     </Container>
@@ -77,44 +77,9 @@ const styles = StyleSheet.create({
     fontFamily: Font.semiBold,
     marginBottom: HP_WP.hp(7),
   },
-  bottomText: {
-    color: '#8C8C8C',
-    fontSize: SIZE.M,
-    marginTop: HP_WP.hp(5),
-    fontFamily: Font.medium,
-  },
-  touchableText: {
-    textDecorationLine: 'underline',
-    color: '#8C8C8C',
-  },
-  buttonStyle: {
-    marginTop: HP_WP.hp(5),
-  },
   inputStyle: {
     borderBottomWidth: 1,
     borderBottomColor: COLORS.purple,
-  },
-
-  countryPicker: {
-    modal: {
-      width: '100%',
-      bottom: 0,
-      position: 'absolute',
-      height: Platform.OS === 'ios' ? 500 : 360,
-    },
-    countryName: {
-      color: '#000',
-    },
-    textInput: {
-      color: '#000',
-      paddingHorizontal: 10,
-    },
-    dialCode: {
-      color: '#000',
-    },
-    searchMessageText: {
-      color: '#000',
-    },
   },
   countryPikerStyle: {
     borderBottomWidth: 1.5,
@@ -123,4 +88,39 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     top: 0.5,
   },
+  bottomText: {
+    color: COLORS.lightGray,
+    fontSize: SIZE.M,
+    marginTop: HP_WP.hp(5),
+    fontFamily: Font.medium,
+  },
+  touchableText: {
+    textDecorationLine: 'underline',
+    color: COLORS.lightGray,
+  },
+  buttonStyle: {
+    marginTop: HP_WP.hp(5),
+  },
+  countryPicker: {
+    modal: {
+      width: '100%',
+      bottom: 0,
+      position: 'absolute',
+      height: Platform.OS === 'ios' ? 500 : 360,
+    },
+    countryName: {
+      color: COLORS.black,
+    },
+    textInput: {
+      color: COLORS.black,
+      paddingHorizontal: 10,
+    },
+    dialCode: {
+      color: COLORS.black,
+    },
+    searchMessageText: {
+      color: COLORS.black,
+    },
+  },
+ 
 });

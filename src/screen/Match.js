@@ -25,67 +25,26 @@ const Match = () => {
   ];
   return (
     <Container>
-      <GlobalHeader
-        title={'Match'}
-        mainContainer={{paddingHorizontal: HP_WP.wp(5)}}
-      />
+      <GlobalHeader title={'Match'} mainContainer={styles.header} />
       <View style={{flex: 1}}>
-        <Text
-          style={{
-            fontSize: SIZE.L,
-            fontWeight: '500',
-            paddingLeft: HP_WP.wp(5),
-            color: COLORS.black,
-            fontFamily: Font.semiBold,
-          }}>
-          7 Match
-        </Text>
+        <Text style={styles.likeText}>7 Match</Text>
         <FlatList
-          style={{marginHorizontal: HP_WP.wp(2.5)}}
+          style={styles.flatList}
           showsVerticalScrollIndicator={false}
           data={dataList}
           numColumns={2}
           renderItem={({item}) => (
             <TouchableOpacity
-              // onPress={() => trytochat(item.blurRadius)}
-              style={{
-                marginHorizontal: HP_WP.wp(2.5),
-                marginVertical: 5,
-              }}>
+              onPress={() => trytochat(item.blurRadius)}
+              style={styles.imageContainer}>
               <Image
+                blurRadius={item.blurRadius}
                 source={item.img}
-                style={[
-                  {
-                    width: HP_WP.wp(42.5),
-                    height: HP_WP.hp(26),
-                    resizeMode: 'cover',
-                    borderRadius: 12,
-                  },
-                ]}
+                style={styles.imageStyle}
               />
-              <View
-                style={{
-                  flexDirection: 'column',
-                  position: 'absolute',
-                  bottom: '5%',
-                  left: '15%',
-                }}>
-                <View
-                  style={{
-                    height: 4,
-                    width: 30,
-                    marginVertical: 5,
-                    backgroundColor: '#fff',
-                  }}
-                />
-                <View
-                  style={{
-                    height: 3,
-                    width: 25,
-                    marginVertical: 5,
-                    backgroundColor: '#9e9e9e',
-                  }}
-                />
+              <View style={styles.imageLineContainer}>
+                <View style={styles.imageLine} />
+                <View style={styles.imageBottomLine} />
               </View>
             </TouchableOpacity>
           )}
@@ -97,4 +56,47 @@ const Match = () => {
 
 export default Match;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  header: {
+    paddingHorizontal: HP_WP.wp(5),
+  },
+  likeText: {
+    fontSize: SIZE.L,
+    marginLeft: HP_WP.wp(5),
+    color: COLORS.black,
+    fontFamily: Font.semiBold,
+    marginTop: 20,
+  },
+  flatList: {
+    marginHorizontal: HP_WP.wp(2.5),
+    marginVertical: 6,
+  },
+  imageContainer: {
+    marginHorizontal: HP_WP.wp(2.5),
+    marginVertical: 5,
+  },
+  imageStyle: {
+    width: HP_WP.wp(42.5),
+    height: HP_WP.hp(26),
+    resizeMode: 'cover',
+    borderRadius: 12,
+  },
+  imageLineContainer: {
+    flexDirection: 'column',
+    position: 'absolute',
+    bottom: '5%',
+    left: '15%',
+  },
+  imageLine: {
+    height: 4,
+    width: 30,
+    marginVertical: 5,
+    backgroundColor: COLORS.white,
+  },
+  imageBottomLine: {
+    height: 3,
+    width: 25,
+    marginVertical: 5,
+    backgroundColor: COLORS.gray,
+  },
+});
