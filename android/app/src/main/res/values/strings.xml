@@ -1,6 +1,7 @@
 <resources>
-<string name="facebook_app_id">948968476240075</string>
-<string name="fb_login_protocol_scheme">fb1234</string>
-<string name="facebook_client_token">242dc3e0aa4536317773f782a60f40b7</string>
+  <string name="app_name">Jadeen</string>
+  <string name="facebook_app_id">948968476240075</string>
+  <string name="facebook_client_token">242dc3e0aa4536317773f782a60f40b7</string>
+  <string name="fb_login_protocol_scheme">fb1234</string>
 </resources>
 

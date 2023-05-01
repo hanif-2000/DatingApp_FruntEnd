@@ -1,6 +1,9 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 
+apply plugin: 'com.google.gms.google-services' // <- Add this line
+
+
 import com.android.build.OutputFile
 
 /**
@@ -152,11 +155,12 @@ dependencies {
     //firebase
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation project(':react-native-fbsdk-next')
 
-
+    // implementation project(':react-native-fbsdk-next')
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+    implementation project(':react-native-push-notification')
 //
-
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     implementation project(':react-native-vector-icons')

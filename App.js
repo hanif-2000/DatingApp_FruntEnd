@@ -61,6 +61,7 @@ const App = () => {
     async function fetchData() {
       if (await hasLocationPermission()) {
         await getLocation();
+        handler()
       }
     }
     fetchData();
