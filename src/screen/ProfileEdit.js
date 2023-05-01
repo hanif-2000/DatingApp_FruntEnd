@@ -1,16 +1,17 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import React, { useState } from 'react';
-import { CountryPicker } from 'react-native-country-codes-picker';
+import React, {useState} from 'react';
+import {CountryPicker} from 'react-native-country-codes-picker';
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
-import { COLORS, HP_WP, SIZE } from '../common/theme';
+import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
 import GlobalInput from '../common/GlobalInput';
 import GlobalButton from '../common/GlobalButton';
+import Moment from 'moment';
 
-const ProfileEdit = ({ navigation }) => {
+const ProfileEdit = ({navigation}) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState();
 
   const [openCountryPicker, setOpenCountryPicker] = useState(false);
   const [countryCode, setCountryCode] = useState('+91');
@@ -24,43 +25,49 @@ const ProfileEdit = ({ navigation }) => {
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = date => {
-    setDate(date);
+  const handleConfirm = (date) => {
+    setDate(Moment(date).format('DD-MM-YYYY'));
     hideDatePicker();
+    console.warn('date',date);
   };
   return (
-    <Container >
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
+    <Container>
+      <GlobalHeader
+        title={'Edit'}
+        mainContainer={{marginHorizontal: HP_WP.wp(4)}}
       />
-      <GlobalHeader title={'Edit'} />
       <View style={styles.mainContainer}>
         <Text style={styles.accountSettings}>Account Settings</Text>
-        <GlobalInput placeholder={'Jenny'} inputStyle={{ marginTop: 10 }} />
+        <GlobalInput placeholder={'Jenny'} inputStyle={{marginTop: 10}} />
         <GlobalInput
           placeholder="9876543210"
           keyboardType={'number-pad'}
           countryCode
           code={[countryCode]}
           openCode={() => setOpenCountryPicker(true)}
-          inputStyle={{ marginTop: 10 }}
+          inputStyle={{marginTop: 10}}
+          textInputStyle={styles.input}
         />
         <GlobalInput
           onPress={showDatePicker}
+          editable={false}
           icon
           iconName="calendar"
           iconType="entypo"
           placeholder={'02-05-1997'}
-          inputStyle={{ marginTop: 10 }}
+          inputStyle={{marginTop: 10}}
+          value={date}
         />
+
         <GlobalInput
           placeholder={'abcqwertyu@gmail.com'}
-          inputStyle={{ marginTop: 10 }}
+          inputStyle={{marginTop: 10}}
         />
-        <GlobalButton onPress={() => navigation.goBack()} Style={styles.button} title={'Save'} />
+        <GlobalButton
+          onPress={() => navigation.goBack()}
+          Style={styles.button}
+          title={'Save'}
+        />
       </View>
       <CountryPicker
         show={openCountryPicker}
@@ -72,8 +79,15 @@ const ProfileEdit = ({ navigation }) => {
         onBackdropPress={() => {
           setOpenCountryPicker(false);
         }}
-        placeholderTextColor="#000"
+        placeholderTextColor={COLORS.black}
         style={styles.countryPicker}
+      />
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        maximumDate={new Date(Date.now() - 86400000)}
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
       />
     </Container>
   );
@@ -89,6 +103,7 @@ const styles = StyleSheet.create({
     marginTop: HP_WP.hp(4),
     color: COLORS.black,
     fontSize: SIZE.L,
+    fontFamily: Font.medium,
   },
   button: {
     marginTop: HP_WP.hp(3),
@@ -101,17 +116,21 @@ const styles = StyleSheet.create({
       height: Platform.OS === 'ios' ? 500 : 360,
     },
     countryName: {
-      color: '#000',
+      color: COLORS.black,
     },
     textInput: {
-      color: '#000',
+      color: COLORS.black,
       paddingHorizontal: 10,
     },
     dialCode: {
-      color: '#000',
+      color: COLORS.black,
     },
     searchMessageText: {
-      color: '#000',
+      color: COLORS.black,
     },
+  },
+  input: {
+    marginLeft: 7,
+    marginTop: 4,
   },
 });

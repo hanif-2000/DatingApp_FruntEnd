@@ -54,7 +54,7 @@ const HomeScreen = ({navigation}) => {
         rightIcon={require('../assets/images/filter.png')}
         onPressRight={() => bottomSheet.current?.show()}
       />
-      <View style={{height: HP_WP.hp(73)}}>
+      <View style={{height: HP_WP.hp(72)}}>
         <Swiper
           style={{height: HP_WP.hp(65)}}
           ref={swiper => {

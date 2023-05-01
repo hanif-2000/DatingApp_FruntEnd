@@ -5,7 +5,6 @@ import {
   Modal,
   Pressable,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -17,8 +16,6 @@ import {BlurView} from '@react-native-community/blur';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {Dropdown} from 'react-native-element-dropdown';
 // import RangeSlider from '@jesster2k10/react-native-range-slider';
-import LinearGradient from 'react-native-linear-gradient';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {Icon} from 'react-native-elements';
 
 import GlobalHeader from '../common/GlobalHeader';
@@ -95,170 +92,145 @@ const Profile = ({navigation}) => {
       });
   };
   return (
-    <LinearGradient
-      start={{x: 0, y: 0}}
-      end={{x: 2, y: 0}}
-      locations={[0, 0.4]}
-      colors={['#000000', '#BD94D7']}
-      style={styles.linearGradient}>
-      <Container>
-        <ImageBackground
-          source={IMAGE.profileBgImage}
-          resizeMode="stretch"
-          style={styles.bgImg}>
-          <GlobalHeader
-            mainContainer={{paddingHorizontal: HP_WP.wp(5)}}
-            light
-            title={'Profile'}
-            headerTitles={styles.headerText}
-          />
-          <View style={styles.mainContainer}>
-            <View style={{alignSelf: 'center'}}>
-              <Image source={IMAGE.Profile} style={styles.profileImg} />
-              <TouchableOpacity
-                style={styles.imageEdit}
-                onPress={() => setModalVisible(true)}>
-                <Icon name={'edit'} size={15} color={'#AA3FEC'} />
-              </TouchableOpacity>
-              <Text style={styles.nameText}>Jenny, 22</Text>
-            </View>
+    // <LinearGradient
+    //   start={{x: 0, y: 0}}
+    //   end={{x: 2, y: 0}}
+    //   locations={[0, 0.4]}
+    //   colors={[COLORS.black, COLORS.lightPurple]}
+    //   style={styles.linearGradient}>
+    <Container>
+      <ImageBackground
+        source={IMAGE.profileBgImage}
+        resizeMode="stretch"
+        style={styles.bgImg}>
+        <GlobalHeader
+          mainContainer={{paddingHorizontal: HP_WP.wp(5)}}
+          light
+          title={'Profile'}
+          headerTitles={styles.headerText}
+        />
+        <View style={styles.mainContainer}>
+          <View style={{alignSelf: 'center'}}>
+            <Image source={IMAGE.Profile} style={styles.profileImg} />
+            <TouchableOpacity
+              style={styles.imageEdit}
+              onPress={() => setModalVisible(true)}>
+              <Icon name={'edit'} size={15} color={COLORS.purple} />
+            </TouchableOpacity>
+            <Text style={styles.nameText}>Jenny, 22</Text>
           </View>
-        </ImageBackground>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.mainContainer}>
-            <View style={styles.accountSettingsContainer}>
-              <Text style={styles.accountSettings}>Account Settings</Text>
-              <Text
-                style={styles.edit}
-                onPress={() => navigation.navigate('ProfileEdit')}>
-                Edit
+        </View>
+      </ImageBackground>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.mainContainer}>
+          <View style={styles.accountSettingsContainer}>
+            <Text style={styles.accountSettings}>Account Settings</Text>
+            <Text
+              style={styles.edit}
+              onPress={() => navigation.navigate('ProfileEdit')}>
+              Edit
+            </Text>
+          </View>
+          <GlobalInput
+            placeholder={'Jenny'}
+            inputName
+            label="Name"
+            editable={false}
+            inputStyle={{marginTop: 10}}
+          />
+          <GlobalInput
+            placeholder={'+91 9876543210'}
+            inputName
+            label="Phone Number"
+            inputStyle={{marginTop: 10}}
+            editable={false}
+          />
+          <GlobalInput
+            placeholder={'02-05-1997'}
+            inputName
+            label="Date of birth"
+            inputStyle={{marginTop: 10}}
+            editable={false}
+          />
+          <GlobalInput
+            placeholder={'abcqwertyu@gmail.com'}
+            inputName
+            label="Email"
+            inputStyle={{marginTop: 10}}
+            editable={false}
+          />
+          <Text style={[styles.accountSettings, {marginTop: HP_WP.hp(2)}]}>
+            Plan Settings
+          </Text>
+          <GlobalInput
+            editable={false}
+            text={true}
+            icon={true}
+            inputName={true}
+            label="Current Plan"
+            tuchText="Free"
+            inputStyle={{marginTop: 10}}
+            onPress={() => navigation.navigate('PlanSetting')}
+          />
+          <Text style={[styles.accountSettings, {marginTop: HP_WP.hp(2)}]}>
+            Discovery Settings
+          </Text>
+          <GlobalInput
+            editable={false}
+            text={true}
+            icon={true}
+            inputName={true}
+            label="Location"
+            tuchText="My Current Location"
+            inputStyle={{marginTop: 10}}
+            // onPress={() =>navigation.navigate('PlanSetting')}
+          />
+          <View style={styles.dropDownView}>
+            <Text style={styles.dropDownTitle}>Preferred Languages</Text>
+            <Dropdown
+              iconStyle={{tintColor: COLORS.blue}}
+              style={[styles.dropdawn]}
+              data={preferredLanguages}
+              maxHeight={240}
+              labelField="name"
+              valueField="name"
+              value={languageName}
+              placeholderStyle={styles.dropDownText}
+              selectedTextStyle={styles.dropDownText}
+              onChange={item => {
+                setLanguageName(item.name);
+              }}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => setMarriage(!marriage)}
+            style={styles.marriageContainer}>
+            <Text style={styles.dropDownTitle}>
+              Marriage (Opposite sex only)
+            </Text>
+            <View
+              style={[
+                styles.marriageIconContainer,
+                {
+                  backgroundColor: marriage ? COLORS.purple : COLORS.white,
+                  borderColor: marriage ? COLORS.white : COLORS.purple,
+                },
+              ]}>
+              {marriage && (
+                <Icon name={'done'} size={15} color={COLORS.white} />
+              )}
+            </View>
+          </TouchableOpacity>
+
+          <View style={styles.ageRangeMainContainer}>
+            <View style={styles.ageRangeContainer}>
+              <Text style={styles.dropDownTitle}>Age Range</Text>
+              <Text>
+                {minSelected}-{maxSelected}
               </Text>
             </View>
-            <GlobalInput
-              placeholder={'Jenny'}
-              inputName
-              label="Name"
-              editable={false}
-              inputStyle={{marginTop: 10}}
-            />
-            <GlobalInput
-              placeholder={'+91 9876543210'}
-              inputName
-              label="Phone Number"
-              inputStyle={{marginTop: 10}}
-              editable={false}
-            />
-            <GlobalInput
-              placeholder={'02-05-1997'}
-              inputName
-              label="Date of birth"
-              inputStyle={{marginTop: 10}}
-              editable={false}
-            />
-            <GlobalInput
-              placeholder={'abcqwertyu@gmail.com'}
-              inputName
-              label="Email"
-              inputStyle={{marginTop: 10}}
-              editable={false}
-            />
-            <Text style={[styles.accountSettings, {marginTop: HP_WP.hp(2)}]}>
-              Plan Settings
-            </Text>
-            <GlobalInput
-              editable={false}
-              text={true}
-              icon={true}
-              inputName={true}
-              label="Current Plan"
-              tuchText="Free"
-              inputStyle={{marginTop: 10}}
-              onPress={() => navigation.navigate('PlanSetting')}
-            />
-            <Text style={[styles.accountSettings, {marginTop: HP_WP.hp(2)}]}>
-              Discovery Settings
-            </Text>
-            <GlobalInput
-              editable={false}
-              text={true}
-              icon={true}
-              inputName={true}
-              label="Location"
-              tuchText="My Current Location"
-              inputStyle={{marginTop: 10}}
-              // onPress={() =>navigation.navigate('PlanSetting')}
-            />
-            <View style={styles.dropDownView}>
-              <Text style={styles.dropDownTitle}>Preferred Languages</Text>
-              <Dropdown
-                iconStyle={{tintColor: COLORS.blue}}
-                style={[{paddingHorizontal: 16, height: 40, width: '30%'}]}
-                data={preferredLanguages}
-                maxHeight={240}
-                labelField="name"
-                valueField="name"
-                value={languageName}
-                placeholderStyle={styles.dropDownText}
-                selectedTextStyle={styles.dropDownText}
-                onChange={item => {
-                  setLanguageName(item.name);
-                }}
-              />
-            </View>
-            <TouchableOpacity
-              onPress={() => setMarriage(!marriage)}
-              style={{
-                borderColor: COLORS.light,
-                height: HP_WP.hp(5),
-                width: HP_WP.wp(92),
-                borderRadius: 4,
-                flexDirection: 'row',
-                alignItems: 'center',
-                paddingHorizontal: 10,
-                borderWidth: 0.8,
-                marginTop: 15,
-                justifyContent: 'space-between',
-              }}>
-              <Text>Marriage (Opposite sex only)</Text>
-              <View
-                style={{
-                  width: 20,
-                  height: 20,
-                  borderWidth: 1,
-                  borderRadius: 20,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: marriage ? '#AA3FEC' : '#fff',
-                  borderColor: marriage ? '#fff' : '#AA3FEC',
-                }}>
-                {marriage && <Icon name={'done'} size={15} color={'#fff'} />}
-              </View>
-            </TouchableOpacity>
 
-            <View
-              style={{
-                borderColor: COLORS.light,
-                borderWidth: 0.8,
-                marginTop: 15,
-                borderRadius: 4,
-              }}>
-              <View
-                style={{
-                  height: HP_WP.hp(5),
-                  width: HP_WP.wp(92),
-                  borderRadius: 4,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  paddingHorizontal: 10,
-                  justifyContent: 'space-between',
-                }}>
-                <Text>Age Range</Text>
-                <Text>
-                  {minSelected}-{maxSelected}
-                </Text>
-              </View>
-
-              {/* <RangeSlider
+            {/* <RangeSlider
                 type="range" // ios only
                 min={18}
                 max={70}
@@ -270,153 +242,97 @@ const Profile = ({navigation}) => {
                 tintColorBetweenHandles="#ff9ff3"
                 onChange={(min, max) => onChange(min, max)}
               /> */}
+          </View>
+
+          <TouchableOpacity
+            onPress={() => setGroupChat(!groupChat)}
+            style={styles.marriageContainer}>
+            <Text style={styles.dropDownTitle}>Group Chats</Text>
+            <View
+              style={[
+                styles.marriageIconContainer,
+                {
+                  backgroundColor: groupChat ? COLORS.purple : COLORS.white,
+                  borderColor: groupChat ? COLORS.white : COLORS.purple,
+                },
+              ]}>
+              {groupChat && (
+                <Icon name={'done'} size={15} color={COLORS.white} />
+              )}
+            </View>
+          </TouchableOpacity>
+          {groupChat && (
+            <View style={styles.ageRangeMainContainer}>
+              <TouchableOpacity
+                onPress={() => setMale(!male)}
+                style={styles.ageRangeContainer}>
+                <Text style={styles.dropDownTitle}>Male</Text>
+                <View
+                  style={[
+                    styles.marriageIconContainer,
+                    {
+                      backgroundColor: male ? COLORS.purple : COLORS.white,
+                      borderColor: male ? COLORS.white : COLORS.purple,
+                    },
+                  ]}>
+                  {male && (
+                    <Icon name={'done'} size={15} color={COLORS.white} />
+                  )}
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => setFemale(!female)}
+                style={styles.ageRangeContainer}>
+                <Text style={styles.dropDownTitle}>Female</Text>
+                <View
+                  style={[
+                    styles.marriageIconContainer,
+                    {
+                      backgroundColor: female ? COLORS.purple : COLORS.white,
+                      borderColor: female ? COLORS.white : COLORS.purple,
+                    },
+                  ]}>
+                  {female && (
+                    <Icon name={'done'} size={15} color={COLORS.white} />
+                  )}
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+
+          <TouchableOpacity
+            onPress={() => setNetwork(!network)}
+            style={[
+              styles.ageRangeContainer,
+              {
+                borderColor: COLORS.light,
+                borderWidth: 0.8,
+                marginTop: 15,
+              },
+            ]}>
+            <Text style={styles.dropDownTitle}>Network</Text>
+            <View
+              style={[
+                styles.marriageIconContainer,
+                {
+                  backgroundColor: network ? COLORS.purple : COLORS.white,
+                  borderColor: network ? COLORS.white : COLORS.purple,
+                },
+              ]}>
+              {network && <Icon name={'done'} size={15} color={COLORS.white} />}
+            </View>
+          </TouchableOpacity>
+
+          <View style={styles.ageRangeMainContainer}>
+            <View style={styles.ageRangeContainer}>
+              <Text style={styles.dropDownTitle}>
+                Maximum Distance (only upgrade )
+              </Text>
+              <Text>{distance}km.</Text>
             </View>
 
-            <TouchableOpacity
-              onPress={() => setGroupChat(!groupChat)}
-              style={{
-                borderColor: COLORS.light,
-                height: HP_WP.hp(5),
-                width: HP_WP.wp(92),
-                borderRadius: 4,
-                flexDirection: 'row',
-                alignItems: 'center',
-                paddingHorizontal: 10,
-                borderWidth: 0.8,
-                marginTop: 15,
-                justifyContent: 'space-between',
-              }}>
-              <Text>Group Chats</Text>
-              <View
-                style={{
-                  width: 20,
-                  height: 20,
-                  borderWidth: 1,
-                  borderRadius: 20,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: groupChat ? '#AA3FEC' : '#fff',
-                  borderColor: groupChat ? '#fff' : '#AA3FEC',
-                }}>
-                {groupChat && <Icon name={'done'} size={15} color={'#fff'} />}
-              </View>
-            </TouchableOpacity>
-            {groupChat && (
-              <View
-                style={{
-                  borderColor: COLORS.light,
-                  borderWidth: 0.8,
-                  marginTop: 15,
-                  borderRadius: 4,
-                }}>
-                <TouchableOpacity
-                  onPress={() => setMale(!male)}
-                  style={{
-                    height: HP_WP.hp(5),
-                    width: HP_WP.wp(92),
-                    borderRadius: 4,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingHorizontal: 10,
-                    justifyContent: 'space-between',
-                  }}>
-                  <Text>Male</Text>
-                  <View
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderWidth: 1,
-                      borderRadius: 20,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: male ? '#AA3FEC' : '#fff',
-                      borderColor: male ? '#fff' : '#AA3FEC',
-                    }}>
-                    {male && <Icon name={'done'} size={15} color={'#fff'} />}
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  onPress={() => setFemale(!female)}
-                  style={{
-                    height: HP_WP.hp(5),
-                    width: HP_WP.wp(92),
-                    borderRadius: 4,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    paddingHorizontal: 10,
-                    justifyContent: 'space-between',
-                  }}>
-                  <Text>Female</Text>
-                  <View
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderWidth: 1,
-                      borderRadius: 20,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: female ? '#AA3FEC' : '#fff',
-                      borderColor: female ? '#fff' : '#AA3FEC',
-                    }}>
-                    {female && <Icon name={'done'} size={15} color={'#fff'} />}
-                  </View>
-                </TouchableOpacity>
-              </View>
-            )}
-
-            <TouchableOpacity
-              onPress={() => setNetwork(!network)}
-              style={{
-                borderColor: COLORS.light,
-                height: HP_WP.hp(5),
-                width: HP_WP.wp(92),
-                borderRadius: 4,
-                flexDirection: 'row',
-                alignItems: 'center',
-                paddingHorizontal: 10,
-                borderWidth: 0.8,
-                marginTop: 15,
-                justifyContent: 'space-between',
-              }}>
-              <Text>Network</Text>
-              <View
-                style={{
-                  width: 20,
-                  height: 20,
-                  borderWidth: 1,
-                  borderRadius: 20,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: network ? '#AA3FEC' : '#fff',
-                  borderColor: network ? '#fff' : '#AA3FEC',
-                }}>
-                {network && <Icon name={'done'} size={15} color={'#fff'} />}
-              </View>
-            </TouchableOpacity>
-
-            <View
-              style={{
-                borderColor: COLORS.light,
-                borderWidth: 0.8,
-                marginTop: 15,
-                borderRadius: 4,
-              }}>
-              <View
-                style={{
-                  height: HP_WP.hp(5),
-                  width: HP_WP.wp(92),
-                  borderRadius: 4,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  paddingHorizontal: 10,
-                  justifyContent: 'space-between',
-                }}>
-                <Text>Maximum Distance (only upgrade )</Text>
-                <Text>{distance}km.</Text>
-              </View>
-
-              {/* <RangeSlider
+            {/* <RangeSlider
                 type="slider" // ios only
                 min={0}
                 max={100}
@@ -429,74 +345,60 @@ const Profile = ({navigation}) => {
                 onChange={(min, max) => onChangeDistance(min, max)}
                 hideLabels={true}
               /> */}
-            </View>
-            <View>
-              <GlobalButton
-                Style={{
-                  borderColor: 'gray',
-                  width: HP_WP.wp(90),
-                  backgroundColor: '#fff',
-                  borderWidth: 1,
-                  borderRadius: 5,
-                  marginVertical: 15,
-                }}
-                textStyle={{color: '#000'}}
-                title={'Logout'}
-              />
+          </View>
+          <View>
+            <GlobalButton
+              Style={[styles.buttonStyle, {marginVertical: 15}]}
+              textStyle={{color: COLORS.black}}
+              title={'Logout'}
+            />
 
-              <GlobalButton
-                Style={{
-                  borderColor: 'gray',
-                  width: HP_WP.wp(90),
-                  backgroundColor: '#fff',
-                  borderWidth: 1,
-                  borderRadius: 5,
-                  marginVertical: 10,
-                }}
-                textStyle={{color: 'red'}}
-                title={'Delete Account'}
-              />
-            </View>
+            <GlobalButton
+              Style={[styles.buttonStyle, {marginBottom: 15}]}
+              textStyle={{color: COLORS.orange}}
+              title={'Delete Account'}
+            />
           </View>
-        </ScrollView>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-            setModalVisible(false);
-          }}>
-          <BlurView
-            style={styles.blurView}
-            blurType="light"
-            blurAmount={10}
-            reducedTransparencyFallbackColor={COLORS.white}
-          />
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Pressable style={styles.button} onPress={chooseFromCamera}>
-                <Text style={styles.textStyle}>Take From Camera</Text>
-              </Pressable>
-              <Pressable style={styles.button} onPress={chooseFromGallery}>
-                <Text style={styles.textStyle}>Choose From Gallery</Text>
-              </Pressable>
-              <Pressable
-                style={[styles.button, {backgroundColor: COLORS.orange}]}
-                onPress={() => setModalVisible(false)}>
-                <Text style={styles.textStyle}>Cancle</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
-        <Spinner
-          color={COLORS.purple}
-          visible={loading}
-          size="large"
-          overlayColor="rgba(0,0,0,0.5)"
+        </View>
+      </ScrollView>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+          setModalVisible(false);
+        }}>
+        <BlurView
+          style={styles.blurView}
+          blurType="light"
+          blurAmount={10}
+          reducedTransparencyFallbackColor={COLORS.white}
         />
-      </Container>
-    </LinearGradient>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Pressable style={styles.button} onPress={chooseFromCamera}>
+              <Text style={styles.textStyle}>Take From Camera</Text>
+            </Pressable>
+            <Pressable style={styles.button} onPress={chooseFromGallery}>
+              <Text style={styles.textStyle}>Choose From Gallery</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.button, {backgroundColor: COLORS.orange}]}
+              onPress={() => setModalVisible(false)}>
+              <Text style={styles.textStyle}>Cancle</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Spinner
+        color={COLORS.purple}
+        visible={loading}
+        size="large"
+        overlayColor="rgba(0,0,0,0.5)"
+      />
+    </Container>
+    // </LinearGradient>
   );
 };
 
@@ -548,8 +450,9 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     color: COLORS.white,
-    fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily: Font.medium,
+    fontSize: SIZE.N,
   },
   profileImg: {
     width: HP_WP.wp(24),
@@ -593,6 +496,11 @@ const styles = StyleSheet.create({
     color: COLORS.blue,
     fontFamily: Font.medium,
   },
+  dropdawn: {
+    paddingHorizontal: 16,
+    height: 40,
+    width: '30%',
+  },
   dropDownText: {
     fontSize: SIZE.N,
     color: COLORS.blue,
@@ -611,8 +519,51 @@ const styles = StyleSheet.create({
   },
   dropDownTitle: {
     paddingLeft: 10,
-    color: '#000',
-    fontSize: 14,
     width: '70%',
+    color: COLORS.black,
+    fontSize: SIZE.N,
+    fontFamily: Font.medium,
+  },
+  marriageContainer: {
+    borderColor: COLORS.light,
+    height: HP_WP.hp(5),
+    width: HP_WP.wp(92),
+    borderRadius: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    borderWidth: 0.8,
+    marginTop: 15,
+    justifyContent: 'space-between',
+  },
+  marriageIconContainer: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  ageRangeMainContainer: {
+    borderColor: COLORS.light,
+    borderWidth: 0.8,
+    marginTop: 15,
+    borderRadius: 4,
+  },
+  ageRangeContainer: {
+    height: HP_WP.hp(5),
+    width: HP_WP.wp(92),
+    borderRadius: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    justifyContent: 'space-between',
+  },
+  buttonStyle: {
+    borderColor: COLORS.gray,
+    width: HP_WP.wp(90),
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderRadius: 5,
   },
 });

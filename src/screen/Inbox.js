@@ -7,7 +7,7 @@ import {
   Image,
 } from 'react-native';
 import React from 'react';
-import {COLORS, Font, HP_WP, IMAGE} from '../common/theme';
+import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
 
@@ -56,12 +56,12 @@ const styles = StyleSheet.create({
   },
   silivaStyle: {
     color: COLORS.black,
-    fontSize: 15,
+    fontSize: SIZE.NL,
     fontFamily: Font.medium,
   },
   hoarderStyle: {
     color: COLORS.black,
-    fontSize: 12,
+    fontSize: SIZE.M,
     fontFamily: Font.regular,
   },
   ProfileNameContainer: {
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
   },
   numberStyle: {
     color: COLORS.black,
-    fontSize: 12,
+    fontSize: SIZE.M,
     fontFamily: Font.regular,
     marginTop: HP_WP.hp(2.4),
   },

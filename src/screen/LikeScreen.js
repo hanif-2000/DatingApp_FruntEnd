@@ -71,73 +71,78 @@ const LikeScreen = ({navigation}) => {
         <LinearGradient
           start={{x: 1, y: 0.8}}
           end={{x: 0.1, y: 0.5}}
-          colors={['#B44CF4', '#7A29AC']}
+          colors={[COLORS.purple, COLORS.darkPurple]}
           style={styles.heartContainer}>
           <Icon name={'heart'} type="entypo" size={25} color={COLORS.white} />
         </LinearGradient>
         <Text style={styles.likesText}>Unlimited Likes</Text>
         <Text style={styles.manyLikes}>Send as many likes as you want</Text>
-        <View style={styles.dotMainContainer}>
-          <FlatList
-            horizontal={true}
-            data={[1, 2, 3, 4, 5]}
-            renderItem={({item}) => (
-              <TouchableOpacity style={styles.dotContainer} />
-            )}
-          />
+        <View style={styles.dotContainer}>
+          <TouchableOpacity style={styles.dot} />
+          <TouchableOpacity style={styles.dot} />
+          <TouchableOpacity style={styles.dot} />
+          <TouchableOpacity style={styles.dot} />
+          <TouchableOpacity style={styles.dot} />
         </View>
-        <FlatList
-          numColumns={3}
-          data={data}
-          renderItem={({item}) => {
-            return (
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => onChange(item)}
+        <View style={{flexDirection: 'row'}}>
+          {data.map(item => (
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => onChange(item)}
+              style={[
+                styles.card,
+                {
+                  borderColor:
+                    currentPlan == item.time ? COLORS.darkYellow : '#C0C0C0',
+                  backgroundColor:
+                    currentPlan == item.time ? COLORS.white : '#F7F7F7',
+                },
+              ]}>
+              <Text
                 style={[
-                  styles.card,
+                  styles.monthText,
                   {
-                    borderColor:
-                      currentPlan == item.time ? '#FFA31A' : '#C0C0C0',
-                    backgroundColor:
-                      currentPlan == item.time ? '#fff' : '#F7F7F7',
+                    fontSize: SIZE.XXXl,
+                    color:
+                      currentPlan == item.time
+                        ? COLORS.darkYellow
+                        : COLORS.black,
                   },
                 ]}>
-                <Text
-                  style={[
-                    styles.monthText,
-                    {
-                      fontSize: SIZE.XXXl,
-                      color: currentPlan == item.time ? '#B67718' : '#000',
-                    },
-                  ]}>
-                  {item.time}
-                </Text>
-                <Text
-                  style={[
-                    styles.monthText,
-                    {color: currentPlan == item.time ? '#B67718' : '#000'},
-                  ]}>
-                  {'months'}
-                </Text>
-                <Text
-                  style={[
-                    styles.monthText,
-                    {
-                      marginTop: 10,
-                      color: currentPlan == item.time ? '#B67718' : '#000',
-                    },
-                  ]}>
-                  ${item.rate}/mo
-                </Text>
-              </TouchableOpacity>
-            );
-          }}
-        />
+                {item.time}
+              </Text>
+              <Text
+                style={[
+                  styles.monthText,
+                  {
+                    color:
+                      currentPlan == item.time
+                        ? COLORS.darkYellow
+                        : COLORS.black,
+                  },
+                ]}>
+                {'months'}
+              </Text>
+              <Text
+                style={[
+                  styles.monthText,
+                  {
+                    marginTop: 10,
+                    color:
+                      currentPlan == item.time
+                        ? COLORS.darkYellow
+                        : COLORS.black,
+                  },
+                ]}>
+                ${item.rate}/mo{' '}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
         <GlobalButton
           onPress={Modalclose}
           title={'CONTINUE'}
-          Style={{backgroundColor: '#B67718', marginTop: 20}}
+          Style={{backgroundColor: COLORS.darkYellow, marginTop: 20}}
         />
       </View>
     );
@@ -145,77 +150,31 @@ const LikeScreen = ({navigation}) => {
 
   return (
     <Container>
-      <GlobalHeader
-        title={'Like'}
-        mainContainer={{paddingHorizontal: HP_WP.wp(5)}}
-      />
+      <GlobalHeader title={'Like'} mainContainer={styles.header} />
       <View style={{flex: 1}}>
-        <Text
-          style={{
-            fontSize: SIZE.L,
-            fontWeight: '500',
-            paddingLeft: HP_WP.wp(5),
-            color: COLORS.black,
-            fontFamily: Font.semiBold,
-          }}>
-          7 Likes
-        </Text>
+        <Text style={styles.likeText}>7 Likes</Text>
         <FlatList
-          style={{marginHorizontal: HP_WP.wp(2.5)}}
+          style={styles.flatList}
           showsVerticalScrollIndicator={false}
           data={dataList}
           numColumns={2}
           renderItem={({item}) => (
             <TouchableOpacity
               onPress={() => trytochat(item.blurRadius)}
-              style={{
-                marginHorizontal: HP_WP.wp(2.5),
-                marginVertical: 5,
-                // backgroundColor: 'red',
-              }}>
+              style={styles.imageContainer}>
               <Image
                 blurRadius={item.blurRadius}
                 source={item.img}
-                style={[
-                  {
-                    width: HP_WP.wp(42.5),
-                    height: HP_WP.hp(26),
-                    resizeMode: 'cover',
-                    borderRadius: 12,
-                  },
-                ]}
+                style={styles.imageStyle}
               />
-              <View
-                style={{
-                  flexDirection: 'column',
-                  position: 'absolute',
-                  bottom: '5%',
-                  left: '15%',
-                }}>
-                <View
-                  style={{
-                    height: 4,
-                    width: 30,
-                    marginVertical: 5,
-                    backgroundColor: '#fff',
-                  }}
-                />
-                <View
-                  style={{
-                    height: 3,
-                    width: 25,
-                    marginVertical: 5,
-                    backgroundColor: '#9e9e9e',
-                  }}
-                />
+              <View style={styles.imageLineContainer}>
+                <View style={styles.imageLine} />
+                <View style={styles.imageBottomLine} />
               </View>
             </TouchableOpacity>
           )}
         />
-        <GlobalButton
-          Style={{backgroundColor: '#EEAF51', marginBottom: 10}}
-          title={'SEE WHO LIKES YOU'}
-        />
+        <GlobalButton Style={styles.button} title={'SEE WHO LIKES YOU'} />
       </View>
       <Modal
         style={{margin: 0}}
@@ -239,14 +198,63 @@ const LikeScreen = ({navigation}) => {
 export default LikeScreen;
 
 const styles = StyleSheet.create({
+  header: {
+    paddingHorizontal: HP_WP.wp(5),
+  },
+  likeText: {
+    fontSize: SIZE.L,
+    marginLeft: HP_WP.wp(5),
+    color: COLORS.black,
+    fontFamily: Font.semiBold,
+    marginTop: 20,
+  },
+  flatList: {
+    marginHorizontal: HP_WP.wp(2.5),
+    marginTop: 6,
+  },
+  imageContainer: {
+    marginHorizontal: HP_WP.wp(2.5),
+    marginVertical: 5,
+  },
+  imageStyle: {
+    width: HP_WP.wp(42.5),
+    height: HP_WP.hp(26),
+    resizeMode: 'cover',
+    borderRadius: 12,
+  },
+  imageLineContainer: {
+    flexDirection: 'column',
+    position: 'absolute',
+    bottom: '5%',
+    left: '15%',
+  },
+  imageLine: {
+    height: 4,
+    width: 30,
+    marginVertical: 5,
+    backgroundColor: COLORS.white,
+  },
+  imageBottomLine: {
+    height: 3,
+    width: 25,
+    marginVertical: 5,
+    backgroundColor: COLORS.gray,
+  },
+  button: {
+    backgroundColor: COLORS.darkYellow,
+    marginVertical: 10,
+  },
   topCardContainer: {
     borderRadius: 8,
-    borderWidth: 0.8,
-    borderColor: COLORS.gray,
-    marginTop: HP_WP.hp(3),
     paddingVertical: 20,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     marginHorizontal: 20,
+  },
+  bottomCardTopText: {
+    textAlign: 'center',
+    color: COLORS.darkYellow,
+    fontSize: SIZE.XXL,
+    fontFamily: Font.semiBold,
   },
   heartContainer: {
     width: 50,
@@ -270,23 +278,34 @@ const styles = StyleSheet.create({
     fontFamily: Font.light,
     marginVertical: 10,
   },
-  dotMainContainer: {
-    marginVertical: 10,
-    alignSelf: 'center',
-    flex: 1,
-  },
   dotContainer: {
-    width: 10,
-    height: 10,
-    borderRadius: 50,
-    marginHorizontal: 5,
-    borderWidth: 0.5,
-    borderColor: '#C0C0C0',
+    flexDirection: 'row',
+    alignSelf: 'center',
   },
+  dot: {
+    borderWidth: 1,
+    width: 15,
+    height: 15,
+    borderRadius: 100,
+    borderColor: '#C0C0C0',
+    marginHorizontal: 4,
+  },
+  // dotMainContainer: {
+  //   marginVertical: 10,
+  //   alignSelf: 'center',
+  //   flex: 1,
+  // },
+  // dotContainer: {
+  //   width: 10,
+  //   height: 10,
+  //   borderRadius: 50,
+  //   marginHorizontal: 5,
+  //   borderWidth: 0.5,
+  //   borderColor: '#C0C0C0',
+  // },
   card: {
     borderWidth: 0.8,
-    borderWidth: 0.8,
-    width: '33.33%',
+    width: '33.34%',
     alignItems: 'center',
     paddingVertical: 30,
     marginTop: 20,
@@ -295,9 +314,5 @@ const styles = StyleSheet.create({
     fontSize: SIZE.N,
     color: COLORS.black,
     fontFamily: Font.semiBold,
-    lineHeight: 25,
-  },
-  bottomCardTopText: {
-    textAlign: 'center',
   },
 });

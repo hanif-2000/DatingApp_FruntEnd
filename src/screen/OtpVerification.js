@@ -64,13 +64,13 @@ const styles = StyleSheet.create({
     width: HP_WP.wp(15),
     borderWidth: 0,
     borderBottomWidth: 1.5,
-    borderBottomColor: '#8E8E8E',
+    borderBottomColor: COLORS.gray,
     color: COLORS.black,
     fontSize: SIZE.L,
   },
   bottomText: {
-    color: '#8C8C8C',
-    fontSize: SIZE.M,
+    color: COLORS.gray,
+    fontSize: SIZE.N,
     marginTop: HP_WP.hp(3),
     fontFamily:Font.medium
   },
