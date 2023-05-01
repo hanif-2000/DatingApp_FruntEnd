@@ -33,7 +33,6 @@ export const SIZE = {
 
 export const COLORS = {
   darkWhite: '#FAFAFA',
-  lightPurple: '#BD94D7',
   blk: '#303030',
   black: '#000',
   white: '#ffffff',
@@ -45,8 +44,10 @@ export const COLORS = {
   orange: '#E75C25',
   red: '#FF2D2D',
   yellow: '#FFD912',
+  darkYellow: '#EEAF51',
   lightPurple: '#BD94D7',
   purple: '#AA3FEC',
+  darkPurple: '#7A29AC',
   light: '#D8D8DC',
   lightBlack2: '#333333',
   lightBlack: '#2C2C2E',

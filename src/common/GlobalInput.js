@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     fontSize: SIZE.N,
     height: HP_WP.hp(5),
     fontFamily: Font.medium,
+    lineHeight:20
   },
   iconStyle: {
     height: HP_WP.hp(2.5),
