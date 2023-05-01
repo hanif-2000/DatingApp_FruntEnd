@@ -1,13 +1,36 @@
 import React from 'react';
-import {StyleSheet, Image, Text} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { StyleSheet, Image, Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { LoginManager, ShareDialog } from 'react-native-fbsdk-next';
 
-import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
+
+import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 import GradientContainer from '../common/GradientContainer';
+import { LoginButton, AccessToken } from 'react-native-fbsdk-next';
+import { useStore } from '../service/AppData';
+
+// https://jadeen.firebaseapp.com/__/auth/handler
 
 const LoginWithFacebook = () => {
+  const { setToken, setUserData } = useStore()
+  const [accessToken, setAccessToken] = React.useState(null);
   let Route = useNavigation();
+
+  const handleLogin = (error, result) => {
+    if (error) {
+      console.log('Error logging in: ', error);
+    } else if (result.isCancelled) {
+      console.log('Login cancelled.');
+    } else {
+      AccessToken.getCurrentAccessToken().then(data => {
+        setUserData(data)
+        setAccessToken(data.accessToken.toString());
+        setToken(data.accessToken.toString());
+        Route.navigate('LoginWithPhone')
+      });
+    }
+  };
 
   return (
     <GradientContainer translucent={false} hidden={false}>
@@ -19,13 +42,30 @@ const LoginWithFacebook = () => {
         <Text style={styles.underLineText}>Privacy{'\n'}Policy</Text> and{' '}
         <Text style={styles.underLineText}>Cookies Policy.</Text>
       </Text>
-      <GlobalButton
+      {/* <GlobalButton
         icon
-        onPress={() => Route.navigate('LoginWithPhone')}
+        onPress={()=>onHandle()}
+        // onPress={() => Route.navigate('LoginWithPhone')}
         title={'LOGIN WITH FACEBOOK'}
         textStyle={{color: COLORS.black}}
         Style={{backgroundColor: COLORS.white}}
-      />
+      /> */}
+      <View style={{
+        borderRadius: 30,
+        height: HP_WP.hp(5.5),
+        width: HP_WP.wp(75),
+        alignSelf: 'center',
+        alignItems: 'center',
+
+      }}>
+        <LoginButton
+          onLoginFinished={() => {
+            handleLogin()
+            Route.navigate('LoginWithPhone')
+          }}
+        />
+      </View>
+
     </GradientContainer>
   );
 };

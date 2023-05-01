@@ -3,19 +3,20 @@ import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import {BottomSheet} from 'react-native-sheet';
 import {Dropdown} from 'react-native-element-dropdown';
-// import RangeSlider from '@jesster2k10/react-native-range-slider';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
 import Card from '../component/Card';
 import IconButton from '../component/IconButton';
-import {COLORS, HP_WP, IMAGE, SIZE,Font} from '../common/theme';
+import {COLORS, HP_WP, IMAGE, SIZE, Font} from '../common/theme';
 import photoCards from '../component/photoCards';
 
-const HomeScreen = ({navigation}) => {
+HomeScreen = ({navigation}) => {
   const [gender, setGender] = useState('male');
-  const [minSelected, setMinSelected] = useState(0);
-  const [maxSelected, setMaxSelected] = useState(0);
+  const [minimumSlideValue, setMinimumSlideValue] = useState([100]);
+  const [maximumSlideValue, setMaximumSliderValue] = useState([18]);
+  const [changeValue, setChangeValue] = useState(0);
 
   const data = [
     {label: '0 km-10 km', value: '1'},
@@ -27,11 +28,6 @@ const HomeScreen = ({navigation}) => {
     {label: '60 km-70 km', value: '7'},
     {label: '70 km-80 km', value: '8'},
   ];
-
-  const onChange = (min, max) => {
-    setMinSelected(min);
-    setMaxSelected(max);
-  };
 
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
@@ -180,19 +176,33 @@ const HomeScreen = ({navigation}) => {
           </View>
           <Text style={styles.distanceText}>Age</Text>
         </View>
-        {/* <RangeSlider
-        style={{marginTop:10}}
-          type="range" // ios only
+        <MultiSlider
+        sliderLength ={300}
+          containerStyle={{
+            marginLeft: 2,
+            alignSelf: 'center',
+          }}
+          trackStyle={{
+            height: 3,
+            backgroundColor: '#CACACA',
+            borderRadius: 5,
+          }}
+          valuePrefix="age"
+          values={[maximumSlideValue, minimumSlideValue]}
+          onValuesChange={value => setChangeValue(value, console.log(value))}
+          selectedStyle={{
+            backgroundColor: COLORS.purple,
+          }}
+          markerStyle={{
+            backgroundColor: COLORS.purple,
+            top:0.8
+          }}
+          step={1}
+          isMarkersSeparated={true}
           min={18}
           max={70}
-          selectedMinimum={22} // ios only
-          selectedMaximum={44} // ios only
-          tintColor="#000"
-          handleColor="#f368e0"
-          handlePressedColor="#f368e0"
-          tintColorBetweenHandles="#ff9ff3"
-          onChange={(min, max) => onChange(min, max)}
-        /> */}
+          allowOverlap
+        />
       </BottomSheet>
     </Container>
   );
@@ -248,7 +258,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: COLORS.gray,
     fontSize: SIZE.N,
-    fontFamily:Font.regular
+    fontFamily: Font.regular,
   },
   activeButton: {
     backgroundColor: COLORS.purple,

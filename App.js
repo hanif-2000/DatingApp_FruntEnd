@@ -1,13 +1,13 @@
-import {PermissionsAndroid, Platform, SafeAreaView} from 'react-native';
-import React, {useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import { PermissionsAndroid, Platform, SafeAreaView } from 'react-native';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
-import Toast, {BaseToast, ErrorToast} from 'react-native-toast-message';
+import Toast, { BaseToast, ErrorToast } from 'react-native-toast-message';
 
 import AuthStack from './src/navigation/AuthStack';
 import MainStack from './src/navigation/MainStack';
-// import { fcmService } from './src/notification/fcmservice';
+import { fcmService } from './src/notification/fcmservice';
 
 Geocoder.init(
   'AIzaSyDEZIj905xo7XomPhQLZxG71RvL5zNEuYM', //  {language: 'en'}
@@ -17,8 +17,8 @@ const toastConfig = {
   success: props => (
     <BaseToast
       {...props}
-      style={{borderLeftColor: 'green'}}
-      contentContainerStyle={{paddingHorizontal: 15}}
+      style={{ borderLeftColor: 'green' }}
+      contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{
         fontSize: 15,
         fontWeight: '400',
@@ -36,8 +36,8 @@ const toastConfig = {
       }}
     />
   ),
-  tomatoToast: ({text1, props}) => (
-    <View style={{height: 60, width: '100%', backgroundColor: 'red'}}>
+  tomatoToast: ({ text1, props }) => (
+    <View style={{ height: 60, width: '100%', backgroundColor: 'red' }}>
       <Text>{text1}</Text>
     </View>
   ),
@@ -101,8 +101,8 @@ const App = () => {
         `Turn on Location Services to allow "${appConfig.displayName}" to determine your location.`,
         '',
         [
-          {text: 'Go to Settings', onPress: openSetting},
-          {text: "Don't Use Location", onPress: () => {}},
+          { text: 'Go to Settings', onPress: openSetting },
+          { text: "Don't Use Location", onPress: () => { } },
         ],
       );
     }
@@ -182,7 +182,7 @@ const App = () => {
 
 
   useEffect(() => {
-    // handler()
+    handler()
   }, []);
 
   const handler = async () => {
@@ -203,7 +203,7 @@ const App = () => {
 
     fcmService.register();
     let token = fcmService.getFcmToken();
-    setFcmToken(token);
+    fcmService.setFcmToken(token);
   };
 
   return (
