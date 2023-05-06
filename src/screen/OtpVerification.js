@@ -1,6 +1,9 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
+import {t} from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import Container from '../common/Container';
 import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
@@ -8,7 +11,7 @@ import GlobalHeader from '../common/GlobalHeader';
 import GlobalButton from '../common/GlobalButton';
 
 const OtpVerification = ({navigation}) => {
-
+  const [loading, setLoading] = useState(false);
   const [clearOTP, setClearOTP] = useState(false);
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
@@ -17,7 +20,7 @@ const OtpVerification = ({navigation}) => {
     <Container Style={styles.container}>
       <GlobalHeader />
       <View style={styles.innarMainContainer}>
-        <Text style={styles.smsCode}>Enter SMS Code </Text>
+        <Text style={styles.smsCode}>{t('enterCode')}</Text>
         <OTPInputView
           style={styles.OtpInputStyle}
           pinCount={4}
@@ -28,15 +31,21 @@ const OtpVerification = ({navigation}) => {
             console.log(`Code is ${code}, you are good to go!`);
           }}
         />
-        <TouchableOpacity style={{alignSelf:'center'}}>
-        <Text style={styles.bottomText}>RESEND</Text>
+        <TouchableOpacity style={{alignSelf: 'center'}}>
+          <Text style={styles.bottomText}>{t('resend')}</Text>
         </TouchableOpacity>
         <GlobalButton
           Style={styles.buttonStyle}
-          title={'CONTINUE'}
-          onPress={() => navigation.navigate('MainStack' ,{screen:'Home'})}
+          title={t('continue')}
+          onPress={() => navigation.navigate('MainStack', {screen: 'Home'})}
         />
       </View>
+      <Spinner
+        color={COLORS.purple}
+        visible={loading}
+        size="large"
+        overlayColor="rgba(0,0,0,0.5)"
+      />
     </Container>
   );
 };
@@ -54,7 +63,8 @@ const styles = StyleSheet.create({
     fontSize: SIZE.XT,
     color: COLORS.blk,
     marginTop: HP_WP.hp(3),
-    fontFamily:Font.semiBold
+    fontFamily: Font.semiBold,
+    textAlign: 'center',
   },
   OtpInputStyle: {
     height: HP_WP.hp(6),
@@ -72,7 +82,7 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
     fontSize: SIZE.N,
     marginTop: HP_WP.hp(3),
-    fontFamily:Font.medium
+    fontFamily: Font.medium,
   },
   buttonStyle: {
     marginTop: HP_WP.hp(3),

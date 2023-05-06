@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
+import {t} from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import Container from '../common/Container';
 import {COLORS, HP_WP, SIZE} from '../common/theme';
@@ -17,6 +20,7 @@ import {Icon} from 'react-native-elements';
 import GlobalButton from '../common/GlobalButton';
 
 const PlanSetting = () => {
+  const [loading, setLoading] = useState(false);
   const [currentPlan, setCurrentPlan] = useState('6');
   data = [
     {id: 1, time: '12', rate: '7'},
@@ -30,32 +34,32 @@ const PlanSetting = () => {
 
   return (
     <Container Style={styles.mainContainer}>
-      <GlobalHeader title={'Manage Subscription'} />
+      <GlobalHeader title={t('manageSubscription')} />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollViewStyle}>
         <View style={[styles.topCardContainer, {padding: 20}]}>
           <View style={styles.directionContainer}>
-            <Text style={styles.currentPlan}>Current Plan</Text>
-            <Text style={styles.free}>Free</Text>
+            <Text style={styles.currentPlan}>{t('currentPlan')}</Text>
+            <Text style={styles.free}>{'free'}</Text>
           </View>
           <View style={[styles.directionContainer, {marginTop: 10}]}>
-            <Text style={styles.currentPlan}>Time Period</Text>
+            <Text style={styles.currentPlan}>{t('timePeriod')}</Text>
             <Text style={styles.free}>12/04/2020 - 12/04/2021</Text>
           </View>
           <View style={[styles.directionContainer, styles.buttonContainer]}>
             <TouchableOpacity style={styles.Unsubscribe}>
-              <Text style={styles.unsubscribeText}>Unsubscribe</Text>
+              <Text style={styles.unsubscribeText}>{t('unsubscribe')}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.Upgrade}>
               <Text style={[styles.unsubscribeText, {color: COLORS.white}]}>
-                Upgrade
+                {t('upgrade')}
               </Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.topCardContainer}>
-          <Text style={styles.bottomCardTopText}>Get Mingle Gold</Text>
+          <Text style={styles.bottomCardTopText}>{t('getGold')}</Text>
           <LinearGradient
             start={{x: 1, y: 0.8}}
             end={{x: 0.1, y: 0.5}}
@@ -63,8 +67,8 @@ const PlanSetting = () => {
             style={styles.heartContainer}>
             <Icon name={'heart'} type="entypo" size={25} color={COLORS.white} />
           </LinearGradient>
-          <Text style={styles.likesText}>Unlimited Likes</Text>
-          <Text style={styles.manyLikes}>Send as many likes as you want</Text>
+          <Text style={styles.likesText}>{t('unlimitedLikes')}</Text>
+          <Text style={styles.manyLikes}>{t('sendManyLikes')}</Text>
           <View style={styles.dotMainContainer}>
             <FlatList
               horizontal={true}
@@ -93,7 +97,10 @@ const PlanSetting = () => {
                     styles.monthText,
                     {
                       fontSize: SIZE.XXXl,
-                      color: currentPlan == item.time ? COLORS.darkYellow : COLORS.black,
+                      color:
+                        currentPlan == item.time
+                          ? COLORS.darkYellow
+                          : COLORS.black,
                     },
                   ]}>
                   {item.time}
@@ -101,7 +108,12 @@ const PlanSetting = () => {
                 <Text
                   style={[
                     styles.monthText,
-                    {color: currentPlan == item.time ? COLORS.darkYellow : COLORS.black},
+                    {
+                      color:
+                        currentPlan == item.time
+                          ? COLORS.darkYellow
+                          : COLORS.black,
+                    },
                   ]}>
                   {'months'}
                 </Text>
@@ -110,7 +122,10 @@ const PlanSetting = () => {
                     styles.monthText,
                     {
                       marginTop: 10,
-                      color: currentPlan == item.time ? COLORS.darkYellow : COLORS.black,
+                      color:
+                        currentPlan == item.time
+                          ? COLORS.darkYellow
+                          : COLORS.black,
                     },
                   ]}>
                   ${item.rate}/mo{' '}
@@ -118,9 +133,15 @@ const PlanSetting = () => {
               </TouchableOpacity>
             ))}
           </View>
-          <GlobalButton title={'CONTINUE'} Style={styles.buttonStyle} />
+          <GlobalButton title={t('continue')} Style={styles.buttonStyle} />
         </View>
       </ScrollView>
+      <Spinner
+        color={COLORS.purple}
+        visible={loading}
+        size="large"
+        overlayColor="rgba(0,0,0,0.5)"
+      />
     </Container>
   );
 };
@@ -145,11 +166,13 @@ const styles = StyleSheet.create({
   directionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   currentPlan: {
     color: COLORS.black,
     fontSize: SIZE.NL,
     fontFamily: Font.semiBold,
+    marginRight: 6,
   },
   free: {
     color: COLORS.lightGray,

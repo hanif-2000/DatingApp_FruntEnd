@@ -1,12 +1,6 @@
 import React from 'react';
 import { StyleSheet, Image, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-<<<<<<< HEAD
-=======
-import { LoginManager, ShareDialog } from 'react-native-fbsdk-next';
-
-
->>>>>>> main
 import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 import GradientContainer from '../common/GradientContainer';
@@ -95,21 +89,54 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: HP_WP.wp(10),
   },
+  choseLanguageBtn: {
+    marginTop: HP_WP.hp(2),
+    alignSelf: 'flex-end',
+  },
+  choseLanguageText: {
+    fontSize: SIZE.L,
+    color: COLORS.black,
+    fontFamily: Font.semiBold,
+  },
   logo: {
-    height: HP_WP.hp(15),
-    width: HP_WP.wp(30),
+    height: HP_WP.hp(18),
+    width: HP_WP.wp(36),
     alignSelf: 'center',
-    marginTop: HP_WP.hp(20),
+    marginTop: HP_WP.hp(10),
   },
   txt: {
     fontSize: SIZE.M,
     color: COLORS.white,
     fontFamily: Font.semiBold,
     textAlign: 'center',
-    marginVertical: HP_WP.hp(12),
+    marginTop: HP_WP.hp(15),
   },
   underLineText: {
     textDecorationLine: 'underline',
     fontSize: SIZE.N,
+  },
+  button: {
+    backgroundColor: COLORS.white,
+    marginTop: HP_WP.hp(10),
+  },
+  buttonText: {
+    color: COLORS.black,
+    marginLeft: 5,
+  },
+  languageModal: {
+    position: 'absolute',
+    width: HP_WP.wp(38),
+    padding: 10,
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderRadius: 12,
+    top: 50,
+    height: 200,
+    alignSelf: 'flex-end',
+  },
+  language: {
+    fontSize: SIZE.L,
+    color: COLORS.black,
+    fontFamily: Font.regular,
   },
 });

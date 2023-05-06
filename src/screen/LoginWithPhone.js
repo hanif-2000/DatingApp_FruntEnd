@@ -1,14 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
-import { CountryPicker } from 'react-native-country-codes-picker';
+import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {CountryPicker} from 'react-native-country-codes-picker';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
+import {t} from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import GlobalHeader from '../common/GlobalHeader';
 import Container from '../common/Container';
-import { COLORS, Font, HP_WP, SIZE } from '../common/theme';
+import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 import GlobalInput from '../common/GlobalInput';
 
-const LoginWithPhone = ({ navigation }) => {
+const LoginWithPhone = ({navigation}) => {
+  const [loading, setLoading] = useState(false);
   const [openCountryPicker, setOpenCountryPicker] = useState(false);
   const [countryCode, setCountryCode] = useState('IN +91');
   const [isCounty, setCountry] = useState();
@@ -17,30 +21,28 @@ const LoginWithPhone = ({ navigation }) => {
     <Container Style={styles.container}>
       <GlobalHeader />
       <View style={styles.innarMainContainer}>
-        <Text style={styles.verifyNumber}>Verify phone number</Text>
+        <Text style={styles.verifyNumber}>{t('verifyNumber')}</Text>
         <GlobalInput
-          placeholder="Phone Number"
+          placeholder={t('phoneNumber')}
           keyboardType={'number-pad'}
           numberInput
           countryCode
           code={[isCounty, ' ', countryCode]}
-          inputStyle={{ width: HP_WP.wp(76) }}
+          inputStyle={{width: HP_WP.wp(76)}}
           textInputStyle={styles.inputStyle}
           openCode={() => setOpenCountryPicker(true)}
           countryPikerStyle={styles.countryPikerStyle}
         />
         <Text style={styles.bottomText}>
-          By clicking Log In, you agree with our Terms. Learn how process your
-          data in our Privacy Policy and Cookies Policy. By clicking Log In, you
-          agree with our Terms. Learn how
+          {t('youAgreeWithTerms')}
           <Text style={styles.touchableText}>
             {' '}
-            process your data in our Privacy Policy and Cookies
+            {t('processYourData')}
           </Text>
         </Text>
         <GlobalButton
           Style={styles.buttonStyle}
-          title={'CONTINUE'}
+          title={t('continue')}
           onPress={() => navigation.navigate('OtpVerification')}
         />
       </View>
@@ -56,6 +58,12 @@ const LoginWithPhone = ({ navigation }) => {
         }}
         placeholderTextColor={COLORS.black}
         style={styles.countryPicker}
+      />
+      <Spinner
+        color={COLORS.purple}
+        visible={loading}
+        size="large"
+        overlayColor="rgba(0,0,0,0.5)"
       />
     </Container>
   );
@@ -76,6 +84,7 @@ const styles = StyleSheet.create({
     marginTop: HP_WP.hp(3),
     fontFamily: Font.semiBold,
     marginBottom: HP_WP.hp(7),
+    textAlign: 'center',
   },
   inputStyle: {
     borderBottomWidth: 1,
@@ -108,19 +117,9 @@ const styles = StyleSheet.create({
       position: 'absolute',
       height: Platform.OS === 'ios' ? 500 : 360,
     },
-    countryName: {
-      color: COLORS.black,
-    },
     textInput: {
       color: COLORS.black,
       paddingHorizontal: 10,
     },
-    dialCode: {
-      color: COLORS.black,
-    },
-    searchMessageText: {
-      color: COLORS.black,
-    },
   },
- 
 });

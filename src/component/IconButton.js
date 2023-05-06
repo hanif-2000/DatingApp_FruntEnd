@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {COLORS} from '../common/theme';
 import {Icon} from 'react-native-elements';
 
 const IconButton = ({onPress, name, backgroundColor, color, type}) => (

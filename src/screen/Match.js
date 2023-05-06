@@ -1,11 +1,23 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, {useState} from 'react';
+import {t} from 'i18next';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
+import Toast from 'react-native-toast-message';
+
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
 import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
-import {Image} from 'react-native-elements';
 
 const Match = () => {
+  const [loading, setLoading] = useState(false);
+
   const dataList = [
     {
       img: IMAGE.VideoCall,
@@ -25,9 +37,9 @@ const Match = () => {
   ];
   return (
     <Container>
-      <GlobalHeader title={'Match'} mainContainer={styles.header} />
+      <GlobalHeader title={t('match')} mainContainer={styles.header} />
       <View style={{flex: 1}}>
-        <Text style={styles.likeText}>7 Match</Text>
+        <Text style={styles.likeText}>{t('matches')}</Text>
         <FlatList
           style={styles.flatList}
           showsVerticalScrollIndicator={false}
@@ -35,7 +47,7 @@ const Match = () => {
           numColumns={2}
           renderItem={({item}) => (
             <TouchableOpacity
-              onPress={() => trytochat(item.blurRadius)}
+              // onPress={() => trytochat(item.blurRadius)}
               style={styles.imageContainer}>
               <Image
                 blurRadius={item.blurRadius}
@@ -50,6 +62,12 @@ const Match = () => {
           )}
         />
       </View>
+      <Spinner
+        color={COLORS.purple}
+        visible={loading}
+        size="large"
+        overlayColor="rgba(0,0,0,0.5)"
+      />
     </Container>
   );
 };

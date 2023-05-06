@@ -1,11 +1,16 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React, {useState, useCallback, useEffect, useRef} from 'react';
+import {t} from 'i18next';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
+import Toast from 'react-native-toast-message';
+
 import Container from '../common/Container';
 import {GiftedChat} from 'react-native-gifted-chat';
 import GlobalHeader from '../common/GlobalHeader';
-import { HP_WP } from '../common/theme';
+import {COLORS, HP_WP} from '../common/theme';
 
 const ChattingScreen = () => {
+  const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
   const [typing, setTyping] = useState(false);
   const msgContainerRef = useRef(null);
@@ -41,7 +46,7 @@ const ChattingScreen = () => {
 
   return (
     <Container Style={styles.mainContainer}>
-      <GlobalHeader title={'Chat'} />
+      <GlobalHeader title={t('chat')} />
       {/* <GiftedChat
                 messages={messages}
                 onSend={messages => onSend(messages)}
@@ -85,6 +90,12 @@ const ChattingScreen = () => {
         //         </>
         //     ) : null
         // }
+      />
+      <Spinner
+        color={COLORS.purple}
+        visible={loading}
+        size="large"
+        overlayColor="rgba(0,0,0,0.5)"
       />
     </Container>
   );

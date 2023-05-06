@@ -13,12 +13,13 @@ import {
 import React, {useState} from 'react';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {BlurView} from '@react-native-community/blur';
-import Spinner from 'react-native-loading-spinner-overlay';
 import {Dropdown} from 'react-native-element-dropdown';
-
+import Spinner from 'react-native-loading-spinner-overlay/lib';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import LinearGradient from 'react-native-linear-gradient';
 import {Icon} from 'react-native-elements';
+import {t} from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import GlobalHeader from '../common/GlobalHeader';
 import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
@@ -108,7 +109,7 @@ const Profile = ({navigation}) => {
         <GlobalHeader
           mainContainer={{paddingHorizontal: HP_WP.wp(5)}}
           light
-          title={'Profile'}
+          title={t('profile')}
           headerTitles={styles.headerText}
         />
         <View style={styles.mainContainer}>
@@ -126,69 +127,69 @@ const Profile = ({navigation}) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.mainContainer}>
           <View style={styles.accountSettingsContainer}>
-            <Text style={styles.accountSettings}>Account Settings</Text>
+            <Text style={styles.accountSettings}>{t('accountSettings')}</Text>
             <Text
               style={styles.edit}
               onPress={() => navigation.navigate('ProfileEdit')}>
-              Edit
+              {t('edit')}
             </Text>
           </View>
           <GlobalInput
             placeholder={'Jenny'}
             inputName
-            label="Name"
+            label={t('name')}
             editable={false}
             inputStyle={{marginTop: 10}}
           />
           <GlobalInput
             placeholder={'+91 9876543210'}
             inputName
-            label="Phone Number"
+            label={t('phoneNumber')}
             inputStyle={{marginTop: 10}}
             editable={false}
           />
           <GlobalInput
             placeholder={'02-05-1997'}
             inputName
-            label="Date of birth"
+            label={t('dob')}
             inputStyle={{marginTop: 10}}
             editable={false}
           />
           <GlobalInput
             placeholder={'abcqwertyu@gmail.com'}
             inputName
-            label="Email"
+            label={t('email')}
             inputStyle={{marginTop: 10}}
             editable={false}
           />
           <Text style={[styles.accountSettings, {marginTop: HP_WP.hp(2)}]}>
-            Plan Settings
+            {t('planSettings')}
           </Text>
           <GlobalInput
             editable={false}
             text={true}
             icon={true}
             inputName={true}
-            label="Current Plan"
-            tuchText="Free"
+            label={t('currentPlan')}
+            tuchText={t('free')}
             inputStyle={{marginTop: 10}}
             onPress={() => navigation.navigate('PlanSetting')}
           />
           <Text style={[styles.accountSettings, {marginTop: HP_WP.hp(2)}]}>
-            Discovery Settings
+            {t('discoverySettings')}
           </Text>
           <GlobalInput
             editable={false}
             text={true}
             icon={true}
             inputName={true}
-            label="Location"
-            tuchText="My Current Location"
+            label={t('location')}
+            tuchText={t('currentLocation')}
             inputStyle={{marginTop: 10}}
             // onPress={() =>navigation.navigate('PlanSetting')}
           />
           <View style={styles.dropDownView}>
-            <Text style={styles.dropDownTitle}>Preferred Languages</Text>
+            <Text style={styles.dropDownTitle}>{t('preferredLanguages')}</Text>
             <Dropdown
               iconStyle={{tintColor: COLORS.blue}}
               style={[styles.dropdawn]}
@@ -207,9 +208,7 @@ const Profile = ({navigation}) => {
           <TouchableOpacity
             onPress={() => setMarriage(!marriage)}
             style={styles.marriageContainer}>
-            <Text style={styles.dropDownTitle}>
-              Marriage (Opposite sex only)
-            </Text>
+            <Text style={styles.dropDownTitle}>{t('marriage')}</Text>
             <View
               style={[
                 styles.marriageIconContainer,
@@ -225,7 +224,7 @@ const Profile = ({navigation}) => {
           </TouchableOpacity>
           <View style={styles.ageRangeMainContainer}>
             <View style={styles.ageRangeContainer}>
-              <Text style={styles.dropDownTitle}>Age Range</Text>
+              <Text style={styles.dropDownTitle}>{t('ageRange')}</Text>
               <Text>
                 {minSelected}-{maxSelected}
               </Text>
@@ -247,7 +246,7 @@ const Profile = ({navigation}) => {
           <TouchableOpacity
             onPress={() => setGroupChat(!groupChat)}
             style={styles.marriageContainer}>
-            <Text style={styles.dropDownTitle}>Group Chats</Text>
+            <Text style={styles.dropDownTitle}>{t('groupChats')}</Text>
             <View
               style={[
                 styles.marriageIconContainer,
@@ -258,6 +257,7 @@ const Profile = ({navigation}) => {
               ]}>
               {groupChat && (
                 <Icon name={'done'} size={15} color={COLORS.white} />
+                )}
             </View>
           </TouchableOpacity>
           {groupChat && (
@@ -265,7 +265,7 @@ const Profile = ({navigation}) => {
               <TouchableOpacity
                 onPress={() => setMale(!male)}
                 style={styles.ageRangeContainer}>
-                <Text style={styles.dropDownTitle}>Male</Text>
+                <Text style={styles.dropDownTitle}>{t('male')}</Text>
                 <View
                   style={[
                     styles.marriageIconContainer,
@@ -282,7 +282,7 @@ const Profile = ({navigation}) => {
               <TouchableOpacity
                 onPress={() => setFemale(!female)}
                 style={styles.ageRangeContainer}>
-                <Text style={styles.dropDownTitle}>Female</Text>
+                <Text style={styles.dropDownTitle}>{t('female')}</Text>
                 <View
                   style={[
                     styles.marriageIconContainer,
@@ -309,7 +309,7 @@ const Profile = ({navigation}) => {
                 marginTop: 15,
               },
             ]}>
-            <Text style={styles.dropDownTitle}>Network</Text>
+            <Text style={styles.dropDownTitle}>{t('network')}</Text>
             <View
               style={[
                 styles.marriageIconContainer,
@@ -323,10 +323,11 @@ const Profile = ({navigation}) => {
           </TouchableOpacity>
           <View style={styles.ageRangeMainContainer}>
             <View style={styles.ageRangeContainer}>
-              <Text style={styles.dropDownTitle}>
-                Maximum Distance (only upgrade )
+              <Text style={styles.dropDownTitle}>{t('maximumDistance')}</Text>
+              <Text>
+                {distance}
+                {t('km')}
               </Text>
-              <Text>{distance}km.</Text>
             </View>
 
             {/* <RangeSlider
@@ -347,13 +348,13 @@ const Profile = ({navigation}) => {
             <GlobalButton
               Style={[styles.buttonStyle, {marginVertical: 15}]}
               textStyle={{color: COLORS.black}}
-              title={'Logout'}
+              title={t('logout')}
             />
 
             <GlobalButton
               Style={[styles.buttonStyle, {marginBottom: 15}]}
               textStyle={{color: COLORS.orange}}
-              title={'Delete Account'}
+              title={t('deleteAccount')}
             />
           </View>
         </View>
@@ -375,15 +376,15 @@ const Profile = ({navigation}) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Pressable style={styles.button} onPress={chooseFromCamera}>
-              <Text style={styles.textStyle}>Take From Camera</Text>
+              <Text style={styles.textStyle}>{t('fromCamera')}</Text>
             </Pressable>
             <Pressable style={styles.button} onPress={chooseFromGallery}>
-              <Text style={styles.textStyle}>Choose From Gallery</Text>
+              <Text style={styles.textStyle}>{t('fromGallery')}</Text>
             </Pressable>
             <Pressable
               style={[styles.button, {backgroundColor: COLORS.orange}]}
               onPress={() => setModalVisible(false)}>
-              <Text style={styles.textStyle}>Cancle</Text>
+              <Text style={styles.textStyle}>{t('cancle')}</Text>
             </Pressable>
           </View>
         </View>
@@ -402,7 +403,10 @@ const Profile = ({navigation}) => {
 export default Profile;
 
 const styles = StyleSheet.create({
-  linearGradient: {flex: 1, flexGrow: 1},
+  linearGradient: {
+    flex: 1,
+    flexGrow: 1,
+  },
   mainContainer: {
     paddingHorizontal: HP_WP.wp(4),
   },
