@@ -7,7 +7,7 @@ import Toast from 'react-native-toast-message';
 import Container from '../common/Container';
 import {GiftedChat} from 'react-native-gifted-chat';
 import GlobalHeader from '../common/GlobalHeader';
-import {HP_WP} from '../common/theme';
+import {COLORS, HP_WP} from '../common/theme';
 
 const ChattingScreen = () => {
   const [loading, setLoading] = useState(false);

@@ -18,6 +18,7 @@ import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
 import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
+
 import useAppData from '../service/AppData';
 
 const LikeScreen = ({navigation}) => {

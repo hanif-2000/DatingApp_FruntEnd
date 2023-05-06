@@ -16,7 +16,8 @@ import Spinner from 'react-native-loading-spinner-overlay/lib';
 import '../language/i18n';
 import Toast from 'react-native-toast-message';
 
-import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
+
+import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 
 const LoginWithFacebook = () => {

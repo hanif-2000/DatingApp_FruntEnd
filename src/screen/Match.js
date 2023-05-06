@@ -47,7 +47,7 @@ const Match = () => {
           numColumns={2}
           renderItem={({item}) => (
             <TouchableOpacity
-              onPress={() => trytochat(item.blurRadius)}
+              // onPress={() => trytochat(item.blurRadius)}
               style={styles.imageContainer}>
               <Image
                 blurRadius={item.blurRadius}

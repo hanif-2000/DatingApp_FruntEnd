@@ -22,19 +22,19 @@ class LocalNotificationService {
       alert: true,
     };
 
-    PushNotification.createChannel(config, (created: any) => {});
+    PushNotification.createChannel(config, (created) => {});
   };
 
   configureNotification = () => {
     let config = {
-      onRegister: function (token: any) {},
-      onNotification: function (notification: any) {
+      onRegister: function (token) {},
+      onNotification: function (notification) {
         if (notification.userInteraction) {
           notificationOpen(notification);
         }
       },
       // Android only
-      senderID: '568080477856',
+      senderID: '12510229230',
       permissions: {
         alert: true,
         badge: true,
@@ -51,7 +51,7 @@ class LocalNotificationService {
     PushNotification.unregister();
   };
 
-  showlocalNotification = ({notification, data}: any) => {
+  showlocalNotification = ({notification, data}) => {
     let config = {
       title: notification?.title,
       message: notification?.message,
@@ -79,7 +79,7 @@ class LocalNotificationService {
 
   clearNotificationBadge = () => {
     if (Platform.OS == 'ios') {
-      PushNotificationIOS.getApplicationIconBadgeNumber((num: any) => {
+      PushNotificationIOS.getApplicationIconBadgeNumber((num) => {
         // get current number
         if (num >= 1) {
           PushNotificationIOS.setApplicationIconBadgeNumber(0); //set number to 0
@@ -88,7 +88,7 @@ class LocalNotificationService {
     }
   };
 
-  removeAllDeliveredNotificationByID = (notificationId: any) => {
+  removeAllDeliveredNotificationByID = (notificationId) => {
     PushNotification.cancelLocalNotifications({id: `${notificationId}`});
   };
 }

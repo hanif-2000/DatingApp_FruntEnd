@@ -15,7 +15,7 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
-    top: HP_WP.hp(-8),
+    top: HP_WP.hp(-6),
   },
   image: {
     borderRadius: 30,

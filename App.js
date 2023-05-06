@@ -112,8 +112,8 @@ const App = () => {
         `Turn on Location Services to allow "${appConfig.displayName}" to determine your location.`,
         '',
         [
-          {text: 'Go to Settings', onPress: openSetting},
-          {text: "Don't Use Location", onPress: () => {}},
+          { text: 'Go to Settings', onPress: openSetting },
+          { text: "Don't Use Location", onPress: () => { } },
         ],
       );
     }
@@ -187,7 +187,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    // handler()
+    handler()
   }, []);
 
   const handler = async () => {
@@ -208,7 +208,7 @@ const App = () => {
 
     fcmService.register();
     let token = fcmService.getFcmToken();
-    setFcmToken(token);
+    fcmService.setFcmToken(token);
   };
 
   return (
