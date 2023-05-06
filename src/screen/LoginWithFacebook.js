@@ -1,32 +1,114 @@
-import React from 'react';
-import {StyleSheet, Image, Text} from 'react-native';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Image,
+  Text,
+  StatusBar,
+  TouchableOpacity,
+  View,
+  Pressable,
+  FlatList,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
+import {useTranslation} from 'react-i18next';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
+import '../language/i18n';
+import Toast from 'react-native-toast-message';
 
 import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
-import GradientContainer from '../common/GradientContainer';
 
 const LoginWithFacebook = () => {
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [languages, setLanguages] = useState(null);
+  const [currentLanguage, setCurrentLanguage] = useState('ENGLISH');
+
+  const {t, i18n} = useTranslation();
+
+  const DATA = [
+    {
+      language: 'ENGLISH',
+    },
+    {
+      language: 'ALBANIAN',
+    },
+  ];
+
   let Route = useNavigation();
 
+  const changeLanguage = value => {
+    i18n
+      .changeLanguage(value)
+      .then(() => {
+        setCurrentLanguage(value);
+        setLanguages(value);
+        setVisible(false);
+      })
+      .catch(err => console.log(err));
+  };
+
   return (
-    <GradientContainer translucent={false} hidden={false}>
-      <Image source={IMAGE.Logo} style={styles.logo} resizeMode="contain" />
-      <Text style={styles.txt}>
-        By clicking Log In, you agree with our{' '}
-        <Text style={styles.underLineText}>Terms.</Text>
-        {'\n'}Learn how we process your data in our{' '}
-        <Text style={styles.underLineText}>Privacy{'\n'}Policy</Text> and{' '}
-        <Text style={styles.underLineText}>Cookies Policy.</Text>
-      </Text>
-      <GlobalButton
-        icon
-        onPress={() => Route.navigate('LoginWithPhone')}
-        title={'LOGIN WITH FACEBOOK'}
-        textStyle={{color: COLORS.black}}
-        Style={{backgroundColor: COLORS.white}}
+    <LinearGradient
+      start={{x: 0, y: 0.2}}
+      end={{x: 0, y: 0.8}}
+      colors={[COLORS.white, COLORS.purple, COLORS.black]}
+      style={styles.linearGradient}>
+      <StatusBar backgroundColor={COLORS.white} barStyle={'dark-content'} />
+      <Pressable onPress={() => setVisible(false)} style={{flex: 1}}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.choseLanguageBtn}
+          onPress={() => setVisible(true)}>
+          <Text style={styles.choseLanguageText}>
+            {languages == null ? 'Select Language' : currentLanguage}
+          </Text>
+        </TouchableOpacity>
+        <Image source={IMAGE.Logo} style={styles.logo} resizeMode="contain" />
+        <Text style={styles.txt}>
+          {t('youAgree')} <Text style={styles.underLineText}>{t('terms')}</Text>
+          {'\n'}
+          {t('learnProcess')}{' '}
+          <Text style={styles.underLineText}>
+            {t('privacy')}
+            {'\n'}
+            {t('policy')}
+          </Text>{' '}
+          {t('and')}{' '}
+          <Text style={styles.underLineText}>{t('cookiesPolicy')}</Text>
+        </Text>
+        <GlobalButton
+          textStyle={styles.buttonText}
+          icon
+          onPress={() => Route.navigate('LoginWithPhone')}
+          title={t('loginFacebook')}
+          Style={styles.button}
+        />
+
+        {visible == true && (
+          <View style={styles.languageModal}>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={DATA}
+              renderItem={({item}) => (
+                <TouchableOpacity
+                  onPress={() => changeLanguage(item.language)}
+                  style={{paddingVertical: 3}}>
+                  <Text style={styles.language}>{item.language}</Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        )}
+      </Pressable>
+      <Spinner
+        color={COLORS.purple}
+        visible={loading}
+        size="large"
+        overlayColor="rgba(0,0,0,0.5)"
       />
-    </GradientContainer>
+    </LinearGradient>
   );
 };
 
@@ -37,21 +119,54 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: HP_WP.wp(10),
   },
+  choseLanguageBtn: {
+    marginTop: HP_WP.hp(2),
+    alignSelf: 'flex-end',
+  },
+  choseLanguageText: {
+    fontSize: SIZE.L,
+    color: COLORS.black,
+    fontFamily: Font.semiBold,
+  },
   logo: {
-    height: HP_WP.hp(15),
-    width: HP_WP.wp(30),
+    height: HP_WP.hp(18),
+    width: HP_WP.wp(36),
     alignSelf: 'center',
-    marginTop: HP_WP.hp(20),
+    marginTop: HP_WP.hp(10),
   },
   txt: {
     fontSize: SIZE.M,
     color: COLORS.white,
     fontFamily: Font.semiBold,
     textAlign: 'center',
-    marginVertical: HP_WP.hp(12),
+    marginTop: HP_WP.hp(15),
   },
   underLineText: {
     textDecorationLine: 'underline',
     fontSize: SIZE.N,
+  },
+  button: {
+    backgroundColor: COLORS.white,
+    marginTop: HP_WP.hp(10),
+  },
+  buttonText: {
+    color: COLORS.black,
+    marginLeft: 5,
+  },
+  languageModal: {
+    position: 'absolute',
+    width: HP_WP.wp(38),
+    padding: 10,
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderRadius: 12,
+    top: 50,
+    height: 200,
+    alignSelf: 'flex-end',
+  },
+  language: {
+    fontSize: SIZE.L,
+    color: COLORS.black,
+    fontFamily: Font.regular,
   },
 });

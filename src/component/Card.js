@@ -20,12 +20,12 @@ const styles = StyleSheet.create({
   image: {
     borderRadius: 30,
     width: '100%',
-    height: HP_WP.hp(70),
+    height: HP_WP.hp(80),
   },
   photoDescriptionContainer: {
     position: 'absolute',
     left: 40,
-    bottom: 30,
+    bottom: 80,
   },
   text: {
     fontSize: SIZE.XL,

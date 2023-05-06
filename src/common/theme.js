@@ -16,6 +16,7 @@ export const Font = {
   regular: 'Poppins-Regular',
   thin: 'Poppins-Thin',
   semiBold: 'Poppins-SemiBold',
+  DancingScript:"DancingScript-Bold"
 };
 
 export const SIZE = {

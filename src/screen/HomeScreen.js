@@ -3,16 +3,19 @@ import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import {BottomSheet} from 'react-native-sheet';
 import {Dropdown} from 'react-native-element-dropdown';
-// import RangeSlider from '@jesster2k10/react-native-range-slider';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
+import Toast from 'react-native-toast-message';
+import {t} from 'i18next';
 
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
 import Card from '../component/Card';
 import IconButton from '../component/IconButton';
-import {COLORS, HP_WP, IMAGE, SIZE,Font} from '../common/theme';
+import {COLORS, HP_WP, IMAGE, SIZE, Font} from '../common/theme';
 import photoCards from '../component/photoCards';
 
 const HomeScreen = ({navigation}) => {
+  const [loading, setLoading] = useState(false);
   const [gender, setGender] = useState('male');
   const [minSelected, setMinSelected] = useState(0);
   const [maxSelected, setMaxSelected] = useState(0);
@@ -54,9 +57,9 @@ const HomeScreen = ({navigation}) => {
         rightIcon={require('../assets/images/filter.png')}
         onPressRight={() => bottomSheet.current?.show()}
       />
-      <View style={{height: HP_WP.hp(72)}}>
+      <View style={styles.swiperContainer}>
         <Swiper
-          style={{height: HP_WP.hp(65)}}
+          style={{height: HP_WP.hp(70)}}
           ref={swiper => {
             this.swiper = swiper;
           }}
@@ -104,7 +107,7 @@ const HomeScreen = ({navigation}) => {
         height={350}
         ref={bottomSheet}>
         <GlobalHeader
-          title={'Filter'}
+          title={t('filter')}
           rightImage={true}
           rightIcon={IMAGE.check}
           drawerPress
@@ -112,7 +115,7 @@ const HomeScreen = ({navigation}) => {
           onPress={() => bottomSheet.current?.hide()}
         />
         <View style={styles.sheetContainer}>
-          <Text style={styles.distanceText}>Distance</Text>
+          <Text style={styles.distanceText}>{t('distance')}</Text>
 
           <Dropdown
             style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
@@ -125,7 +128,7 @@ const HomeScreen = ({navigation}) => {
             maxHeight={300}
             labelField="label"
             valueField="value"
-            placeholder={!isFocus ? 'Select Distance' : 'Select Distance'}
+            placeholder={t('selectDistance')}
             // searchPlaceholder="Search..."
             value={value}
             onFocus={() => setIsFocus(true)}
@@ -136,7 +139,7 @@ const HomeScreen = ({navigation}) => {
             }}
           />
 
-          <Text style={styles.distanceText}>Gender</Text>
+          <Text style={styles.distanceText}>{t('gender')}</Text>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               onPress={() => setGender('male')}
@@ -146,7 +149,7 @@ const HomeScreen = ({navigation}) => {
                   styles.buttonText,
                   {color: gender == 'male' ? COLORS.white : COLORS.light},
                 ]}>
-                Male
+                {t('male')}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -163,7 +166,7 @@ const HomeScreen = ({navigation}) => {
                   styles.buttonText,
                   {color: gender == 'female' ? COLORS.white : COLORS.light},
                 ]}>
-                Female
+                {t('female')}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -174,11 +177,11 @@ const HomeScreen = ({navigation}) => {
                   styles.buttonText,
                   {color: gender == 'shemale' ? COLORS.white : COLORS.light},
                 ]}>
-                Shemale
+                {t('shemale')}
               </Text>
             </TouchableOpacity>
           </View>
-          <Text style={styles.distanceText}>Age</Text>
+          <Text style={styles.distanceText}>{'age'}</Text>
         </View>
         {/* <RangeSlider
         style={{marginTop:10}}
@@ -194,6 +197,12 @@ const HomeScreen = ({navigation}) => {
           onChange={(min, max) => onChange(min, max)}
         /> */}
       </BottomSheet>
+      <Spinner
+        color={COLORS.purple}
+        visible={loading}
+        size="large"
+        overlayColor="rgba(0,0,0,0.5)"
+      />
     </Container>
   );
 };
@@ -201,14 +210,14 @@ const HomeScreen = ({navigation}) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
+  swiperContainer: {
+    height: HP_WP.hp(72),
+    marginTop: 30,
+  },
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: 10,
-  },
-  contentContainer: {
-    flex: 1,
-    alignItems: 'center',
   },
   sheet: {
     position: 'absolute',
@@ -248,7 +257,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: COLORS.gray,
     fontSize: SIZE.N,
-    fontFamily:Font.regular
+    fontFamily: Font.regular,
   },
   activeButton: {
     backgroundColor: COLORS.purple,
@@ -256,11 +265,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  activeButtonText: {
-    color: COLORS.white,
-    fontSize: SIZE.N,
-    fontFamily: Font.regular,
   },
   dropdown: {
     height: 34,

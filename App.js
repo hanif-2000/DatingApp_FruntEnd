@@ -1,13 +1,20 @@
-import {PermissionsAndroid, Platform, SafeAreaView} from 'react-native';
+import {
+  PermissionsAndroid,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+} from 'react-native';
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
 import Toast, {BaseToast, ErrorToast} from 'react-native-toast-message';
+import {useNetInfo} from '@react-native-community/netinfo';
 
 import AuthStack from './src/navigation/AuthStack';
 import MainStack from './src/navigation/MainStack';
-// import { fcmService } from './src/notification/fcmservice';
+import {Font} from './src/common/theme';
+import ConectionModal from './src/component/ConectionModal';
 
 Geocoder.init(
   'AIzaSyDEZIj905xo7XomPhQLZxG71RvL5zNEuYM', //  {language: 'en'}
@@ -17,12 +24,9 @@ const toastConfig = {
   success: props => (
     <BaseToast
       {...props}
-      style={{borderLeftColor: 'green'}}
+      style={styles.baseToastContainer}
       contentContainerStyle={{paddingHorizontal: 15}}
-      text1Style={{
-        fontSize: 15,
-        fontWeight: '400',
-      }}
+      text1Style={styles.baseToastText}
     />
   ),
   error: props => (
@@ -31,24 +35,31 @@ const toastConfig = {
       text1Style={{
         fontSize: 17,
       }}
-      text2Style={{
-        fontSize: 15,
-      }}
+      text2Style={styles.baseToastText}
     />
   ),
-  tomatoToast: ({text1, props}) => (
-    <View style={{height: 60, width: '100%', backgroundColor: 'red'}}>
-      <Text>{text1}</Text>
-    </View>
-  ),
+  // tomatoToast: ({text1, props}) => (
+  //   <View style={{height: 60, width: '100%', backgroundColor: 'red'}}>
+  //     <Text>{text1}</Text>
+  //   </View>
+  // ),
 };
 
 const App = () => {
+  const netInfo = useNetInfo();
+  const [isVisible, setVisible] = React.useState(false);
   const [forceLocation, setForceLocation] = React.useState(true);
   const [highAccuracy, setHighAccuracy] = React.useState(true);
   const [locationDialog, setLocationDialog] = React.useState(true);
   const [useLocationManager, setUseLocationManager] = React.useState(false);
 
+  React.useEffect(() => {
+    setTimeout(() => {
+      if (!netInfo.isConnected) {
+        setVisible(true);
+      }
+    }, 1000);
+  }, []);
 
   React.useEffect(() => {
     async function fetchData() {
@@ -153,9 +164,6 @@ const App = () => {
 
     Geolocation.getCurrentPosition(
       position => {
-        console.warn(position.coords.latitude);
-        console.warn(position.coords.longitude);
-
         // setLat(position.coords.latitude);
         // setLong(position.coords.longitude);
       },
@@ -177,9 +185,6 @@ const App = () => {
       },
     );
   };
-
-
-
 
   useEffect(() => {
     // handler()
@@ -208,6 +213,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
+      {!netInfo.isConnected && <ConectionModal isVisible={isVisible} />}
       <AuthStack />
       <Toast config={toastConfig} />
     </NavigationContainer>
@@ -215,3 +221,12 @@ const App = () => {
 };
 
 export default App;
+const styles = StyleSheet.create({
+  baseToastText: {
+    fontSize: 15,
+    fontFamily: Font.medium,
+  },
+  baseToastContainer: {
+    borderLeftColor: 'green',
+  },
+});

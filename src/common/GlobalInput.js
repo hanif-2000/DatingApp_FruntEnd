@@ -114,10 +114,6 @@ const styles = StyleSheet.create({
     fontFamily: Font.medium,
     lineHeight:20
   },
-  iconStyle: {
-    height: HP_WP.hp(2.5),
-    width: HP_WP.wp(5),
-  },
   errorText: {
     fontSize: SIZE.S,
     fontFamily: Font.regular,

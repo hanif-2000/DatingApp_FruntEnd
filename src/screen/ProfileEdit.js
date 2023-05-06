@@ -1,15 +1,21 @@
-import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import React, {useState} from 'react';
 import {CountryPicker} from 'react-native-country-codes-picker';
+import Moment from 'moment';
+import {t} from 'i18next';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
+import Toast from 'react-native-toast-message';
+
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
 import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
 import GlobalInput from '../common/GlobalInput';
 import GlobalButton from '../common/GlobalButton';
-import Moment from 'moment';
 
 const ProfileEdit = ({navigation}) => {
+  const [loading, setLoading] = useState(false);
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [date, setDate] = useState();
 
@@ -25,19 +31,19 @@ const ProfileEdit = ({navigation}) => {
     setDatePickerVisibility(false);
   };
 
-  const handleConfirm = (date) => {
+  const handleConfirm = date => {
     setDate(Moment(date).format('DD-MM-YYYY'));
     hideDatePicker();
-    console.warn('date',date);
+    console.warn('date', date);
   };
   return (
     <Container>
       <GlobalHeader
-        title={'Edit'}
+        title={t('edit')}
         mainContainer={{marginHorizontal: HP_WP.wp(4)}}
       />
       <View style={styles.mainContainer}>
-        <Text style={styles.accountSettings}>Account Settings</Text>
+        <Text style={styles.accountSettings}>{t('accountSettings')}</Text>
         <GlobalInput placeholder={'Jenny'} inputStyle={{marginTop: 10}} />
         <GlobalInput
           placeholder="9876543210"
@@ -66,7 +72,7 @@ const ProfileEdit = ({navigation}) => {
         <GlobalButton
           onPress={() => navigation.goBack()}
           Style={styles.button}
-          title={'Save'}
+          title={t('save')}
         />
       </View>
       <CountryPicker
@@ -88,6 +94,12 @@ const ProfileEdit = ({navigation}) => {
         maximumDate={new Date(Date.now() - 86400000)}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
+      />
+      <Spinner
+        color={COLORS.purple}
+        visible={loading}
+        size="large"
+        overlayColor="rgba(0,0,0,0.5)"
       />
     </Container>
   );

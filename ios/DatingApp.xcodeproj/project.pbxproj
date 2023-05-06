@@ -40,6 +40,8 @@
 		BE20C10876914DFEA0EADB10 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFE078E9475D47D69E746D65 /* Poppins-Bold.ttf */; };
 		D974D40A9D6A443FB70B596E /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 689A395167794BF783D900EB /* Poppins-Black.ttf */; };
 		F8B80FE718AC489F85E61EB1 /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFE23432091A47B881D88022 /* Poppins-ExtraBold.ttf */; };
+		57C1560A93D045949A337BDD /* DancingScript-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFAB487110D346B6BA7D91AB /* DancingScript-SemiBold.ttf */; };
+		5538BBAAB1B74A77AE4FA665 /* DancingScript-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C656AA1FE6ED411997AFD015 /* DancingScript-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +99,8 @@
 		EE0CEDAD60D24DF5B3461878 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../src/assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		EFE078E9475D47D69E746D65 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		EFE23432091A47B881D88022 /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-ExtraBold.ttf"; path = "../src/assets/fonts/Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
+		EFAB487110D346B6BA7D91AB /* DancingScript-SemiBold.ttf */ = {isa = PBXFileReference; name = "DancingScript-SemiBold.ttf"; path = "../src/assets/fonts/DancingScript-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C656AA1FE6ED411997AFD015 /* DancingScript-Bold.ttf */ = {isa = PBXFileReference; name = "DancingScript-Bold.ttf"; path = "../src/assets/fonts/DancingScript-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +177,8 @@
 				EE0CEDAD60D24DF5B3461878 /* Poppins-SemiBold.ttf */,
 				60C7C47DAF80404588F4192F /* Poppins-Thin.ttf */,
 				A214F9DA1B874F5EA4848C6D /* OFL.txt */,
+				EFAB487110D346B6BA7D91AB /* DancingScript-SemiBold.ttf */,
+				C656AA1FE6ED411997AFD015 /* DancingScript-Bold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -358,6 +364,8 @@
 				BDABFADCDCBF4E6DBB6E9808 /* Poppins-SemiBold.ttf in Resources */,
 				63B9A9D9D11B4610B8D47AB3 /* Poppins-Thin.ttf in Resources */,
 				25158DE7E96B45BD9FAA00D5 /* OFL.txt in Resources */,
+				57C1560A93D045949A337BDD /* DancingScript-SemiBold.ttf in Resources */,
+				5538BBAAB1B74A77AE4FA665 /* DancingScript-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
