@@ -15,6 +15,8 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {BlurView} from '@react-native-community/blur';
 import {Dropdown} from 'react-native-element-dropdown';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
+import MultiSlider from '@ptomasroos/react-native-multi-slider';
+import LinearGradient from 'react-native-linear-gradient';
 import {Icon} from 'react-native-elements';
 import {t} from 'i18next';
 import Toast from 'react-native-toast-message';
@@ -36,9 +38,9 @@ const Profile = ({navigation}) => {
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
 
-  const [minSelected, setMinSelected] = useState(0);
-  const [maxSelected, setMaxSelected] = useState(0);
-  const [distance, setDistance] = useState(0);
+  const [minimumSlideValue, setMinimumSlideValue] = useState([100]);
+  const [maximumSlideValue, setMaximumSliderValue] = useState([18]);
+  const [changeValue, setChangeValue] = useState(0);
 
   const [preferredLanguages, setPreferredLanguages] = useState([
     {
@@ -220,7 +222,6 @@ const Profile = ({navigation}) => {
               )}
             </View>
           </TouchableOpacity>
-
           <View style={styles.ageRangeMainContainer}>
             <View style={styles.ageRangeContainer}>
               <Text style={styles.dropDownTitle}>{t('ageRange')}</Text>
@@ -256,7 +257,7 @@ const Profile = ({navigation}) => {
               ]}>
               {groupChat && (
                 <Icon name={'done'} size={15} color={COLORS.white} />
-              )}
+                )}
             </View>
           </TouchableOpacity>
           {groupChat && (
@@ -320,7 +321,6 @@ const Profile = ({navigation}) => {
               {network && <Icon name={'done'} size={15} color={COLORS.white} />}
             </View>
           </TouchableOpacity>
-
           <View style={styles.ageRangeMainContainer}>
             <View style={styles.ageRangeContainer}>
               <Text style={styles.dropDownTitle}>{t('maximumDistance')}</Text>
