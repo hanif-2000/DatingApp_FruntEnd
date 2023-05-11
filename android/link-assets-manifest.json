@@ -2,6 +2,14 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "src/assets/fonts/DancingScript-Bold.ttf",
+      "sha1": "f903ff117b4b4ed6a71e19745ce380cceb0e561c"
+    },
+    {
+      "path": "src/assets/fonts/DancingScript-SemiBold.ttf",
+      "sha1": "931d54cf0a5753a5267a4d5c7036bdb2b24906d6"
+    },
+    {
       "path": "src/assets/fonts/OFL.txt",
       "sha1": "8d6c34b70e3d638c82d7b5aba3f847f7d6d2c831"
     },

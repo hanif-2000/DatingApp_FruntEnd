@@ -10,6 +10,9 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Modal from 'react-native-modal';
 import {Icon} from 'react-native-elements';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
+import {t} from 'i18next';
+import Toast from 'react-native-toast-message';
 
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
@@ -19,6 +22,7 @@ import GlobalButton from '../common/GlobalButton';
 import useAppData from '../service/AppData';
 
 const LikeScreen = ({navigation}) => {
+  const [loading, setLoading] = useState(false);
   const [isVisible, setVisible] = useState(false);
   const [currentPlan, setCurrentPlan] = useState('6');
   const [{upgraded}] = useAppData();
@@ -68,7 +72,7 @@ const LikeScreen = ({navigation}) => {
   const ModalUI = () => {
     return (
       <View style={styles.topCardContainer}>
-        <Text style={styles.bottomCardTopText}>Get Mingle Gold</Text>
+        <Text style={styles.bottomCardTopText}>{t('getGold')}</Text>
         <LinearGradient
           start={{x: 1, y: 0.8}}
           end={{x: 0.1, y: 0.5}}
@@ -76,8 +80,8 @@ const LikeScreen = ({navigation}) => {
           style={styles.heartContainer}>
           <Icon name={'heart'} type="entypo" size={25} color={COLORS.white} />
         </LinearGradient>
-        <Text style={styles.likesText}>Unlimited Likes</Text>
-        <Text style={styles.manyLikes}>Send as many likes as you want</Text>
+        <Text style={styles.likesText}>{t('unlimitedLikes')}</Text>
+        <Text style={styles.manyLikes}>{t('sendManyLikes')}</Text>
         <View style={styles.dotContainer}>
           <TouchableOpacity style={styles.dot} />
           <TouchableOpacity style={styles.dot} />
@@ -142,7 +146,7 @@ const LikeScreen = ({navigation}) => {
         </View>
         <GlobalButton
           onPress={Modalclose}
-          title={'CONTINUE'}
+          title={t('continue')}
           Style={{backgroundColor: COLORS.darkYellow, marginTop: 20}}
         />
       </View>
@@ -151,9 +155,9 @@ const LikeScreen = ({navigation}) => {
 
   return (
     <Container>
-      <GlobalHeader title={'Like'} mainContainer={styles.header} />
+      <GlobalHeader title={t('like')} mainContainer={styles.header} />
       <View style={{flex: 1}}>
-        <Text style={styles.likeText}>7 Likes</Text>
+        <Text style={styles.likeText}>{t('likes')}</Text>
         <FlatList
           style={styles.flatList}
           showsVerticalScrollIndicator={false}
@@ -175,7 +179,7 @@ const LikeScreen = ({navigation}) => {
             </TouchableOpacity>
           )}
         />
-        <GlobalButton Style={styles.button} title={'SEE WHO LIKES YOU'} />
+        <GlobalButton Style={styles.button} title={t('seeLike')} />
       </View>
       <Modal
         style={{margin: 0}}
@@ -192,6 +196,12 @@ const LikeScreen = ({navigation}) => {
         onBackdropPress={Modalclose}>
         <ModalUI />
       </Modal>
+      <Spinner
+        color={COLORS.purple}
+        visible={loading}
+        size="large"
+        overlayColor="rgba(0,0,0,0.5)"
+      />
     </Container>
   );
 };
@@ -291,19 +301,6 @@ const styles = StyleSheet.create({
     borderColor: '#C0C0C0',
     marginHorizontal: 4,
   },
-  // dotMainContainer: {
-  //   marginVertical: 10,
-  //   alignSelf: 'center',
-  //   flex: 1,
-  // },
-  // dotContainer: {
-  //   width: 10,
-  //   height: 10,
-  //   borderRadius: 50,
-  //   marginHorizontal: 5,
-  //   borderWidth: 0.5,
-  //   borderColor: '#C0C0C0',
-  // },
   card: {
     borderWidth: 0.8,
     width: '33.34%',

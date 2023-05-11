@@ -49,7 +49,7 @@ const GlobalHeader = ({
         </TouchableOpacity>
       </View>
       {logo ? (
-        <Image source={IMAGE.logo2} style={styles.logo} />
+        <Image source={IMAGE.Logo} style={styles.logo} />
       ) : (
         <Text style={[styles.titles, headerTitles]}>{title}</Text>
       )}
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     fontFamily: Font.semiBold,
   },
   logo: {
-    height: HP_WP.hp(3),
+    height: HP_WP.hp(4),
     width: HP_WP.wp(30),
     resizeMode: 'contain',
     flex: 1,

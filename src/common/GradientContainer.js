@@ -12,15 +12,15 @@ import LinearGradient from 'react-native-linear-gradient';
 const GradientContainer = ({children}) => {
   return (
     <LinearGradient
-      start={{x: 0.9, y: 0}}
-      end={{x: 0.9, y: 0.9}}
-      colors={[COLORS.lightPurple, COLORS.black]}
+      start={{x: 0, y: 0}}
+      end={{x: 0, y:.7}}
+      colors={[COLORS.purple, COLORS.black]}
       style={styles.linearGradient}>
-      <SafeAreaView style={styles.safeAreaViewStyle}>
+      <SafeAreaView style={[styles.linearGradient,{backgroundColor: 'transparent'}]}>
         <View style={styles.container}>
           <StatusBar
             animated={true}
-            backgroundColor={COLORS.lightPurple}
+            backgroundColor={COLORS.purple}
             barStyle={'light-content'}
           />
           <KeyboardAvoidingView
@@ -44,9 +44,5 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     flex: 1,
-  },
-  safeAreaViewStyle: {
-    flex: 1,
-    backgroundColor: 'transparent',
   },
 });
