@@ -1,18 +1,14 @@
 import React from 'react';
 import { StyleSheet, Image, Text, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-<<<<<<< HEAD
-=======
-import { LoginManager, ShareDialog } from 'react-native-fbsdk-next';
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import auth from '@react-native-firebase/auth';
 
-
->>>>>>> main
 import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 import GradientContainer from '../common/GradientContainer';
 import { useStore } from '../service/AppData';
-import { LoginManager, AccessToken } from 'react-native-fbsdk';
-import auth from '@react-native-firebase/auth';
+
 
 // https://jadeen.firebaseapp.com/__/auth/handler
 

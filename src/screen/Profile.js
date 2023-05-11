@@ -258,6 +258,7 @@ const Profile = ({navigation}) => {
               ]}>
               {groupChat && (
                 <Icon name={'done'} size={15} color={COLORS.white} />
+              )}
             </View>
           </TouchableOpacity>
           {groupChat && (
