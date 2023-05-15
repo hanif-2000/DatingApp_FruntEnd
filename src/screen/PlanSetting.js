@@ -175,8 +175,8 @@ const styles = StyleSheet.create({
     marginRight: 6,
   },
   free: {
-    color: COLORS.lightGray,
-    fontSize: SIZE.N,
+    color: COLORS.black,
+    fontSize: SIZE.M,
     fontFamily: Font.light,
   },
   buttonContainer: {

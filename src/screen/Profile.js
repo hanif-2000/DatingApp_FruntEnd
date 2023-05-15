@@ -225,9 +225,9 @@ const Profile = ({navigation}) => {
           <View style={styles.ageRangeMainContainer}>
             <View style={styles.ageRangeContainer}>
               <Text style={styles.dropDownTitle}>{t('ageRange')}</Text>
-              <Text>
+              {/* <Text>
                 {minSelected}-{maxSelected}
-              </Text>
+              </Text> */}
             </View>
 
             {/* <RangeSlider
@@ -324,10 +324,10 @@ const Profile = ({navigation}) => {
           <View style={styles.ageRangeMainContainer}>
             <View style={styles.ageRangeContainer}>
               <Text style={styles.dropDownTitle}>{t('maximumDistance')}</Text>
-              <Text>
+              {/* <Text>
                 {distance}
                 {t('km')}
-              </Text>
+              </Text> */}
             </View>
 
             {/* <RangeSlider
