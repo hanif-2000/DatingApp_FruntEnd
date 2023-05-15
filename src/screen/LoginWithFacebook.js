@@ -1,25 +1,66 @@
-import React from 'react';
-import { StyleSheet, Image, Text, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
-import GlobalButton from '../common/GlobalButton';
-import GradientContainer from '../common/GradientContainer';
-import { useStore } from '../service/AppData';
-import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Image,
+  Text,
+  StatusBar,
+  TouchableOpacity,
+  View,
+  Pressable,
+  FlatList,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
+import {useTranslation} from 'react-i18next';
+import Spinner from 'react-native-loading-spinner-overlay/lib';
+import '../language/i18n';
+import Toast from 'react-native-toast-message';
+import {useStore} from '../service/AppData';
+import {LoginManager, AccessToken} from 'react-native-fbsdk';
 import auth from '@react-native-firebase/auth';
+
+import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
+import GlobalButton from '../common/GlobalButton';
 
 // https://jadeen.firebaseapp.com/__/auth/handler
 
 const LoginWithFacebook = () => {
-  const { setToken, setUserData } = useStore()
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [languages, setLanguages] = useState(null);
+  const [currentLanguage, setCurrentLanguage] = useState('ENGLISH');
+
+  const {t, i18n} = useTranslation();
+
+  const DATA = [
+    {
+      language: 'ENGLISH',
+    },
+    {
+      language: 'ALBANIAN',
+    },
+  ];
+
+  const changeLanguage = value => {
+    i18n
+      .changeLanguage(value)
+      .then(() => {
+        setCurrentLanguage(value);
+        setLanguages(value);
+        setVisible(false);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const {setToken, setUserData} = useStore();
   // const [accessToken, setAccessToken] = React.useState(null);
   let Route = useNavigation();
 
   const facebookLogin = async () => {
     try {
-      LoginManager.logOut()
-      if (Platform.OS === "android") {
-        LoginManager.setLoginBehavior("web_only")
+      LoginManager.logOut();
+      if (Platform.OS === 'android') {
+        LoginManager.setLoginBehavior('web_only');
       }
       const result = await LoginManager.logInWithPermissions([
         'public_profile',
@@ -37,9 +78,9 @@ const LoginWithFacebook = () => {
       );
       const userData = await auth().signInWithCredential(facebookCredential);
       console.warn('userData-----', userData);
-      const { additionalUserInfo, user } = userData
-      const { profile } = additionalUserInfo
-      const { uid, displayName, email } = user
+      const {additionalUserInfo, user} = userData;
+      const {profile} = additionalUserInfo;
+      const {uid, displayName, email} = user;
       // handleSocialLogin(uid, 'facebook', email, displayName, profile?.first_name, profile?.last_name)
     } catch (error) {
       console.warn('error------>', error);
@@ -47,38 +88,65 @@ const LoginWithFacebook = () => {
   };
 
   return (
-    <GradientContainer translucent={false} hidden={false}>
-      <Image source={IMAGE.Logo} style={styles.logo} resizeMode="contain" />
-      <Text style={styles.txt}>
-        By clicking Log In, you agree with our{' '}
-        <Text style={styles.underLineText}>Terms.</Text>
-        {'\n'}Learn how we process your data in our{' '}
-        <Text style={styles.underLineText}>Privacy{'\n'}Policy</Text> and{' '}
-        <Text style={styles.underLineText}>Cookies Policy.</Text>
-      </Text>
-      <GlobalButton
-        icon
-        onPress={() => facebookLogin()}
-        title={'LOGIN WITH FACEBOOK'}
-        textStyle={{ color: COLORS.black }}
-        Style={{ backgroundColor: COLORS.white }}
-      />
-      {/* <View style={{
-        borderRadius: 30,
-        height: HP_WP.hp(5.5),
-        width: HP_WP.wp(75),
-        alignSelf: 'center',
-        alignItems: 'center',
-
-      }}>
-        <LoginButton
-          onLoginFinished={() => {
-            handleLogin()
-          }}
+    <LinearGradient
+      start={{x: 0, y: 0.2}}
+      end={{x: 0, y: 0.8}}
+      colors={[COLORS.white, COLORS.purple, COLORS.black]}
+      style={styles.linearGradient}>
+      <StatusBar backgroundColor={COLORS.white} barStyle={'dark-content'} />
+      <Pressable onPress={() => setVisible(false)} style={{flex: 1}}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.choseLanguageBtn}
+          onPress={() => setVisible(true)}>
+          <Text style={styles.choseLanguageText}>
+            {languages == null ? 'Select Language' : currentLanguage}
+          </Text>
+        </TouchableOpacity>
+        <Image source={IMAGE.Logo} style={styles.logo} resizeMode="contain" />
+        <Text style={styles.txt}>
+          {t('youAgree')} <Text style={styles.underLineText}>{t('terms')}</Text>
+          {'\n'}
+          {t('learnProcess')}{' '}
+          <Text style={styles.underLineText}>
+            {t('privacy')}
+            {'\n'}
+            {t('policy')}
+          </Text>{' '}
+          {t('and')}{' '}
+          <Text style={styles.underLineText}>{t('cookiesPolicy')}</Text>
+        </Text>
+        <GlobalButton
+          textStyle={styles.buttonText}
+          icon
+          // onPress={() => facebookLogin()}
+          onPress={() => Route.navigate('LoginWithPhone')}
+          title={t('loginFacebook')}
+          Style={styles.button}
         />
-      </View> */}
-
-    </GradientContainer>
+        {visible == true && (
+          <View style={styles.languageModal}>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              data={DATA}
+              renderItem={({item}) => (
+                <TouchableOpacity
+                  onPress={() => changeLanguage(item.language)}
+                  style={{paddingVertical: 3}}>
+                  <Text style={styles.language}>{item.language}</Text>
+                </TouchableOpacity>
+              )}
+            />
+          </View>
+        )}
+      </Pressable>
+      <Spinner
+        color={COLORS.purple}
+        visible={loading}
+        size="large"
+        overlayColor="rgba(0,0,0,0.5)"
+      />
+    </LinearGradient>
   );
 };
 
