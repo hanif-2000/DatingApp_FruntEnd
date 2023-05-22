@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {CountryPicker} from 'react-native-country-codes-picker';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
@@ -10,12 +10,43 @@ import Container from '../common/Container';
 import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 import GlobalInput from '../common/GlobalInput';
+import {numberVerify} from '../service/API';
 
 const LoginWithPhone = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [openCountryPicker, setOpenCountryPicker] = useState(false);
   const [countryCode, setCountryCode] = useState('IN +91');
   const [isCounty, setCountry] = useState();
+  const [number, setNumber] = useState('6376969559');
+
+  const onHandle = () => {
+    if (number.length < 8) {
+      Alert.alert('Check Number');
+    } else {
+      let body = {countryCode: countryCode, number: number, user_id: 1};
+      setLoading(true);
+      numberVerify(body, onResponse, onError);
+    }
+  };
+
+  const onResponse = res => {
+    setLoading(false);
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: res.message,
+    });
+    navigation.navigate('OtpVerification');
+  };
+
+  const onError = err => {
+    setLoading(false);
+    Toast.show({
+      type: 'error',
+      position: 'top',
+      text1: err.data.error,
+    });
+  };
 
   return (
     <Container Style={styles.container}>
@@ -25,6 +56,8 @@ const LoginWithPhone = ({navigation}) => {
         <GlobalInput
           placeholder={t('phoneNumber')}
           keyboardType={'number-pad'}
+          value={number}
+          onChange={t => setNumber(t)}
           numberInput
           countryCode
           code={[isCounty, ' ', countryCode]}
@@ -35,15 +68,13 @@ const LoginWithPhone = ({navigation}) => {
         />
         <Text style={styles.bottomText}>
           {t('youAgreeWithTerms')}
-          <Text style={styles.touchableText}>
-            {' '}
-            {t('processYourData')}
-          </Text>
+          <Text style={styles.touchableText}> {t('processYourData')}</Text>
         </Text>
         <GlobalButton
           Style={styles.buttonStyle}
           title={t('continue')}
-          onPress={() => navigation.navigate('OtpVerification')}
+          onPress={onHandle}
+          // onPress={() => navigation.navigate('OtpVerification')}
         />
       </View>
       <CountryPicker
