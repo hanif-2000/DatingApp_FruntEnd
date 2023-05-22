@@ -15,12 +15,12 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
-    top: HP_WP.hp(-6),
+    top: HP_WP.hp(-5),
   },
   image: {
     borderRadius: 30,
     width: '100%',
-    height: HP_WP.hp(80),
+    height: HP_WP.hp(75),
   },
   photoDescriptionContainer: {
     position: 'absolute',

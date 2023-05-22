@@ -9,13 +9,40 @@ import Container from '../common/Container';
 import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
 import GlobalHeader from '../common/GlobalHeader';
 import GlobalButton from '../common/GlobalButton';
+import {otpVerify} from '../service/API';
 
 const OtpVerification = ({navigation}) => {
   const [loading, setLoading] = useState(false);
-  const [clearOTP, setClearOTP] = useState(false);
   const [otp, setOtp] = useState('');
   const [otpError, setOtpError] = useState('');
 
+  const onHandle = () => {
+    if (otp.length < 6) {
+      setOtpError('success');
+    } else {
+      let body = {user_id: 1, otp: otp};
+      setLoading(true);
+      otpVerify(body, onResponse, onError);
+    }
+  };
+  const onResponse = res => {
+    setLoading(false);
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: res.message,
+    });
+    navigation.navigate('MainStack', {screen: 'Home'})
+  };
+
+  const onError = err => {
+    setLoading(false);
+    Toast.show({
+      type: 'error',
+      position: 'top',
+      text1: err.error,
+    });
+  };
   return (
     <Container Style={styles.container}>
       <GlobalHeader />
@@ -23,21 +50,25 @@ const OtpVerification = ({navigation}) => {
         <Text style={styles.smsCode}>{t('enterCode')}</Text>
         <OTPInputView
           style={styles.OtpInputStyle}
-          pinCount={4}
+          pinCount={6}
           keyboardType={'phone-pad'}
           autoFocusOnLoad
           codeInputFieldStyle={styles.underlineStyleBase}
+          onCodeChanged={code => setOtp(code)}
           onCodeFilled={code => {
-            console.log(`Code is ${code}, you are good to go!`);
+            setOtp(code);
+            setOtpError('');
           }}
         />
+        {otpError && <Text style={{color:COLORS.orange,marginTop:2,fontSize:SIZE.M}}>Enter OTP</Text>}
         <TouchableOpacity style={{alignSelf: 'center'}}>
           <Text style={styles.bottomText}>{t('resend')}</Text>
         </TouchableOpacity>
         <GlobalButton
           Style={styles.buttonStyle}
           title={t('continue')}
-          onPress={() => navigation.navigate('MainStack', {screen: 'Home'})}
+          onPress={onHandle}
+          // onPress={() => navigation.navigate('MainStack', {screen: 'Home'})}
         />
       </View>
       <Spinner
@@ -71,7 +102,7 @@ const styles = StyleSheet.create({
     marginTop: HP_WP.hp(4),
   },
   underlineStyleBase: {
-    width: HP_WP.wp(15),
+    width: HP_WP.wp(10),
     borderWidth: 0,
     borderBottomWidth: 1.5,
     borderBottomColor: COLORS.gray,

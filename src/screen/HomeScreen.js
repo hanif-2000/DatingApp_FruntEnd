@@ -55,7 +55,6 @@ const HomeScreen = ({navigation}) => {
       />
       <View style={styles.swiperContainer}>
         <Swiper
-          style={{height: HP_WP.hp(70)}}
           ref={swiper => {
             this.swiper = swiper;
           }}
@@ -221,8 +220,7 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   swiperContainer: {
-    height: HP_WP.hp(72),
-    marginTop: 30,
+    height: HP_WP.hp(70),
   },
   buttonsContainer: {
     flexDirection: 'row',
