@@ -16,12 +16,16 @@ import Spinner from 'react-native-loading-spinner-overlay/lib';
 import '../language/i18n';
 import Toast from 'react-native-toast-message';
 import {useStore} from '../service/AppData';
-import {LoginManager, AccessToken} from 'react-native-fbsdk';
+// import {LoginManager, AccessToken} from 'react-native-fbsdk';
+import { Settings,LoginButton,LoginManager, AccessToken } from 'react-native-fbsdk-next';
+
 import auth from '@react-native-firebase/auth';
 
 
 import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
+Settings.setAppID('948968476240075');
+Settings.initializeSDK();
 
 // https://jadeen.firebaseapp.com/__/auth/handler
 
@@ -120,8 +124,8 @@ const LoginWithFacebook = () => {
         <GlobalButton
           textStyle={styles.buttonText}
           icon
-          // onPress={() => facebookLogin()}
-          onPress={() => Route.navigate('LoginWithPhone')}
+          onPress={() => facebookLogin()}
+          // onPress={() => Route.navigate('LoginWithPhone')}
           title={t('loginFacebook')}
           Style={styles.button}
         />
