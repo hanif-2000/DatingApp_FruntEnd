@@ -1,30 +1,30 @@
-import { create } from 'zustand';
+import {create} from 'zustand';
 
 export const useStore = create(set => ({
   upgraded: false,
-  userData:{},
-  token:null,
+  userData: {},
+  token: null,
 
-  setUpgraded: (upgraded) =>
+  setUpgraded: upgraded =>
     set(() => ({
       upgraded: upgraded,
     })),
-    setUserData: (userData) =>
+  setUserData: userData =>
     set(() => ({
       userData: userData,
     })),
-setToken: (token) =>
-set(() => ({
-  token: token,
-})),
+  setToken: token =>
+    set(() => ({
+      token: token,
+    })),
 }));
 
 export default () => {
   return [
     {
-      upgraded: useStore((state) => state.upgraded),
-      userData: useStore((state) => state.userData),
-      token: useStore((state) => state.token),
+      upgraded: useStore(state => state.upgraded),
+      userData: useStore(state => state.userData),
+      token: useStore(state => state.token),
     },
   ];
 };

@@ -124,8 +124,8 @@ const LoginWithFacebook = () => {
         <GlobalButton
           textStyle={styles.buttonText}
           icon
-          onPress={() => facebookLogin()}
-          // onPress={() => Route.navigate('LoginWithPhone')}
+          // onPress={() => facebookLogin()}
+          onPress={() => Route.navigate('LoginWithPhone')}
           title={t('loginFacebook')}
           Style={styles.button}
         />

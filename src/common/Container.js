@@ -5,6 +5,8 @@ import {
   StatusBar,
   View,
   SafeAreaView,
+  Pressable,
+  Keyboard,
 } from 'react-native';
 import {COLORS, HP_WP} from './theme';
 
@@ -19,11 +21,13 @@ const Container = ({isLight, translucent, children, Style, hidden}) => {
           translucent={translucent}
           hidden={hidden ? true : false}
         />
+        <Pressable onPress={() => Keyboard.dismiss()} style={{flex:1}}>
         <KeyboardAvoidingView
           style={{flex: 1}}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           {children}
         </KeyboardAvoidingView>
+        </Pressable>
       </View>
     </SafeAreaView>
   );
