@@ -14,22 +14,19 @@ import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
-import '../language/i18n';
 import Toast from 'react-native-toast-message';
-import { useStore } from '../service/AppData';
-// import {LoginManager, AccessToken} from 'react-native-fbsdk';
-import { Settings, LoginButton, LoginManager, AccessToken } from 'react-native-fbsdk-next';
-import { LoginWithFacebook_API } from '../service/API'
 import auth from '@react-native-firebase/auth';
+import { Settings,LoginManager, AccessToken } from 'react-native-fbsdk-next';
 
-
+import '../language/i18n';
+import { useStore } from '../service/AppData';
+import { LoginWithFacebook_API } from '../service/API'
 import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 import { fcmService } from '../notification/fcmservice';
+
 Settings.setAppID('948968476240075');
 Settings.initializeSDK();
-
-// https://jadeen.firebaseapp.com/__/auth/handler
 
 const LoginWithFacebook = () => {
   const [loading, setLoading] = useState(false);
