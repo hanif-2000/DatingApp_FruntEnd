@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import Toast from 'react-native-toast-message';
 import auth from '@react-native-firebase/auth';
-import { Settings,LoginManager, AccessToken } from 'react-native-fbsdk-next';
+import { Settings, LoginManager, AccessToken } from 'react-native-fbsdk-next';
 
 import '../language/i18n';
 import { useStore } from '../service/AppData';
@@ -56,7 +56,7 @@ const LoginWithFacebook = () => {
       .catch(err => console.log(err));
   };
 
-  const { setFcmToken, setUserData,setUserId,setAccessToken } = useStore();
+  const { setFcmToken, setUserData, setUserId, setAccessToken } = useStore();
   let Route = useNavigation();
 
   const facebookLogin = async () => {
@@ -148,7 +148,8 @@ const LoginWithFacebook = () => {
           <GlobalButton
             textStyle={styles.buttonText}
             icon
-            onPress={() => facebookLogin()}
+            onPress={() => Route.replace('MainStack', { screen: 'Home' })}
+            //  facebookLogin()}
             title={t('loginFacebook')}
             Style={styles.button}
           />

@@ -42,7 +42,7 @@ const Match = () => {
 
   useEffect(() => {
     setLoading(true)
-    handleFacebookLogin()
+    // handleFacebookLogin()
   }, [])
   const handleFacebookLogin = async () => {
     try {
