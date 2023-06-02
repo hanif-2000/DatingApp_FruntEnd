@@ -21,7 +21,7 @@ const Container = ({isLight, translucent, children, Style, hidden}) => {
           translucent={translucent}
           hidden={hidden ? true : false}
         />
-        <Pressable onPress={() => Keyboard.dismiss()} style={{flex:1}}>
+        <Pressable onPress={() => Keyboard.dismiss()}  style={{flex: 1}}>
         <KeyboardAvoidingView
           style={{flex: 1}}
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.white,
+    flexGrow:1
   },
   container: {
     flexGrow: 1,

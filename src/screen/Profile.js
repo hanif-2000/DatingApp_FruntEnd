@@ -4,30 +4,33 @@ import {
   ImageBackground,
   Modal,
   Pressable,
+  SafeAreaView,
   ScrollView,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {BlurView} from '@react-native-community/blur';
-import {Dropdown} from 'react-native-element-dropdown';
+import React, { useState } from 'react';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { BlurView } from '@react-native-community/blur';
+import { Dropdown } from 'react-native-element-dropdown';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import LinearGradient from 'react-native-linear-gradient';
-import {Icon} from 'react-native-elements';
-import {t} from 'i18next';
+import { Icon } from 'react-native-elements';
+import { t } from 'i18next';
 import Toast from 'react-native-toast-message';
 
 import GlobalHeader from '../common/GlobalHeader';
-import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
+import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import GlobalInput from '../common/GlobalInput';
 import GlobalButton from '../common/GlobalButton';
-import Container from '../common/Container';
+import useAppData, { useStore } from '../service/AppData';
+import { Logout_Api } from '../service/API';
 
-const Profile = ({navigation}) => {
+const Profile = ({ navigation }) => {
   const [nameOfFile, setNameOfFile] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -37,6 +40,10 @@ const Profile = ({navigation}) => {
   const [groupChat, setGroupChat] = useState(false);
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
+
+  // data geting from zustand
+  const [{ userData, userId, accessToken }] = useAppData();
+  console.warn(userData?.additionalUserInfo?.profile?.picture?.data?.url);
 
   const [minimumSlideValue, setMinimumSlideValue] = useState([100]);
   const [maximumSlideValue, setMaximumSliderValue] = useState([18]);
@@ -74,7 +81,7 @@ const Profile = ({navigation}) => {
     },
   ]);
   const chooseFromGallery = () => {
-    launchImageLibrary({selectionLimit: 1, mediaType: 'photo'})
+    launchImageLibrary({ selectionLimit: 1, mediaType: 'photo' })
       .then(images => {
         setNameOfFile(images.assets[0]);
         setModalVisible(false);
@@ -85,7 +92,7 @@ const Profile = ({navigation}) => {
   };
 
   const chooseFromCamera = () => {
-    launchCamera({mediaType: 'photo'})
+    launchCamera({ mediaType: 'photo' })
       .then(image => {
         setModalVisible(false);
         setNameOfFile(image.assets[0]);
@@ -94,243 +101,266 @@ const Profile = ({navigation}) => {
         setModalVisible(false);
       });
   };
+
+  const onLogOut = () => {
+    const formData = new FormData();
+    formData.append('data', JSON.stringify([{ "user_id": userId, 'jwt_token': accessToken }]));
+    Logout_Api(formData,onLogoutResponse,onLogoutError)
+  }
+
+  const onLogoutResponse = (data) => {
+    setLoading(false)
+    console.log('onResponse---', data.id);
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: data.message,
+    });
+  }
+  const onLogoutError = (e) => {
+    setLoading(false)
+    console.warn('onError--', e);
+  }
+
   return (
-    // <LinearGradient
-    //   start={{x: 0, y: 0}}
-    //   end={{x: 2, y: 0}}
-    //   locations={[0, 0.4]}
-    //   colors={[COLORS.black, COLORS.lightPurple]}
-    //   style={styles.linearGradient}>
-    <Container>
+    <>
       <ImageBackground
         source={IMAGE.profileBgImage}
         resizeMode="stretch"
         style={styles.bgImg}>
         <GlobalHeader
-          mainContainer={{paddingHorizontal: HP_WP.wp(5)}}
+          mainContainer={{ paddingHorizontal: HP_WP.wp(5) }}
           light
           title={t('profile')}
           headerTitles={styles.headerText}
         />
+        <StatusBar backgroundColor={COLORS.white} barStyle={'light-content'} />
         <View style={styles.mainContainer}>
-          <View style={{alignSelf: 'center'}}>
-            <Image source={IMAGE.Profile} style={styles.profileImg} />
+          <View style={{ alignSelf: 'center' }}>
+            <Image source={{ uri: userData?.additionalUserInfo?.profile?.picture?.data?.url }} style={styles.profileImg} />
             <TouchableOpacity
               style={styles.imageEdit}
               onPress={() => setModalVisible(true)}>
               <Icon name={'edit'} size={15} color={COLORS.purple} />
             </TouchableOpacity>
-            <Text style={styles.nameText}>Jenny, 22</Text>
+            <Text style={styles.nameText}>{userData?.user?.displayName}, 22</Text>
           </View>
         </View>
       </ImageBackground>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.mainContainer}>
-          <View style={styles.accountSettingsContainer}>
-            <Text style={styles.accountSettings}>{t('accountSettings')}</Text>
-            <Text
-              style={styles.edit}
-              onPress={() => navigation.navigate('ProfileEdit')}>
-              {t('edit')}
-            </Text>
-          </View>
-          <GlobalInput
-            placeholder={'Jenny'}
-            inputName
-            label={t('name')}
-            editable={false}
-            inputStyle={{marginTop: 10}}
-          />
-          <GlobalInput
-            placeholder={'+91 9876543210'}
-            inputName
-            label={t('phoneNumber')}
-            inputStyle={{marginTop: 10}}
-            editable={false}
-          />
-          <GlobalInput
-            placeholder={'02-05-1997'}
-            inputName
-            label={t('dob')}
-            inputStyle={{marginTop: 10}}
-            editable={false}
-          />
-          <GlobalInput
-            placeholder={'abcqwertyu@gmail.com'}
-            inputName
-            label={t('email')}
-            inputStyle={{marginTop: 10}}
-            editable={false}
-          />
-          <Text style={[styles.accountSettings, {marginTop: HP_WP.hp(2)}]}>
-            {t('planSettings')}
-          </Text>
-          <GlobalInput
-            editable={false}
-            text={true}
-            icon={true}
-            inputName={true}
-            label={t('currentPlan')}
-            tuchText={t('free')}
-            inputStyle={{marginTop: 10}}
-            onPress={() => navigation.navigate('PlanSetting')}
-          />
-          <Text style={[styles.accountSettings, {marginTop: HP_WP.hp(2)}]}>
-            {t('discoverySettings')}
-          </Text>
-          <GlobalInput
-            editable={false}
-            text={true}
-            icon={true}
-            inputName={true}
-            label={t('location')}
-            tuchText={t('currentLocation')}
-            inputStyle={{marginTop: 10}}
-            // onPress={() =>navigation.navigate('PlanSetting')}
-          />
-          <View style={styles.dropDownView}>
-            <Text style={styles.dropDownTitle}>{t('preferredLanguages')}</Text>
-            <Dropdown
-              iconStyle={{tintColor: COLORS.blue}}
-              style={[styles.dropdawn]}
-              data={preferredLanguages}
-              maxHeight={240}
-              labelField="name"
-              valueField="name"
-              value={languageName}
-              placeholderStyle={styles.dropDownText}
-              selectedTextStyle={styles.dropDownText}
-              onChange={item => {
-                setLanguageName(item.name);
-              }}
-            />
-          </View>
-          <TouchableOpacity
-            onPress={() => setMarriage(!marriage)}
-            style={styles.marriageContainer}>
-            <Text style={styles.dropDownTitle}>{t('marriage')}</Text>
-            <View
-              style={[
-                styles.marriageIconContainer,
-                {
-                  backgroundColor: marriage ? COLORS.purple : COLORS.white,
-                  borderColor: marriage ? COLORS.white : COLORS.purple,
-                },
-              ]}>
-              {marriage && (
-                <Icon name={'done'} size={15} color={COLORS.white} />
-              )}
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.mainContainer}>
+            <View style={styles.accountSettingsContainer}>
+              <Text style={styles.accountSettings}>{t('accountSettings')}</Text>
+              <Text
+                style={styles.edit}
+                onPress={() => navigation.navigate('ProfileEdit')}>
+                {t('edit')}
+              </Text>
             </View>
-          </TouchableOpacity>
-          <View style={styles.ageRangeMainContainer}>
-            <View style={styles.ageRangeContainer}>
-              <Text style={styles.dropDownTitle}>{t('ageRange')}</Text>
-              {/* <Text>
+            <GlobalInput
+              placeholder={userData?.user?.displayName}
+              inputName
+              label={t('name')}
+              editable={false}
+              inputStyle={{ marginTop: 10 }}
+            />
+            <GlobalInput
+              placeholder={userData?.user?.phoneNumber ? userData?.user?.phoneNumber : '1234567890'}
+              inputName
+              label={t('phoneNumber')}
+              inputStyle={{ marginTop: 10 }}
+              editable={false}
+            />
+            <GlobalInput
+              placeholder={'02-05-1997'}
+              inputName
+              label={t('dob')}
+              inputStyle={{ marginTop: 10 }}
+              editable={false}
+            />
+            <GlobalInput
+              placeholder={userData?.user?.email}
+              inputName
+              label={t('email')}
+              inputStyle={{ marginTop: 10 }}
+              editable={false}
+            />
+            <Text style={[styles.accountSettings, { marginTop: HP_WP.hp(2) }]}>
+              {t('planSettings')}
+            </Text>
+            <GlobalInput
+              editable={false}
+              text={true}
+              icon={true}
+              inputName={true}
+              label={t('currentPlan')}
+              tuchText={t('free')}
+              inputStyle={{ marginTop: 10 }}
+              onPress={() => navigation.navigate('PlanSetting')}
+            />
+            <Text style={[styles.accountSettings, { marginTop: HP_WP.hp(2) }]}>
+              {t('discoverySettings')}
+            </Text>
+            <GlobalInput
+              editable={false}
+              text={true}
+              icon={true}
+              inputName={true}
+              label={t('location')}
+              tuchText={t('currentLocation')}
+              inputStyle={{ marginTop: 10 }}
+            // onPress={() =>navigation.navigate('PlanSetting')}
+            />
+            <View style={styles.dropDownView}>
+              <Text style={styles.dropDownTitle}>{t('preferredLanguages')}</Text>
+              <Dropdown
+                iconStyle={{ tintColor: COLORS.blue }}
+                style={[styles.dropdawn]}
+                data={preferredLanguages}
+                maxHeight={240}
+                labelField="name"
+                valueField="name"
+                value={languageName}
+                placeholderStyle={styles.dropDownText}
+                selectedTextStyle={styles.dropDownText}
+                onChange={item => {
+                  setLanguageName(item.name);
+                }}
+              />
+            </View>
+            <TouchableOpacity
+              onPress={() => setMarriage(!marriage)}
+              style={styles.marriageContainer}>
+              <Text style={styles.dropDownTitle}>{t('marriage')}</Text>
+              <View
+                style={[
+                  styles.marriageIconContainer,
+                  {
+                    backgroundColor: marriage ? COLORS.purple : COLORS.white,
+                    borderColor: marriage ? COLORS.white : COLORS.purple,
+                  },
+                ]}>
+                {marriage && (
+                  <Icon name={'done'} size={15} color={COLORS.white} />
+                )}
+              </View>
+            </TouchableOpacity>
+            <View style={[styles.ageRangeMainContainer]}>
+              <View style={styles.ageRangeContainer}>
+                <Text style={styles.dropDownTitle}>{t('ageRange')}</Text>
+                {/* <Text>
                 {minSelected}-{maxSelected}
               </Text> */}
+              </View>
+              <MultiSlider
+                values={[0, 100]}  // Initial values for the sliders
+                sliderLength={200}  // Length of the slider
+                onValuesChange={(values) => console.log(values)}  // Callback when slider values change
+              />
+              {/* 
+            <MultiSlider
+              type="range" // ios only
+              min={18}
+              max={70}
+              selectedMinimum={22} // ios only
+              selectedMaximum={44} // ios only
+              tintColor="#000"
+              handleColor="#f368e0"
+              handlePressedColor="#f368e0"
+              tintColorBetweenHandles="#ff9ff3"
+              onChange={(min, max) => onChange(min, max)}
+            /> */}
             </View>
+            <TouchableOpacity
+              onPress={() => setGroupChat(!groupChat)}
+              style={styles.marriageContainer}>
+              <Text style={styles.dropDownTitle}>{t('groupChats')}</Text>
+              <View
+                style={[
+                  styles.marriageIconContainer,
+                  {
+                    backgroundColor: groupChat ? COLORS.purple : COLORS.white,
+                    borderColor: groupChat ? COLORS.white : COLORS.purple,
+                  },
+                ]}>
+                {groupChat && (
+                  <Icon name={'done'} size={15} color={COLORS.white} />
+                )}
+              </View>
+            </TouchableOpacity>
+            {groupChat && (
+              <View style={styles.ageRangeMainContainer}>
+                <TouchableOpacity
+                  onPress={() => setMale(!male)}
+                  style={styles.ageRangeContainer}>
+                  <Text style={styles.dropDownTitle}>{t('male')}</Text>
+                  <View
+                    style={[
+                      styles.marriageIconContainer,
+                      {
+                        backgroundColor: male ? COLORS.purple : COLORS.white,
+                        borderColor: male ? COLORS.white : COLORS.purple,
+                      },
+                    ]}>
+                    {male && (
+                      <Icon name={'done'} size={15} color={COLORS.white} />
+                    )}
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => setFemale(!female)}
+                  style={styles.ageRangeContainer}>
+                  <Text style={styles.dropDownTitle}>{t('female')}</Text>
+                  <View
+                    style={[
+                      styles.marriageIconContainer,
+                      {
+                        backgroundColor: female ? COLORS.purple : COLORS.white,
+                        borderColor: female ? COLORS.white : COLORS.purple,
+                      },
+                    ]}>
+                    {female && (
+                      <Icon name={'done'} size={15} color={COLORS.white} />
+                    )}
+                  </View>
+                </TouchableOpacity>
+              </View>
+            )}
 
-            {/* <RangeSlider
-                type="range" // ios only
-                min={18}
-                max={70}
-                selectedMinimum={22} // ios only
-                selectedMaximum={44} // ios only
-                tintColor="#000"
-                handleColor="#f368e0"
-                handlePressedColor="#f368e0"
-                tintColorBetweenHandles="#ff9ff3"
-                onChange={(min, max) => onChange(min, max)}
-              /> */}
-          </View>
-          <TouchableOpacity
-            onPress={() => setGroupChat(!groupChat)}
-            style={styles.marriageContainer}>
-            <Text style={styles.dropDownTitle}>{t('groupChats')}</Text>
-            <View
+            <TouchableOpacity
+              onPress={() => setNetwork(!network)}
               style={[
-                styles.marriageIconContainer,
+                styles.ageRangeContainer,
                 {
-                  backgroundColor: groupChat ? COLORS.purple : COLORS.white,
-                  borderColor: groupChat ? COLORS.white : COLORS.purple,
+                  borderColor: COLORS.light,
+                  borderWidth: 0.8,
+                  marginTop: 15,
                 },
               ]}>
-              {groupChat && (
-                <Icon name={'done'} size={15} color={COLORS.white} />
-              )}
-            </View>
-          </TouchableOpacity>
-          {groupChat && (
+              <Text style={styles.dropDownTitle}>{t('network')}</Text>
+              <View
+                style={[
+                  styles.marriageIconContainer,
+                  {
+                    backgroundColor: network ? COLORS.purple : COLORS.white,
+                    borderColor: network ? COLORS.white : COLORS.purple,
+                  },
+                ]}>
+                {network && <Icon name={'done'} size={15} color={COLORS.white} />}
+              </View>
+            </TouchableOpacity>
             <View style={styles.ageRangeMainContainer}>
-              <TouchableOpacity
-                onPress={() => setMale(!male)}
-                style={styles.ageRangeContainer}>
-                <Text style={styles.dropDownTitle}>{t('male')}</Text>
-                <View
-                  style={[
-                    styles.marriageIconContainer,
-                    {
-                      backgroundColor: male ? COLORS.purple : COLORS.white,
-                      borderColor: male ? COLORS.white : COLORS.purple,
-                    },
-                  ]}>
-                  {male && (
-                    <Icon name={'done'} size={15} color={COLORS.white} />
-                  )}
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => setFemale(!female)}
-                style={styles.ageRangeContainer}>
-                <Text style={styles.dropDownTitle}>{t('female')}</Text>
-                <View
-                  style={[
-                    styles.marriageIconContainer,
-                    {
-                      backgroundColor: female ? COLORS.purple : COLORS.white,
-                      borderColor: female ? COLORS.white : COLORS.purple,
-                    },
-                  ]}>
-                  {female && (
-                    <Icon name={'done'} size={15} color={COLORS.white} />
-                  )}
-                </View>
-              </TouchableOpacity>
-            </View>
-          )}
+              <View style={[styles.ageRangeContainer]}>
+                <Text style={styles.dropDownTitle}>{t('maximumDistance')}</Text>
+                <Text>
+                  {/* {distance} */}
+                  2
+                  {t('km')}
+                </Text>
+              </View>
 
-          <TouchableOpacity
-            onPress={() => setNetwork(!network)}
-            style={[
-              styles.ageRangeContainer,
-              {
-                borderColor: COLORS.light,
-                borderWidth: 0.8,
-                marginTop: 15,
-              },
-            ]}>
-            <Text style={styles.dropDownTitle}>{t('network')}</Text>
-            <View
-              style={[
-                styles.marriageIconContainer,
-                {
-                  backgroundColor: network ? COLORS.purple : COLORS.white,
-                  borderColor: network ? COLORS.white : COLORS.purple,
-                },
-              ]}>
-              {network && <Icon name={'done'} size={15} color={COLORS.white} />}
-            </View>
-          </TouchableOpacity>
-          <View style={styles.ageRangeMainContainer}>
-            <View style={styles.ageRangeContainer}>
-              <Text style={styles.dropDownTitle}>{t('maximumDistance')}</Text>
-              {/* <Text>
-                {distance}
-                {t('km')}
-              </Text> */}
-            </View>
-
-            {/* <RangeSlider
+              {/* <RangeSlider
                 type="slider" // ios only
                 min={0}
                 max={100}
@@ -343,66 +373,70 @@ const Profile = ({navigation}) => {
                 onChange={(min, max) => onChangeDistance(min, max)}
                 hideLabels={true}
               /> */}
-          </View>
-          <View>
-            <GlobalButton
-              Style={[styles.buttonStyle, {marginVertical: 15}]}
-              textStyle={{color: COLORS.black}}
-              title={t('logout')}
-            />
+            </View>
+            <View>
+              <GlobalButton
+                onPress={() => onLogOut()}
+                Style={[styles.buttonStyle, { marginVertical: 15 }]}
+                textStyle={{ color: COLORS.black }}
+                title={t('logout')}
+              />
 
-            <GlobalButton
-              Style={[styles.buttonStyle, {marginBottom: 15}]}
-              textStyle={{color: COLORS.orange}}
-              title={t('deleteAccount')}
-            />
+              <GlobalButton
+                Style={[styles.buttonStyle, { marginBottom: 15 }]}
+                textStyle={{ color: COLORS.orange }}
+                title={t('deleteAccount')}
+              />
+            </View>
           </View>
-        </View>
-      </ScrollView>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(false);
-        }}>
-        <BlurView
-          style={styles.blurView}
-          blurType="light"
-          blurAmount={10}
-          reducedTransparencyFallbackColor={COLORS.white}
+        </ScrollView>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+            setModalVisible(false);
+          }}>
+          <BlurView
+            style={styles.blurView}
+            blurType="light"
+            blurAmount={10}
+            reducedTransparencyFallbackColor={COLORS.white}
+          />
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Pressable style={styles.button} onPress={chooseFromCamera}>
+                <Text style={styles.textStyle}>{t('fromCamera')}</Text>
+              </Pressable>
+              <Pressable style={styles.button} onPress={chooseFromGallery}>
+                <Text style={styles.textStyle}>{t('fromGallery')}</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.button, { backgroundColor: COLORS.orange }]}
+                onPress={() => setModalVisible(false)}>
+                <Text style={styles.textStyle}>{t('cancle')}</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+        <Spinner
+          color={COLORS.purple}
+          visible={loading}
+          size="large"
+          overlayColor="rgba(0,0,0,0.5)"
         />
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Pressable style={styles.button} onPress={chooseFromCamera}>
-              <Text style={styles.textStyle}>{t('fromCamera')}</Text>
-            </Pressable>
-            <Pressable style={styles.button} onPress={chooseFromGallery}>
-              <Text style={styles.textStyle}>{t('fromGallery')}</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, {backgroundColor: COLORS.orange}]}
-              onPress={() => setModalVisible(false)}>
-              <Text style={styles.textStyle}>{t('cancle')}</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
-      <Spinner
-        color={COLORS.purple}
-        visible={loading}
-        size="large"
-        overlayColor="rgba(0,0,0,0.5)"
-      />
-    </Container>
-    // </LinearGradient>
+      </SafeAreaView>
+    </>
   );
 };
 
 export default Profile;
 
 const styles = StyleSheet.create({
+  bgImg: {
+    paddingTop: 50
+  },
   linearGradient: {
     flex: 1,
     flexGrow: 1,

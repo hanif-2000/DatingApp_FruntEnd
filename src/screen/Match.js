@@ -1,4 +1,5 @@
 import {
+  Alert,
   FlatList,
   Image,
   StyleSheet,
@@ -6,14 +7,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
-import {t} from 'i18next';
+import React, { useEffect, useState } from 'react';
+import { t } from 'i18next';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import Toast from 'react-native-toast-message';
 
+import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk-next';
+
+
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
-import {COLORS, Font, HP_WP, IMAGE, SIZE} from '../common/theme';
+import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 
 const Match = () => {
   const [loading, setLoading] = useState(false);
@@ -35,17 +39,57 @@ const Match = () => {
       img: IMAGE.VideoCall,
     },
   ];
+
+  useEffect(() => {
+    setLoading(true)
+    handleFacebookLogin()
+  }, [])
+  const handleFacebookLogin = async () => {
+    try {
+      const accessToken = await AccessToken.getCurrentAccessToken();
+      if (accessToken) {
+        // Make a Graph API request to get the nearby friends
+        const request = new GraphRequest(
+          '/me/friends',
+          {
+            httpMethod: 'GET',
+            version: 'v12.0',
+            fields: { name: 'babu', location: 'merta city' },
+            // limit: { string: '10' },
+            accessToken: accessToken,
+          },
+          (error, result) => {
+            if (error) {
+              setLoading(false)
+              console.log('Error retrieving nearby friends:', error);
+            } else {
+              setLoading(false)
+              Alert.alert(`Nearby friends: ${!result.data ? result.data : 0} Total friends${result.summary.total_count}`)
+              console.warn('Nearby friends:', result);
+            }
+          }
+        );
+        // Execute the Graph API request
+        new GraphRequestManager().addRequest(request).start();
+      }
+
+    } catch (error) {
+      setLoading(false)
+      console.log('Error logging in with Facebook:', error);
+    }
+  };
+
   return (
     <Container>
       <GlobalHeader title={t('match')} mainContainer={styles.header} />
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <Text style={styles.likeText}>{t('matches')}</Text>
         <FlatList
           style={styles.flatList}
           showsVerticalScrollIndicator={false}
           data={dataList}
           numColumns={2}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <TouchableOpacity
               // onPress={() => trytochat(item.blurRadius)}
               style={styles.imageContainer}>

@@ -45,7 +45,6 @@ const OtpVerification = ({navigation}) => {
   };
   return (
     <Container Style={styles.container}>
-      <GlobalHeader />
       <View style={styles.innarMainContainer}>
         <Text style={styles.smsCode}>{t('enterCode')}</Text>
         <OTPInputView
@@ -86,6 +85,7 @@ export default OtpVerification;
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: HP_WP.wp(5),
+    paddingTop:HP_WP.wp(10),
   },
   innarMainContainer: {
     marginHorizontal: HP_WP.wp(7),

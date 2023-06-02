@@ -1,35 +1,61 @@
-import React, {useRef, useState} from 'react';
-import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
-import {BottomSheet} from 'react-native-sheet';
-import {Dropdown} from 'react-native-element-dropdown';
+import { BottomSheet } from 'react-native-sheet';
+import { Dropdown } from 'react-native-element-dropdown';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import Toast from 'react-native-toast-message';
-import {t} from 'i18next';
+import { t } from 'i18next';
 
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
 import Card from '../component/Card';
 import IconButton from '../component/IconButton';
-import {COLORS, HP_WP, IMAGE, SIZE, Font} from '../common/theme';
+import { COLORS, HP_WP, IMAGE, SIZE, Font } from '../common/theme';
 import photoCards from '../component/photoCards';
+import useAppData, { useStore } from '../service/AppData';
+import { UserListing_API } from '../service/API';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [gender, setGender] = useState('male');
   const [minimumSlideValue, setMinimumSlideValue] = useState([100]);
   const [maximumSlideValue, setMaximumSliderValue] = useState([18]);
   const [changeValue, setChangeValue] = useState(0);
+  const [userList, setUserList] = useState([{}])
+  const [{ userId }] = useAppData();
+  
+  useEffect(() => {
+    getUserList()
+  }, [])
+
+  const getUserList = () => {
+    setLoading(true)
+    const formData = new FormData();
+    formData.append('data', JSON.stringify([{ "user_id": userId }]));
+    UserListing_API(formData, onResponse, onError)
+
+  }
+
+  const onResponse = (data) => {
+    setLoading(false)
+    setUserList(data?.result)
+    console.log('onResponse---', data.result);
+  }
+  const onError = (e) => {
+    setLoading(false)
+    console.warn('onError--', e);
+  }
 
   const data = [
-    {label: '0 km-10 km', value: '1'},
-    {label: '10 km-20 km', value: '2'},
-    {label: '20 km-30 km', value: '3'},
-    {label: '30 km-40 km', value: '4'},
-    {label: '40 km-50 km', value: '5'},
-    {label: '50 km-60 km', value: '6'},
-    {label: '60 km-70 km', value: '7'},
-    {label: '70 km-80 km', value: '8'},
+    { label: '0 km-10 km', value: '1' },
+    { label: '10 km-20 km', value: '2' },
+    { label: '20 km-30 km', value: '3' },
+    { label: '30 km-40 km', value: '4' },
+    { label: '40 km-50 km', value: '5' },
+    { label: '50 km-60 km', value: '6' },
+    { label: '60 km-70 km', value: '7' },
+    { label: '70 km-80 km', value: '8' },
   ];
 
   const [value, setValue] = useState(null);
@@ -49,7 +75,7 @@ const HomeScreen = ({navigation}) => {
         withoutIcon={true}
         logo={true}
         rightImage={true}
-        mainContainer={{paddingHorizontal: HP_WP.wp(5)}}
+        mainContainer={{ paddingHorizontal: HP_WP.wp(5) }}
         rightIcon={require('../assets/images/filter.png')}
         onPressRight={() => bottomSheet.current?.show()}
       />
@@ -61,7 +87,7 @@ const HomeScreen = ({navigation}) => {
           verticalSwipe={false}
           backgroundColor={COLORS.white}
           animateCardOpacity
-          cards={photoCards}
+          cards={userList}
           renderCard={card => <Card card={card} />}
           cardIndex={0}
           stackSize={2}
@@ -113,7 +139,7 @@ const HomeScreen = ({navigation}) => {
           <Text style={styles.distanceText}>{t('distance')}</Text>
 
           <Dropdown
-            style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
+            style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.placeholderStyle}
             // inputSearchStyle={styles.inputSearchStyle}
@@ -142,7 +168,7 @@ const HomeScreen = ({navigation}) => {
               <Text
                 style={[
                   styles.buttonText,
-                  {color: gender == 'male' ? COLORS.white : COLORS.light},
+                  { color: gender == 'male' ? COLORS.white : COLORS.light },
                 ]}>
                 {t('male')}
               </Text>
@@ -159,7 +185,7 @@ const HomeScreen = ({navigation}) => {
               <Text
                 style={[
                   styles.buttonText,
-                  {color: gender == 'female' ? COLORS.white : COLORS.light},
+                  { color: gender == 'female' ? COLORS.white : COLORS.light },
                 ]}>
                 {t('female')}
               </Text>
@@ -170,7 +196,7 @@ const HomeScreen = ({navigation}) => {
               <Text
                 style={[
                   styles.buttonText,
-                  {color: gender == 'shemale' ? COLORS.white : COLORS.light},
+                  { color: gender == 'shemale' ? COLORS.white : COLORS.light },
                 ]}>
                 {t('shemale')}
               </Text>

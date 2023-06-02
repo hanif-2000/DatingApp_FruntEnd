@@ -7,7 +7,7 @@ import Foundation from 'react-native-vector-icons/Foundation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {COLORS, HP_WP} from '../common/theme';
+import { COLORS, HP_WP } from '../common/theme';
 import HomeScreen from '../screen/HomeScreen';
 import ChatScreen from '../screen/Inbox';
 import Profile from '../screen/Profile';
@@ -15,6 +15,7 @@ import LikeScreen from '../screen/LikeScreen';
 import Match from '../screen/Match';
 
 const Tab = createBottomTabNavigator();
+
 
 const MainStack = () => {
   return (
@@ -43,7 +44,7 @@ const MainStack = () => {
         component={LikeScreen}
         // component={Match}
         options={() => ({
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <AntDesign
               name="hearto"
               size={30}
@@ -54,14 +55,19 @@ const MainStack = () => {
       />
       <Tab.Screen
         name="Group"
-        component={LikeScreen}
+        component={ChatScreen}
         options={() => ({
-          tabBarIcon: ({focused}) => (
-            <MaterialCommunityIcons
-              name="account-group-outline"
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              name="chatbox-ellipses-outline"
               size={30}
               color={focused ? COLORS.purple : COLORS.COLORS}
             />
+            // <MaterialCommunityIcons
+            //   // name="account-group-outline"
+            //   size={30}
+            //   color={focused ? COLORS.purple : COLORS.COLORS}
+            // />
           ),
         })}
       />
@@ -69,16 +75,17 @@ const MainStack = () => {
         name="CheckIn"
         component={Match}
         options={() => ({
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
+
             <MaterialCommunityIcons
-              name="near-me"
+              name="facebook"
               size={30}
               color={focused ? COLORS.purple : COLORS.COLORS}
             />
           ),
         })}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="ChatScreen"
         component={ChatScreen}
         options={() => ({
@@ -90,12 +97,12 @@ const MainStack = () => {
             />
           ),
         })}
-      />
+      /> */}
       <Tab.Screen
         name="Profile"
         component={Profile}
         options={() => ({
-          tabBarIcon: ({focused}) => (
+          tabBarIcon: ({ focused }) => (
             <FontAwesome
               name="user"
               size={30}

@@ -5,7 +5,6 @@ import Spinner from 'react-native-loading-spinner-overlay/lib';
 import {t} from 'i18next';
 import Toast from 'react-native-toast-message';
 
-import GlobalHeader from '../common/GlobalHeader';
 import Container from '../common/Container';
 import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
@@ -36,7 +35,7 @@ const LoginWithPhone = ({navigation}) => {
       position: 'top',
       text1: res.message,
     });
-    navigation.navigate('OtpVerification');
+    navigation.replace('OtpVerification');
   };
 
   const onError = err => {
@@ -50,7 +49,6 @@ const LoginWithPhone = ({navigation}) => {
 
   return (
     <Container Style={styles.container}>
-      <GlobalHeader />
       <View style={styles.innarMainContainer}>
         <Text style={styles.verifyNumber}>{t('verifyNumber')}</Text>
         <GlobalInput
@@ -105,6 +103,7 @@ export default LoginWithPhone;
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: HP_WP.wp(5),
+    paddingTop:HP_WP.wp(10),
   },
   innarMainContainer: {
     marginHorizontal: HP_WP.wp(7),

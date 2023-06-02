@@ -31,6 +31,10 @@
 			</array>
 		</dict>
 	</array>
+
+	<key>FacebookClientToken</key>
+	<string>242dc3e0aa4536317773f782a60f40b7</string>
+
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>

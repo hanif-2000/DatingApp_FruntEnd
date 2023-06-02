@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
 import React, {useState, useCallback, useEffect, useRef} from 'react';
 import {t} from 'i18next';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
@@ -106,5 +106,6 @@ export default ChattingScreen;
 const styles = StyleSheet.create({
   mainContainer: {
     paddingHorizontal: HP_WP.wp(5),
+    flex:1
   },
 });
