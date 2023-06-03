@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Image,
@@ -20,7 +20,7 @@ import { Settings, LoginManager, AccessToken } from 'react-native-fbsdk-next';
 
 import '../language/i18n';
 import { useStore } from '../service/AppData';
-import { LoginWithFacebook_API } from '../service/API'
+import { LoginWithFacebook_API, getLanguageList_API } from '../service/API'
 import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 import { fcmService } from '../notification/fcmservice';
@@ -32,18 +32,29 @@ const LoginWithFacebook = () => {
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [languages, setLanguages] = useState(null);
+  const [languagesList, setLanguagesList] = useState([]);
   const [currentLanguage, setCurrentLanguage] = useState('ENGLISH');
-
   const { t, i18n } = useTranslation();
 
-  const DATA = [
-    {
-      language: 'ENGLISH',
-    },
-    {
-      language: 'ALBANIAN',
-    },
-  ];
+  useEffect(() => {
+    setLoading(true)
+    getLanguageList()
+  }, [])
+
+
+  const getLanguageList = () => {
+    getLanguageList_API(onLanguageListResponse, onLanguageListError)
+  }
+
+  const onLanguageListResponse = (res) => {
+    setLoading(false)
+    setLanguagesList(res)
+    setLanguageList(res);
+  }
+  const onLanguageListError = (e) => {
+    setLoading(false)
+    console.warn('e', e);
+  }
 
   const changeLanguage = value => {
     i18n
@@ -56,7 +67,7 @@ const LoginWithFacebook = () => {
       .catch(err => console.log(err));
   };
 
-  const { setFcmToken, setUserData, setUserId, setAccessToken } = useStore();
+  const { setFcmToken, setUserData, setUserId, setAccessToken,setLanguageList } = useStore();
   let Route = useNavigation();
 
   const facebookLogin = async () => {
@@ -123,7 +134,10 @@ const LoginWithFacebook = () => {
       style={styles.linearGradient}>
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar backgroundColor={COLORS.white} barStyle={'dark-content'} />
-        <Pressable onPress={() => setVisible(false)} style={{ flex: 1 }}>
+        <Pressable
+          onPress={() => setVisible(false)}
+          style={{ flex: 1 }}
+        >
           <TouchableOpacity
             activeOpacity={0.8}
             style={styles.choseLanguageBtn}
@@ -157,13 +171,13 @@ const LoginWithFacebook = () => {
             <View style={styles.languageModal}>
               <FlatList
                 showsVerticalScrollIndicator={false}
-                data={DATA}
+                data={languagesList}
                 renderItem={({ item }) => (
-                  <TouchableOpacity
-                    onPress={() => changeLanguage(item.language)}
-                    style={{ paddingVertical: 3 }}>
-                    <Text style={styles.language}>{item.language}</Text>
-                  </TouchableOpacity>
+                  <Pressable
+                    onPress={() => changeLanguage(item.name)}
+                    style={[styles.languageDropdown, { backgroundColor: languages === item.name ? COLORS.purple : COLORS.white, }]}>
+                    <Text style={[styles.language, { color: languages === item.name ? COLORS.white : COLORS.darkPurple }]}>{item.name}</Text>
+                  </Pressable>
                 )}
               />
             </View>
@@ -195,6 +209,7 @@ const styles = StyleSheet.create({
     fontSize: SIZE.L,
     color: COLORS.black,
     fontFamily: Font.semiBold,
+    textTransform:'uppercase'
   },
   logo: {
     height: HP_WP.hp(18),
@@ -225,16 +240,20 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: HP_WP.wp(38),
     padding: 10,
-    backgroundColor: COLORS.white,
-    borderWidth: 1,
-    borderRadius: 12,
+    backgroundColor: COLORS.lightPurple,
+    borderRadius: 5,
     top: 50,
-    height: 200,
     alignSelf: 'flex-end',
+  },
+  languageDropdown: {
+    paddingVertical: 3,
+    margin: 3,
+    alignItems: 'center',
+    borderWidth: 1
   },
   language: {
     fontSize: SIZE.L,
-    color: COLORS.black,
     fontFamily: Font.regular,
+    textTransform: 'uppercase'
   },
 });

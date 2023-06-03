@@ -6,7 +6,7 @@ import Moment from 'moment';
 import { t } from 'i18next';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import Toast from 'react-native-toast-message';
-import { updateProfileData } from '../service/API'
+import { setAccountSetting_API } from '../service/API'
 
 import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
@@ -43,20 +43,23 @@ const ProfileEdit = ({ navigation }) => {
   };
 
   const onSave = () => {
+    setLoading(true)
     const formData = new FormData();
     formData.append('id', '5');
     formData.append('name', name);
     formData.append('phone_number', number);
     formData.append('email', email);
     formData.append('dob', date);
-    updateProfileData(formData, onResponse, onError)
+    setAccountSetting_API(formData, onResponse, onError)
   }
 
   const onResponse = (data) => {
+    setLoading(false)
     console.warn('onResponse---', data);
     navigation.goBack()
   }
   const onError = (e) => {
+    setLoading(false)
     console.warn('onError--', e);
   }
 

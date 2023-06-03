@@ -19,7 +19,7 @@ import Container from '../common/Container';
 import GlobalHeader from '../common/GlobalHeader';
 import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 
-const Match = () => {
+const FacebookCheckIn = () => {
   const [loading, setLoading] = useState(false);
 
   const dataList = [
@@ -41,7 +41,7 @@ const Match = () => {
   ];
 
   useEffect(() => {
-    setLoading(true)
+    // setLoading(true)
     // handleFacebookLogin()
   }, [])
   const handleFacebookLogin = async () => {
@@ -116,7 +116,7 @@ const Match = () => {
   );
 };
 
-export default Match;
+export default FacebookCheckIn;
 
 const styles = StyleSheet.create({
   header: {

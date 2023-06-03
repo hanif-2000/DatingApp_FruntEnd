@@ -6,8 +6,13 @@ export const useStore = create(set => ({
   fcmToken: null,
   userId: null,
   accessToken: null,
+  languageList: [{}],
 
 
+  setLanguageList: languageList =>
+    set(() => ({
+      languageList: languageList,
+    })),
   setAccessToken: accessToken =>
     set(() => ({
       accessToken: accessToken,
@@ -39,6 +44,7 @@ export default () => {
       fcmToken: useStore(state => state.fcmToken),
       userId: useStore(state => state.userId),
       accessToken: useStore(state => state.accessToken),
+      languageList:useStore(state => state.languageList),
     },
   ];
 };

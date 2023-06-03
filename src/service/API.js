@@ -20,27 +20,28 @@ export  const LoginWithFacebook_API  = (body, onResponse, onError) => {
     });
 };
 
-// 2. Login with Number
-export  const numberVerify  = (body, onResponse, onError) => {
+// 2. language-list
+export  const getLanguageList_API  = (onResponse, onError) => {
   axios({
-    method: 'POST',
-    url: `${BASE_URL}auth/forgotPassword`,
-    data: body,
+    method: 'GET',
+    url: `${BASE_URL}auth/language-list`,
+    data: {},
     headers: headers,
   })
     .then(function (response) {
-      onResponse(response.data);
+      onResponse(response?.data?.result);
     })
     .catch(error => {
-      onError(error.response);
+      console.warn(error);
+      onError(error?.response);
     });
 };
 
-// 3. OTP Verify
-export  const otpVerify  = (body, onResponse, onError) => {
+// 3.account-setting
+export  const setAccountSetting_API  = (body, onResponse, onError) => {
   axios({
     method: 'POST',
-    url: `${BASE_URL}auth/verifyforgototp`,
+    url: `${BASE_URL}auth/account-setting`,
     data: body,
     headers: headers,
   })

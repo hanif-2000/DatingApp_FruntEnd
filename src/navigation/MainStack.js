@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -12,10 +11,9 @@ import HomeScreen from '../screen/HomeScreen';
 import ChatScreen from '../screen/Inbox';
 import Profile from '../screen/Profile';
 import LikeScreen from '../screen/LikeScreen';
-import Match from '../screen/Match';
+import FacebookCheckIn from '../screen/FacebookCheckIn';
 
 const Tab = createBottomTabNavigator();
-
 
 const MainStack = () => {
   return (
@@ -73,7 +71,7 @@ const MainStack = () => {
       />
       <Tab.Screen
         name="CheckIn"
-        component={Match}
+        component={FacebookCheckIn}
         options={() => ({
           tabBarIcon: ({ focused }) => (
 

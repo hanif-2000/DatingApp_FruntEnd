@@ -6,26 +6,26 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
-import {t} from 'i18next';
+import { t } from 'i18next';
 import Toast from 'react-native-toast-message';
 
 import Container from '../common/Container';
-import {COLORS, HP_WP, SIZE} from '../common/theme';
+import { COLORS, HP_WP, SIZE } from '../common/theme';
 import GlobalHeader from '../common/GlobalHeader';
-import {Font} from '../common/theme';
-import {Icon} from 'react-native-elements';
+import { Font } from '../common/theme';
+import { Icon } from 'react-native-elements';
 import GlobalButton from '../common/GlobalButton';
 
-const PlanSetting = () => {
+const PlanSetting = ({ navigation }) => {
   const [loading, setLoading] = useState(false);
   const [currentPlan, setCurrentPlan] = useState('6');
   data = [
-    {id: 1, time: '12', rate: '7'},
-    {id: 2, time: '6', rate: '10'},
-    {id: 3, time: '1', rate: '9'},
+    { id: 1, time: '12', rate: '7' },
+    { id: 2, time: '6', rate: '10' },
+    { id: 3, time: '1', rate: '9' },
   ];
 
   const onChange = item => {
@@ -38,21 +38,27 @@ const PlanSetting = () => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollViewStyle}>
-        <View style={[styles.topCardContainer, {padding: 20}]}>
+        <View style={[styles.topCardContainer, { padding: 20 }]}>
           <View style={styles.directionContainer}>
             <Text style={styles.currentPlan}>{t('currentPlan')}</Text>
             <Text style={styles.free}>{'free'}</Text>
           </View>
-          <View style={[styles.directionContainer, {marginTop: 10}]}>
+          <View style={[styles.directionContainer, { marginTop: 10 }]}>
             <Text style={styles.currentPlan}>{t('timePeriod')}</Text>
             <Text style={styles.free}>12/04/2020 - 12/04/2021</Text>
           </View>
           <View style={[styles.directionContainer, styles.buttonContainer]}>
-            <TouchableOpacity style={styles.Unsubscribe}>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={styles.Unsubscribe}
+            >
               <Text style={styles.unsubscribeText}>{t('unsubscribe')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.Upgrade}>
-              <Text style={[styles.unsubscribeText, {color: COLORS.white}]}>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={styles.Upgrade}
+            >
+              <Text style={[styles.unsubscribeText, { color: COLORS.white }]}>
                 {t('upgrade')}
               </Text>
             </TouchableOpacity>
@@ -61,8 +67,8 @@ const PlanSetting = () => {
         <View style={styles.topCardContainer}>
           <Text style={styles.bottomCardTopText}>{t('getGold')}</Text>
           <LinearGradient
-            start={{x: 1, y: 0.8}}
-            end={{x: 0.1, y: 0.5}}
+            start={{ x: 1, y: 0.8 }}
+            end={{ x: 0.1, y: 0.5 }}
             colors={[COLORS.purple, COLORS.darkPurple]}
             style={styles.heartContainer}>
             <Icon name={'heart'} type="entypo" size={25} color={COLORS.white} />
@@ -73,12 +79,12 @@ const PlanSetting = () => {
             <FlatList
               horizontal={true}
               data={[1, 2, 3, 4, 5]}
-              renderItem={({item}) => (
+              renderItem={({ item }) => (
                 <TouchableOpacity style={styles.dotContainer} />
               )}
             />
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: 'row' }}>
             {data.map(item => (
               <TouchableOpacity
                 activeOpacity={0.8}
@@ -133,7 +139,7 @@ const PlanSetting = () => {
               </TouchableOpacity>
             ))}
           </View>
-          <GlobalButton title={t('continue')} Style={styles.buttonStyle} />
+          <GlobalButton onPress={() => navigation.goBack()} title={t('continue')} Style={styles.buttonStyle} />
         </View>
       </ScrollView>
       <Spinner

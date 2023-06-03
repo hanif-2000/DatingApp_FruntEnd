@@ -42,12 +42,12 @@ const Profile = ({ navigation }) => {
   const [female, setFemale] = useState(false);
 
   // data geting from zustand
-  const [{ userData, userId, accessToken }] = useAppData();
-  console.warn(userData?.additionalUserInfo?.profile?.picture?.data?.url);
+  const [{ userData, userId, accessToken ,languageList}] = useAppData();
+  // console.warn(userData?.additionalUserInfo?.profile?.picture?.data?.url);
 
-  const [minimumSlideValue, setMinimumSlideValue] = useState([100]);
-  const [maximumSlideValue, setMaximumSliderValue] = useState([18]);
-  const [changeValue, setChangeValue] = useState(0);
+  const [distance, setDistance] = useState([2]);
+  const [minAgeSelected, setMinAgeSelected] = useState(18);
+  const [maxAgeSelected, setMaxAgeSelected] = useState(38);
 
   const [preferredLanguages, setPreferredLanguages] = useState([
     {
@@ -60,14 +60,11 @@ const Profile = ({ navigation }) => {
     },
   ]);
 
-  // const onChange = (min, max) => {
-  //   setMinSelected(min);
-  //   setMaxSelected(max);
-  // };
+  const onChange = (age) => {
+    setMinAgeSelected(age[0]);
+    setMaxAgeSelected(age[1]);
+  };
 
-  // const onChangeDistance = (min, max) => {
-  //   setDistance(max);
-  // };
 
   const [planName, setPlanName] = useState('Free');
   const [plan, setPlan] = useState([
@@ -105,7 +102,7 @@ const Profile = ({ navigation }) => {
   const onLogOut = () => {
     const formData = new FormData();
     formData.append('data', JSON.stringify([{ "user_id": userId, 'jwt_token': accessToken }]));
-    Logout_Api(formData,onLogoutResponse,onLogoutError)
+    Logout_Api(formData, onLogoutResponse, onLogoutError)
   }
 
   const onLogoutResponse = (data) => {
@@ -217,11 +214,12 @@ const Profile = ({ navigation }) => {
               <Dropdown
                 iconStyle={{ tintColor: COLORS.blue }}
                 style={[styles.dropdawn]}
-                data={preferredLanguages}
+                data={languageList}
                 maxHeight={240}
                 labelField="name"
                 valueField="name"
                 value={languageName}
+                placeholder={"Select language"}
                 placeholderStyle={styles.dropDownText}
                 selectedTextStyle={styles.dropDownText}
                 onChange={item => {
@@ -249,28 +247,37 @@ const Profile = ({ navigation }) => {
             <View style={[styles.ageRangeMainContainer]}>
               <View style={styles.ageRangeContainer}>
                 <Text style={styles.dropDownTitle}>{t('ageRange')}</Text>
-                {/* <Text>
-                {minSelected}-{maxSelected}
-              </Text> */}
+                <Text>
+                  {minAgeSelected}-{maxAgeSelected}
+                </Text>
               </View>
               <MultiSlider
-                values={[0, 100]}  // Initial values for the sliders
-                sliderLength={200}  // Length of the slider
-                onValuesChange={(values) => console.log(values)}  // Callback when slider values change
+                sliderLength={300}
+                containerStyle={{
+                  marginLeft: 2,
+                  alignSelf: 'center',
+                }}
+                trackStyle={{
+                  height: 3,
+                  backgroundColor: '#CACACA',
+                  borderRadius: 5,
+                }}
+                valuePrefix="age"
+                values={[minAgeSelected, maxAgeSelected]}
+                onValuesChange={value => onChange(value)}
+                selectedStyle={{
+                  backgroundColor: COLORS.purple,
+                }}
+                markerStyle={{
+                  backgroundColor: COLORS.purple,
+                  top: 0.8
+                }}
+                step={1}
+                isMarkersSeparated={true}
+                min={18}
+                max={70}
+                allowOverlap
               />
-              {/* 
-            <MultiSlider
-              type="range" // ios only
-              min={18}
-              max={70}
-              selectedMinimum={22} // ios only
-              selectedMaximum={44} // ios only
-              tintColor="#000"
-              handleColor="#f368e0"
-              handlePressedColor="#f368e0"
-              tintColorBetweenHandles="#ff9ff3"
-              onChange={(min, max) => onChange(min, max)}
-            /> */}
             </View>
             <TouchableOpacity
               onPress={() => setGroupChat(!groupChat)}
@@ -354,25 +361,36 @@ const Profile = ({ navigation }) => {
               <View style={[styles.ageRangeContainer]}>
                 <Text style={styles.dropDownTitle}>{t('maximumDistance')}</Text>
                 <Text>
-                  {/* {distance} */}
-                  2
+                  {distance}
                   {t('km')}
                 </Text>
               </View>
 
-              {/* <RangeSlider
+              <MultiSlider
+                sliderLength={300}
+                containerStyle={{
+                  marginLeft: 2,
+                  alignSelf: 'center',
+                }}
+                trackStyle={{
+                  height: 3,
+                  backgroundColor: '#CACACA',
+                  borderRadius: 5,
+                }}
+                valuePrefix="age"
+                values={distance}
+                onValuesChange={(v)=>setDistance(v[0])}
+                selectedStyle={{
+                  backgroundColor: COLORS.purple,
+                }}
+                markerStyle={{
+                  backgroundColor: COLORS.purple,
+                  top: 0.8
+                }}
+                min={0.2}
+                max={50}
                 type="slider" // ios only
-                min={0}
-                max={100}
-                selectedMinimum={0} // ios only
-                selectedMaximum={100} // ios only
-                tintColor="#000"
-                handleColor="#f368e0"
-                handlePressedColor="#f368e0"
-                tintColorBetweenHandles="#ff9ff3"
-                onChange={(min, max) => onChangeDistance(min, max)}
-                hideLabels={true}
-              /> */}
+              />
             </View>
             <View>
               <GlobalButton
@@ -540,6 +558,7 @@ const styles = StyleSheet.create({
     fontSize: SIZE.N,
     color: COLORS.blue,
     fontFamily: Font.medium,
+    textTransform:'uppercase'
   },
   dropDownView: {
     borderColor: COLORS.gray,
