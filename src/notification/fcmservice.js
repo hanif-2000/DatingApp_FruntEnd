@@ -45,7 +45,7 @@ class FCMService {
         .getToken()
         .then(token => {
           if (token) {
-            console.warn('[FCM TOKEN] => ', token);
+            console.log('[FCM TOKEN] => ', token);
             res(token);
             fcmToken = token;
           } else {
@@ -120,7 +120,7 @@ class FCMService {
 
     //Triggerd When have new token
     messaging().onTokenRefresh(fcmToken => {
-      console.warn('[FCMService] new token refresh', fcmToken);
+      console.log('[FCMService] new token refresh', fcmToken);
     });
   };
 

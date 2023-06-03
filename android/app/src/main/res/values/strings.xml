@@ -1,8 +1,5 @@
 <resources>
-  <!-- <string name="app_name">Jadeen</string>
-  <string name="facebook_app_id">770647537986195</string>
-  <string name="facebook_client_token">f3dbcaaa69a95cb06710f1982c0f2a94</string>
-  <string name="fb_login_protocol_scheme">fb770647537986195</string> -->
+  <string name="app_name">Jadeen</string>
   <string name="facebook_app_id">770647537986195</string>
   <string name="fb_login_protocol_scheme">fb770647537986195</string>
   <string name="facebook_client_token">f3dbcaaa69a95cb06710f1982c0f2a94</string>

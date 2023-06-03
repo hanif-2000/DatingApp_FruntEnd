@@ -7,10 +7,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
-import {useNavigation} from '@react-navigation/native';
+import { Icon } from 'react-native-elements';
+import { useNavigation } from '@react-navigation/native';
 
-import {COLORS, Font, HP_WP, IMAGE, SIZE} from './theme';
+import { COLORS, Font, HP_WP, IMAGE, SIZE } from './theme';
 
 const GlobalHeader = ({
   title,
@@ -34,7 +34,7 @@ const GlobalHeader = ({
       style={[
         styles.mainContainer,
         mainContainer,
-        {paddingTop: Platform.OS === 'android' ? HP_WP.hp(2) : HP_WP.hp(0.5)},
+        { paddingTop: Platform.OS === 'android' ? HP_WP.hp(2) : HP_WP.hp(0.5) },
       ]}>
       <View style={styles.iconContainer}>
         <TouchableOpacity
@@ -53,11 +53,11 @@ const GlobalHeader = ({
       ) : (
         <Text style={[styles.titles, headerTitles]}>{title}</Text>
       )}
-      <View style={{flex: 0.2}}>
+      <View style={{ flex: 0.2 }}>
         {rightImage && (
           <TouchableOpacity
             onPress={onPressRight}
-            style={{alignSelf: 'flex-end'}}>
+            style={{ alignSelf: 'flex-end' }}>
             <Image
               source={rightIcon}
               style={[styles.rightIconStyle, rightIconStyle]}
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingBottom: HP_WP.hp(0.5),
-    justifyContent:'space-between'
+    justifyContent: 'space-between'
   },
   iconContainer: {
     flex: 0.2,

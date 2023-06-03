@@ -4,11 +4,11 @@ const headers = {
   'Content-Type': 'multipart/form-data',
 };
 
-// 1. Login with facebook
-export  const loginApi  = (body, onResponse, onError) => {
+// 1. LoginWithFacebook_API
+export  const LoginWithFacebook_API  = (body, onResponse, onError) => {
   axios({
     method: 'POST',
-    url: `${BASE_URL}auth/loginapi`,
+    url: `${BASE_URL}auth/facebook-store`,
     data: body,
     headers: headers,
   })
@@ -20,27 +20,28 @@ export  const loginApi  = (body, onResponse, onError) => {
     });
 };
 
-// 2. Login with Number
-export  const numberVerify  = (body, onResponse, onError) => {
+// 2. language-list
+export  const getLanguageList_API  = (onResponse, onError) => {
   axios({
-    method: 'POST',
-    url: `${BASE_URL}auth/forgotPassword`,
-    data: body,
+    method: 'GET',
+    url: `${BASE_URL}auth/language-list`,
+    data: {},
     headers: headers,
   })
     .then(function (response) {
-      onResponse(response.data);
+      onResponse(response?.data?.result);
     })
     .catch(error => {
-      onError(error.response);
+      console.warn(error);
+      onError(error?.response);
     });
 };
 
-// 3. OTP Verify
-export  const otpVerify  = (body, onResponse, onError) => {
+// 3.account-setting
+export  const setAccountSetting_API  = (body, onResponse, onError) => {
   axios({
     method: 'POST',
-    url: `${BASE_URL}auth/verifyforgototp`,
+    url: `${BASE_URL}auth/account-setting`,
     data: body,
     headers: headers,
   })
@@ -83,4 +84,50 @@ export  const editPost  = (body, onResponse, onError) => {
     });
 };
 
+export const updateProfileData= (body, onResponse, onError) => {
+  axios({
+    method: 'POST',
+    url: `${BASE_URL}auth/facebook-update`,
+    data: body,
+    headers: headers,
+  })
+    .then(function (response) {
+      onResponse(response.data);
+    })
+    .catch(error => {
+      onError(error.response);
+    });
+};
+
+
+export const UserListing_API= (body, onResponse, onError) => {
+  axios({
+    method: 'POST',
+    url: `${BASE_URL}auth/post/list`,
+    data: body,
+    headers: headers,
+  })
+    .then(function (response) {
+      onResponse(response.data);
+    })
+    .catch(error => {
+      onError(error.response);
+    });
+};
+
+
+export const Logout_Api= (body, onResponse, onError) => {
+  axios({
+    method: 'POST',
+    url: `${BASE_URL}auth/logout`,
+    data: body,
+    headers: headers,
+  })
+    .then(function (response) {
+      onResponse(response.data);
+    })
+    .catch(error => {
+      onError(error.response);
+    });
+};
 

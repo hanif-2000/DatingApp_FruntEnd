@@ -1,13 +1,15 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
-import {COLORS, Font, HP_WP, SIZE} from '../common/theme';
+import { View, Text, Image, StyleSheet } from 'react-native';
+import { COLORS, Font, HP_WP, SIZE } from '../common/theme';
 
-const Card = ({card}) => (
+const Card = ({ card }) => (
   <View style={styles.card}>
-    <Image style={styles.image} source={card.photo} resizeMode="cover" />
+
+    {/* <Image style={styles.image} source={require('../assets/images/videoCallImage.png')} resizeMode="cover" /> */}
+    <Image style={styles.image} source={{ uri: card.profile_url }} resizeMode="cover" />
     <View style={styles.photoDescriptionContainer}>
-      <Text style={styles.text}>{`${card.userName} , ${card.age}`}</Text>
-      <Text style={styles.text2}>{`${card.miles}`}</Text>
+      <Text style={styles.text}>{`${card.name} , ${card?.id}`}</Text>
+      <Text style={styles.text2}>{`${card?.Miles}`}</Text>
     </View>
   </View>
 );
@@ -21,6 +23,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     width: '100%',
     height: HP_WP.hp(75),
+
   },
   photoDescriptionContainer: {
     position: 'absolute',
@@ -37,5 +40,6 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     fontFamily: Font.medium,
     marginTop: 5,
+    fontWeight: '700'
   },
 });

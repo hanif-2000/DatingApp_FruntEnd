@@ -1,10 +1,26 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 
 export const useStore = create(set => ({
   upgraded: false,
   userData: {},
-  token: null,
+  fcmToken: null,
+  userId: null,
+  accessToken: null,
+  languageList: [{}],
 
+
+  setLanguageList: languageList =>
+    set(() => ({
+      languageList: languageList,
+    })),
+  setAccessToken: accessToken =>
+    set(() => ({
+      accessToken: accessToken,
+    })),
+  setUserId: userId =>
+    set(() => ({
+      userId: userId,
+    })),
   setUpgraded: upgraded =>
     set(() => ({
       upgraded: upgraded,
@@ -13,18 +29,22 @@ export const useStore = create(set => ({
     set(() => ({
       userData: userData,
     })),
-  setToken: token =>
+  setFcmToken: token =>
     set(() => ({
-      token: token,
+      fcmToken: token,
     })),
 }));
 
 export default () => {
   return [
     {
+
       upgraded: useStore(state => state.upgraded),
       userData: useStore(state => state.userData),
-      token: useStore(state => state.token),
+      fcmToken: useStore(state => state.fcmToken),
+      userId: useStore(state => state.userId),
+      accessToken: useStore(state => state.accessToken),
+      languageList:useStore(state => state.languageList),
     },
   ];
 };
