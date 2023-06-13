@@ -11,7 +11,6 @@ import React, { useEffect, useState } from 'react';
 import { t } from 'i18next';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import Toast from 'react-native-toast-message';
-
 import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk-next';
 
 
@@ -21,6 +20,7 @@ import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 
 const FacebookCheckIn = () => {
   const [loading, setLoading] = useState(false);
+  const [places, setPlaces] = useState([]);
 
   const dataList = [
     {
@@ -40,79 +40,86 @@ const FacebookCheckIn = () => {
     },
   ];
 
-  useEffect(() => {
-    // setLoading(true)
-    // handleFacebookLogin()
-  }, [])
-  const handleFacebookLogin = async () => {
+  // useEffect(() => {
+  //   fetchNearbyPlaces();
+  // }, []);
+
+  const fetchNearbyPlaces = async () => {
     try {
       const accessToken = await AccessToken.getCurrentAccessToken();
-      if (accessToken) {
-        // Make a Graph API request to get the nearby friends
-        const request = new GraphRequest(
-          '/me/friends',
-          {
-            httpMethod: 'GET',
-            version: 'v12.0',
-            fields: { name: 'babu', location: 'merta city' },
-            // limit: { string: '10' },
-            accessToken: accessToken,
+      const request = new GraphRequest(
+        '/search',
+        {
+          parameters: {
+            type: { string: 'place' },
+            center: { string: '37.7749,-122.4194' }, // Latitude and longitude of the center point
+            distance: { string: '1000' }, // Distance in meters
+            fields: { string: 'id,name,location' }, // Fields to retrieve
           },
-          (error, result) => {
-            if (error) {
-              setLoading(false)
-              console.log('Error retrieving nearby friends:', error);
-            } else {
-              setLoading(false)
-              Alert.alert(`Nearby friends: ${!result.data ? result.data : 0} Total friends${result.summary.total_count}`)
-              console.warn('Nearby friends:', result);
-            }
+          accessToken: accessToken.accessToken,
+        },
+        (error, result) => {
+          if (error) {
+            console.warn('Error fetching nearby places:', error);
+          } else {
+            console.warn('Nearby places:', result.data);
+            // Handle the retrieved places
           }
-        );
-        // Execute the Graph API request
-        new GraphRequestManager().addRequest(request).start();
-      }
-
+        }
+      );
+  
+      new GraphRequestManager().addRequest(request).start();
     } catch (error) {
-      setLoading(false)
-      console.log('Error logging in with Facebook:', error);
+      console.warn('Error fetching nearby places:', error);
     }
   };
+  
+  // Call the fetchNearbyPlaces function to retrieve nearby places
+  fetchNearbyPlaces();
+  
+  
+
 
   return (
-    <Container>
-      <GlobalHeader title={t('match')} mainContainer={styles.header} />
-      <View style={{ flex: 1 }}>
-        <Text style={styles.likeText}>{t('matches')}</Text>
-        <FlatList
-          style={styles.flatList}
-          showsVerticalScrollIndicator={false}
-          data={dataList}
-          numColumns={2}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              // onPress={() => trytochat(item.blurRadius)}
-              style={styles.imageContainer}>
-              <Image
-                blurRadius={item.blurRadius}
-                source={item.img}
-                style={styles.imageStyle}
-              />
-              <View style={styles.imageLineContainer}>
-                <View style={styles.imageLine} />
-                <View style={styles.imageBottomLine} />
-              </View>
-            </TouchableOpacity>
-          )}
-        />
-      </View>
-      <Spinner
-        color={COLORS.purple}
-        visible={loading}
-        size="large"
-        overlayColor="rgba(0,0,0,0.5)"
-      />
-    </Container>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Nearby Places:</Text>
+      {places.map((place) => (
+        <Text key={place.id}>{place.name}</Text>
+      ))}
+    </View>
+    // <Container>
+    //   <GlobalHeader title={t('match')} mainContainer={styles.header} />
+    //   <View style={{ flex: 1 }}>
+    //     <Text style={styles.likeText}>{t('matches')}</Text>
+    //     <FlatList
+    //       style={styles.flatList}
+    //       showsVerticalScrollIndicator={false}
+    //       data={dataList}
+    //       numColumns={2}
+    //       renderItem={({ item }) => (
+    //         <TouchableOpacity
+    //           // onPress={() => trytochat(item.blurRadius)}
+    //           style={styles.imageContainer}>
+    //           <Image
+    //             blurRadius={item.blurRadius}
+    //             source={item.img}
+    //             style={styles.imageStyle}
+    //           />
+    //           <View style={styles.imageLineContainer}>
+    //             <View style={styles.imageLine} />
+    //             <View style={styles.imageBottomLine} />
+    //           </View>
+    //         </TouchableOpacity>
+    //       )}
+    //     />
+    //   </View>
+    //   <Spinner
+    //     color={COLORS.purple}
+    //     visible={loading}
+    //     size="large"
+    //     overlayColor="rgba(0,0,0,0.5)"
+    //   />
+    // </Container>
   );
 };
 

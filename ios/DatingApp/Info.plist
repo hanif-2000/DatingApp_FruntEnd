@@ -32,6 +32,12 @@
 		</dict>
 	</array>
 
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>Please, give access to your Location Always And When In</string>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>Please, give access to your Location Always</string>
+  <key>NSLocationTemporaryUsageDescriptionDictionary</key>
+    <string>Please, give access to your Location Temporary</string>
 	<key>FacebookClientToken</key>
 	<string>242dc3e0aa4536317773f782a60f40b7</string>
 
@@ -64,7 +70,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Please, give access to your camera</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+<string>Your location is required for this app.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Please, give access to your camera</string>
 	<key>NSPhotoLibraryUsageDescription</key>

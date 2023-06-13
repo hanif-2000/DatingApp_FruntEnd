@@ -155,6 +155,7 @@ dependencies {
     //firebase
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation project(':react-native-permissions')
 
     // implementation project(':react-native-fbsdk-next')
     implementation 'com.google.firebase:firebase-auth'

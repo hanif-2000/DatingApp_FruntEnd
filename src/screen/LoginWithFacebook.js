@@ -67,7 +67,7 @@ const LoginWithFacebook = () => {
       .catch(err => console.log(err));
   };
 
-  const { setFcmToken, setUserData, setUserId, setAccessToken,setLanguageList } = useStore();
+  const { setFcmToken, setUserData, setUserId, setAccessToken, setLanguageList } = useStore();
   let Route = useNavigation();
 
   const facebookLogin = async () => {
@@ -83,7 +83,8 @@ const LoginWithFacebook = () => {
       const result = await LoginManager.logInWithPermissions([
         'public_profile',
         'email',
-        'user_friends'
+        'user_friends',
+        'user_location',
       ]);
       if (result.isCancelled) {
         throw 'User cancelled the login process';
@@ -97,6 +98,7 @@ const LoginWithFacebook = () => {
         data.accessToken,
       );
       const userData = await auth().signInWithCredential(facebookCredential);
+      console.warn(userData);
       setUserData(userData)
       const formData = new FormData();
       formData.append('data', JSON.stringify([{ "name": userData?.user?.displayName, "email": userData?.user?.email, "profile_url": userData?.user?.photoURL, "fcm_token": token, 'uid': userData?.user?.uid, facebook_id: userData?.additionalUserInfo?.profile?.id }]));
@@ -114,8 +116,8 @@ const LoginWithFacebook = () => {
     console.log('onResponse---', data.id);
     setUserId(data?.id)
     setAccessToken(data?.jwt_token)
-    Route.replace('LoginWithPhone')
-    Toast.show({
+    Route.replace('MainStack', { screen: 'Home' })
+        Toast.show({
       type: 'success',
       position: 'top',
       text1: data.message,
@@ -162,8 +164,11 @@ const LoginWithFacebook = () => {
           <GlobalButton
             textStyle={styles.buttonText}
             icon
-            onPress={() => Route.replace('MainStack', { screen: 'Home' })}
-            //  facebookLogin()}
+            onPress={() => {
+              facebookLogin()
+              // Route.replace('MainStack', { screen: 'Home' })
+            }
+            }
             title={t('loginFacebook')}
             Style={styles.button}
           />
@@ -209,7 +214,7 @@ const styles = StyleSheet.create({
     fontSize: SIZE.L,
     color: COLORS.black,
     fontFamily: Font.semiBold,
-    textTransform:'uppercase'
+    textTransform: 'uppercase'
   },
   logo: {
     height: HP_WP.hp(18),

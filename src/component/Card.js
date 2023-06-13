@@ -8,7 +8,7 @@ const Card = ({ card }) => (
     {/* <Image style={styles.image} source={require('../assets/images/videoCallImage.png')} resizeMode="cover" /> */}
     <Image style={styles.image} source={{ uri: card.profile_url }} resizeMode="cover" />
     <View style={styles.photoDescriptionContainer}>
-      <Text style={styles.text}>{`${card.name} , ${card?.id}`}</Text>
+      <Text style={styles.text}>{`${card.name} , ${card?.age}`}</Text>
       <Text style={styles.text2}>{`${card?.Miles}`}</Text>
     </View>
   </View>
