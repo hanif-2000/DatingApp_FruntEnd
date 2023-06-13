@@ -28,13 +28,15 @@ import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import GlobalInput from '../common/GlobalInput';
 import GlobalButton from '../common/GlobalButton';
 import useAppData, { useStore } from '../service/AppData';
-import { Logout_Api } from '../service/API';
+import { Logout_Api, delete_account } from '../service/API';
+import { LoginManager } from 'react-native-fbsdk-next';
+import { useNavigation } from '@react-navigation/native';
 
 const Profile = ({ navigation }) => {
   const [nameOfFile, setNameOfFile] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [languageName, setLanguageName] = useState('English');
+  const [languageName, setLanguageName] = useState('english');
   const [marriage, setMarriage] = useState(false);
   const [network, setNetwork] = useState(false);
   const [groupChat, setGroupChat] = useState(false);
@@ -42,7 +44,9 @@ const Profile = ({ navigation }) => {
   const [female, setFemale] = useState(false);
 
   // data geting from zustand
-  const [{ userData, userId, accessToken ,languageList}] = useAppData();
+  const [{ userData, userId, accessToken, languageList }] = useAppData();
+  const { setFcmToken, setUserData, setUserId, setAccessToken, setLanguageList } = useStore();
+  let Route = useNavigation();
   // console.warn(userData?.additionalUserInfo?.profile?.picture?.data?.url);
 
   const [distance, setDistance] = useState([2]);
@@ -59,6 +63,23 @@ const Profile = ({ navigation }) => {
       name: 'Hindi',
     },
   ]);
+
+
+  const facebookLogout = async () => {
+    setLoading(true)
+    try {
+      await LoginManager.logOut();
+      // Clear the user data and navigate to the login screen
+      setUserData(null);
+      setUserId(null);
+      setAccessToken(null);
+      onLogOut()
+    } catch (error) {
+      setLoading(false)
+      console.warn('Error logging out:', error);
+    }
+  };
+
 
   const onChange = (age) => {
     setMinAgeSelected(age[0]);
@@ -100,14 +121,15 @@ const Profile = ({ navigation }) => {
   };
 
   const onLogOut = () => {
-    const formData = new FormData();
-    formData.append('data', JSON.stringify([{ "user_id": userId, 'jwt_token': accessToken }]));
+    const formData = {
+      "user_id": userId
+    }
     Logout_Api(formData, onLogoutResponse, onLogoutError)
   }
 
   const onLogoutResponse = (data) => {
     setLoading(false)
-    console.log('onResponse---', data.id);
+    Route.replace('LoginWithFacebook');
     Toast.show({
       type: 'success',
       position: 'top',
@@ -116,7 +138,29 @@ const Profile = ({ navigation }) => {
   }
   const onLogoutError = (e) => {
     setLoading(false)
-    console.warn('onError--', e);
+    console.warn('onLogoutError--', e);
+  }
+
+  const onDeleteAccount = () => {
+    const formData = {
+      "user_id": userId
+    }
+    delete_account(formData, onDeleteAccountResponse, onDeleteAccountError)
+  }
+
+  const onDeleteAccountResponse = (res) => {
+    setLoading(false)
+    Route.replace('LoginWithFacebook');
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: res.message,
+    });
+  }
+
+  const onDeleteAccountError = (e) => {
+    setLoading(false)
+    console.warn('onDeleteAccountError--', e);
   }
 
   return (
@@ -379,7 +423,7 @@ const Profile = ({ navigation }) => {
                 }}
                 valuePrefix="age"
                 values={distance}
-                onValuesChange={(v)=>setDistance(v[0])}
+                onValuesChange={(v) => setDistance(v[0])}
                 selectedStyle={{
                   backgroundColor: COLORS.purple,
                 }}
@@ -394,13 +438,14 @@ const Profile = ({ navigation }) => {
             </View>
             <View>
               <GlobalButton
-                onPress={() => onLogOut()}
+                onPress={() => facebookLogout()}
                 Style={[styles.buttonStyle, { marginVertical: 15 }]}
                 textStyle={{ color: COLORS.black }}
                 title={t('logout')}
               />
 
               <GlobalButton
+                onPress={() => onDeleteAccount()}
                 Style={[styles.buttonStyle, { marginBottom: 15 }]}
                 textStyle={{ color: COLORS.orange }}
                 title={t('deleteAccount')}
@@ -552,13 +597,13 @@ const styles = StyleSheet.create({
   dropdawn: {
     paddingHorizontal: 16,
     height: 40,
-    width: '30%',
+    width: '31%',
   },
   dropDownText: {
     fontSize: SIZE.N,
     color: COLORS.blue,
     fontFamily: Font.medium,
-    textTransform:'uppercase'
+    textTransform: 'uppercase'
   },
   dropDownView: {
     borderColor: COLORS.gray,

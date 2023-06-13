@@ -24,6 +24,8 @@ import { LoginWithFacebook_API, getLanguageList_API } from '../service/API'
 import { COLORS, Font, HP_WP, IMAGE, SIZE } from '../common/theme';
 import GlobalButton from '../common/GlobalButton';
 import { fcmService } from '../notification/fcmservice';
+import { PermissionsAndroid } from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
 
 Settings.setAppID('948968476240075');
 Settings.initializeSDK();
@@ -35,6 +37,8 @@ const LoginWithFacebook = () => {
   const [languagesList, setLanguagesList] = useState([]);
   const [currentLanguage, setCurrentLanguage] = useState('ENGLISH');
   const { t, i18n } = useTranslation();
+
+
 
   useEffect(() => {
     setLoading(true)
@@ -117,7 +121,7 @@ const LoginWithFacebook = () => {
     setUserId(data?.id)
     setAccessToken(data?.jwt_token)
     Route.replace('MainStack', { screen: 'Home' })
-        Toast.show({
+    Toast.show({
       type: 'success',
       position: 'top',
       text1: data.message,

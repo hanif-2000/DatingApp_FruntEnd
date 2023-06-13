@@ -45,6 +45,44 @@ const App = () => {
   const [locationDialog, setLocationDialog] = React.useState(true);
   const [useLocationManager, setUseLocationManager] = React.useState(false);
 
+
+  async function requestLocationPermission() {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Location Permission',
+          message: 'App needs access to your location.',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.warn('Location permission granted.');
+        getLiveLocation()
+      } else {
+        console.warn('Location permission denied.');
+      }
+    } catch (error) {
+      console.warn('Error requesting location permission:', error);
+    }
+  }
+
+  const getLiveLocation = () => {
+    Geolocation.getCurrentPosition(
+      position => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        console.warn('Latitude:', latitude);
+        console.warn('Longitude:', longitude);
+      },
+      error => {
+        console.warn('Error getting location:', error);
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+    );
+  }
+
+
   React.useEffect(() => {
     setTimeout(() => {
       if (!netInfo.isConnected) {
@@ -54,6 +92,7 @@ const App = () => {
   }, []);
 
   React.useEffect(() => {
+    requestLocationPermission()
     async function fetchData() {
       await Check();
     }

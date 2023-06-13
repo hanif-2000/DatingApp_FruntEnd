@@ -5,7 +5,7 @@ const headers = {
 };
 
 // 1. LoginWithFacebook_API
-export  const LoginWithFacebook_API  = (body, onResponse, onError) => {
+export const LoginWithFacebook_API = (body, onResponse, onError) => {
   axios({
     method: 'POST',
     url: `${BASE_URL}auth/facebook-store`,
@@ -21,7 +21,7 @@ export  const LoginWithFacebook_API  = (body, onResponse, onError) => {
 };
 
 // 2. language-list
-export  const getLanguageList_API  = (onResponse, onError) => {
+export const getLanguageList_API = (onResponse, onError) => {
   axios({
     method: 'GET',
     url: `${BASE_URL}auth/language-list`,
@@ -38,7 +38,7 @@ export  const getLanguageList_API  = (onResponse, onError) => {
 };
 
 // 3.account-setting
-export  const setAccountSetting_API  = (body, onResponse, onError) => {
+export const setAccountSetting_API = (body, onResponse, onError) => {
   axios({
     method: 'POST',
     url: `${BASE_URL}auth/account-setting`,
@@ -53,23 +53,7 @@ export  const setAccountSetting_API  = (body, onResponse, onError) => {
     });
 };
 
-// 4 Logout Api
-export  const logoutApi  = (body, onResponse, onError) => {
-  axios({
-    method: 'POST',
-    url: `${BASE_URL}auth/logout`,
-    data: body,
-    headers: headers,
-  })
-    .then(function (response) {
-      onResponse(response.data);
-    })
-    .catch(error => {
-      onError(error.response);
-    });
-};
-
-export  const editPost  = (body, onResponse, onError) => {
+export const editPost = (body, onResponse, onError) => {
   axios({
     method: 'POST',
     url: `${BASE_URL}auth/post/edit/5`,
@@ -84,7 +68,7 @@ export  const editPost  = (body, onResponse, onError) => {
     });
 };
 
-export const updateProfileData= (body, onResponse, onError) => {
+export const updateProfileData = (body, onResponse, onError) => {
   axios({
     method: 'POST',
     url: `${BASE_URL}auth/facebook-update`,
@@ -100,7 +84,7 @@ export const updateProfileData= (body, onResponse, onError) => {
 };
 
 
-export const UserListing_API= (body, onResponse, onError) => {
+export const UserListing_API = (body, onResponse, onError) => {
   axios({
     method: 'POST',
     url: `${BASE_URL}auth/post/list`,
@@ -116,12 +100,14 @@ export const UserListing_API= (body, onResponse, onError) => {
 };
 
 
-export const Logout_Api= (body, onResponse, onError) => {
+export const Logout_Api = (body, onResponse, onError) => {
   axios({
     method: 'POST',
-    url: `${BASE_URL}auth/logout`,
+    url: `https://lightcode.in/jadeen.org/api/auth/logout-api`,
     data: body,
-    headers: headers,
+    headers: {
+      'Content-Type': 'application/json'
+    },
   })
     .then(function (response) {
       onResponse(response.data);
@@ -131,3 +117,36 @@ export const Logout_Api= (body, onResponse, onError) => {
     });
 };
 
+export const delete_account = (body, onResponse, onError) => {
+  axios({
+    method: 'POST',
+    url: `https://lightcode.in/jadeen.org/api/auth/delete_account`,
+    data: body,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+    .then(function (response) {
+      onResponse(response.data);
+    })
+    .catch(error => {
+      onError(error.response);
+    });
+};
+
+export const likePost = (body, onResponse, onError) => {
+  axios({
+    method: 'POST',
+    url: `https://lightcode.in/jadeen.org/api/auth/post-like`,
+    data: body,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+  })
+    .then(function (response) {
+      onResponse(response.data);
+    })
+    .catch(error => {
+      onError(error.response);
+    });
+};

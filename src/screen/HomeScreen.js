@@ -14,7 +14,7 @@ import IconButton from '../component/IconButton';
 import { COLORS, HP_WP, IMAGE, SIZE, Font } from '../common/theme';
 import photoCards from '../component/photoCards';
 import useAppData, { useStore } from '../service/AppData';
-import { UserListing_API } from '../service/API';
+import { UserListing_API, likePost } from '../service/API';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
 const HomeScreen = ({ navigation }) => {
@@ -25,6 +25,7 @@ const HomeScreen = ({ navigation }) => {
   const [changeValue, setChangeValue] = useState(0);
   const [userList, setUserList] = useState([{}])
   const [{ userId }] = useAppData();
+  const [type, setType] = useState(null)
 
   useEffect(() => {
     getUserList()
@@ -35,7 +36,6 @@ const HomeScreen = ({ navigation }) => {
     const formData = new FormData();
     formData.append('data', JSON.stringify([{ "user_id": userId }]));
     UserListing_API(formData, onResponse, onError)
-
   }
 
   const onResponse = (data) => {
@@ -48,27 +48,57 @@ const HomeScreen = ({ navigation }) => {
     console.warn('onError--', e);
   }
 
+  const onPostLike = (id) => {
+    setLoading(true)
+    let tmp = {
+      "user_id": "1",
+      "post_id": id
+    }
+    likePost(tmp, onlikePostResponse, onlikePostError)
+
+  }
+
+  const onlikePostResponse = (res) => {
+    // console.warn(res);
+    Toast.show({
+      type: 'success',
+      position: 'top',
+      text1: res.message,
+    });
+    this.swiper.swipeRight(type);
+    setLoading(false)
+  }
+
+  const onlikePostError = (e) => {
+    Toast.show({
+      type: 'error',
+      position: 'top',
+      text1: e.message,
+    });
+    setLoading(false)
+  }
   const data = [
-    { label: '0 km-10 km', value: '1' },
-    { label: '10 km-20 km', value: '2' },
-    { label: '20 km-30 km', value: '3' },
-    { label: '30 km-40 km', value: '4' },
-    { label: '40 km-50 km', value: '5' },
-    { label: '50 km-60 km', value: '6' },
-    { label: '60 km-70 km', value: '7' },
-    { label: '70 km-80 km', value: '8' },
+    { label: '20 Mtr-30 Mtr', value: '1' },
+    { label: '30 Mtr-40 Mtr', value: '2' },
+    { label: '40 Mtr-50 Mtr', value: '3' },
+    { label: '50 Mtr-60 Mtr', value: '4' },
+    { label: '60 Mtr-70 Mtr', value: '5' },
+    { label: '70 Mtr-80 Mtr', value: '6' },
+    { label: '80 Mtr-90 Mtr', value: '7' },
+    { label: '90 Mtr-10 Mtr', value: '8' },
   ];
 
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const bottomSheet = useRef(null);
 
-  const onSwipedLeft = type => {
-    this.swiper.swipeLeft(type);
+  const onSwipedLeft = (t) => {
+    this.swiper.swipeLeft(t);
   };
 
-  const onSwipedRight = type => {
-    this.swiper.swipeRight(type);
+  const onSwipedRight = (t, id) => {
+    setType(t)
+    onPostLike(id)
   };
   return (
     <Container>
@@ -89,7 +119,7 @@ const HomeScreen = ({ navigation }) => {
           backgroundColor={COLORS.white}
           animateCardOpacity
           cards={userList}
-          renderCard={card => <Card card={card} />}
+          renderCard={card => <Card card={card} onSwipedLeft={() => onSwipedLeft('left')} onSwipedRight={(id) => onSwipedRight('right', id)} />}
           cardIndex={0}
           stackSize={2}
           infinite
@@ -97,7 +127,7 @@ const HomeScreen = ({ navigation }) => {
           animateOverlayLabelsOpacity
         />
       </View>
-
+      {/* 
       <View style={styles.buttonsContainer}>
         <IconButton
           name="close"
@@ -120,7 +150,7 @@ const HomeScreen = ({ navigation }) => {
           backgroundColor={COLORS.purple}
           type="entypo"
         />
-      </View>
+      </View> */}
       <BottomSheet
         backdropBackgroundColor="rgba(0,0,0,0.5)"
         draggable={false}
@@ -203,7 +233,11 @@ const HomeScreen = ({ navigation }) => {
                 </Text>
               </TouchableOpacity>
             </View>
-            <Text style={styles.distanceText}>{'age'}</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={styles.distanceText}>{'age'}</Text>
+              <Text style={styles.distanceText}>{changeValue && changeValue[0]}-{changeValue && changeValue[1]}</Text>
+            </View>
+
           </View>
           <MultiSlider
             sliderLength={300}
@@ -249,11 +283,6 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   swiperContainer: {
     height: HP_WP.hp(70),
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginBottom: 10,
   },
   sheet: {
     position: 'absolute',
